@@ -1,0 +1,209 @@
+/*@import 'nib'*/
+/*-------------------*/
+/*-----VARIABLES-----*/
+/*-------------------*/
+/*------------------*/
+/*-------------------*/
+/*-----CSS-STYL-----*/
+/*-----------------*/
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: aleolightitalic;
+  background-color: #fff;
+  min-height: 100%;
+  position: relative;
+}
+#header {
+  width: 500px;
+  margin: auto;
+}
+#header .title_header {
+  font-size: 4em;
+  font-family: great_vibesregular;
+  margin-top: 20px;
+  text-align: center;
+}
+#header .title_header a {
+  color: #000;
+  text-decoration: none;
+  transition: 1s;
+}
+#header .title_header a:hover {
+  color: #e74c3c;
+  transition: 1s;
+}
+#header .border_box {
+  width: 300px;
+  margin: auto;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #000;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.8em;
+  opacity: 0;
+  transition: 1s;
+}
+#header .nav_horizontal {
+  margin: auto;
+  margin-top: 100px;
+  transition: 1s;
+}
+#header .nav_horizontal .icon_index {
+  width: 142px;
+  height: 142px;
+  margin: 10px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: 0.5s;
+}
+#header .nav_horizontal .icon_index:hover {
+  width: 138px;
+  height: 138px;
+  opacity: 1;
+  transition: 0.5s;
+}
+#container {
+  width: 500px;
+  margin: auto;
+  padding-bottom: 150px;
+}
+#container .project_box {
+  width: 300px;
+  height: 300px;
+  padding: 10px;
+  margin: 10px;
+  color: #000;
+  text-decoration: none;
+  background: transparent;
+  border-radius: 4px;
+  border: 10px solid rgba(0,0,0,0.01);
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  transition: 1s;
+}
+#container .project_box:hover {
+  color: #000;
+  background: #eee;
+  border: 10px solid rgba(0,0,0,0.12);
+  box-shadow: 5px 5px 5px #eee;
+  transition: 1s;
+}
+#container .project_box:hover .authors {
+  opacity: 1;
+  transition: 0.2s;
+}
+#container .project_box:hover .year {
+  opacity: 1;
+  transition: 1s;
+}
+#container .project_box:hover .progress {
+  opacity: 1;
+  transition: 1.5s;
+}
+#container .project_box .title {
+  font-size: 1.5em;
+  font-weight: bolder;
+}
+#container .project_box .authors {
+  opacity: 0;
+}
+#container .project_box .year {
+  opacity: 0;
+}
+#container .project_box .progress {
+  font-size: 1.2em;
+  font-weight: bolder;
+  opacity: 0;
+}
+#container .english_resume {
+  display: block;
+}
+#container .french_resume {
+  display: none;
+}
+#container .horizontal_nav {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+#container .horizontal_nav span {
+  font-size: 2em;
+  cursor: pointer;
+  margin-right: 10px;
+}
+#container .horizontal_nav span:hover {
+  color: #e74c3c;
+}
+#container .horizontal_nav span[selected="true"] {
+  color: #e74c3c;
+}
+a {
+  color: #000;
+  text-decoration: none;
+  font-size: 1.5em;
+  transition: 0.5s;
+}
+a:hover {
+  color: #e74c3c;
+  transition: 0.5s;
+}
+/*FOOTER*/
+/*------*/
+#footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 130px;
+  text-align: center;
+  font-family: aleolight;
+  background: #eee;
+  padding-top: 20px;
+}
+#footer .nav_footer ul {
+  list-style-type: none;
+}
+#footer .nav_footer ul a {
+  color: #000;
+  text-decoration: none;
+  font-size: 1.5em;
+  transition: 0.5s;
+}
+#footer .nav_footer ul a:hover {
+  color: #e74c3c;
+  transition: 0.5s;
+}
+/*-------------------*/
+/*-------FONTS-------*/
+/*-------------------*/
+@font-face {
+  font-family: 'great_vibesregular';
+  src: url("../fonts/greatvibes-regular-webfont.eot");
+  src: url("../fonts/greatvibes-regular-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/greatvibes-regular-webfont.woff") format('woff'), url("../fonts/greatvibes-regular-webfont.ttf") format('truetype'), url("../fonts/greatvibes-regular-webfont.svg#great_vibesregular") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'aleoregular';
+  src: url("../fonts/aleo-regular-webfont.eot");
+  src: url("../fonts/aleo-regular-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/aleo-regular-webfont.woff") format('woff'), url("../fonts/aleo-regular-webfont.ttf") format('truetype'), url("../fonts/aleo-regular-webfont.svg#aleoregular") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'aleolightitalic';
+  src: url("../fonts/aleo-lightitalic-webfont.eot");
+  src: url("../fonts/aleo-lightitalic-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/aleo-lightitalic-webfont.woff") format('woff'), url("../fonts/aleo-lightitalic-webfont.ttf") format('truetype'), url("../fonts/aleo-lightitalic-webfont.svg#aleolightitalic") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'aleolight';
+  src: url("../fonts/aleo-light-webfont.eot");
+  src: url("../fonts/aleo-light-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/aleo-light-webfont.woff") format('woff'), url("../fonts/aleo-light-webfont.ttf") format('truetype'), url("../fonts/aleo-light-webfont.svg#aleolight") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
