@@ -20,18 +20,20 @@ body {
   width: 500px;
   margin: auto;
 }
-#header .title_header {
+#header .top_header {
   font-size: 4em;
   font-family: great_vibesregular;
   margin-top: 20px;
   text-align: center;
 }
-#header .title_header a {
+#header .top_header .title {
+  font-size: 1.5em;
   color: #000;
   text-decoration: none;
+  cursor: pointer;
   transition: 1s;
 }
-#header .title_header a:hover {
+#header .top_header .title:hover {
   color: #e74c3c;
   transition: 1s;
 }
@@ -66,15 +68,32 @@ body {
   opacity: 1;
   transition: 0.5s;
 }
+#header .sidebar {
+  position: absolute;
+  top: 340px;
+  left: 80px;
+  width: 300px;
+  dislay: none;
+}
+#header .sidebar .sidebar_icon {
+  width: 44px;
+  height: 44px;
+  display: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+#header .sidebar .sidebar_icon:hover {
+  width: 40px;
+  height: 40px;
+  transition: 0.5s;
+}
 #container {
   width: 500px;
   margin: auto;
   padding-bottom: 150px;
 }
 #container .project_box {
-  width: 300px;
-  height: 300px;
-  padding: 10px;
+  padding: 15px;
   margin: 10px;
   color: #000;
   text-decoration: none;
@@ -106,7 +125,7 @@ body {
   transition: 1.5s;
 }
 #container .project_box .title {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: bolder;
 }
 #container .project_box .authors {
@@ -116,30 +135,142 @@ body {
   opacity: 0;
 }
 #container .project_box .progress {
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bolder;
   opacity: 0;
 }
-#container .english_resume {
+#container .resume .english_resume {
   display: block;
 }
-#container .french_resume {
+#container .resume .french_resume {
   display: none;
 }
-#container .horizontal_nav {
+#container .resume .horizontal_nav {
   display: inline-block;
   margin-bottom: 20px;
 }
-#container .horizontal_nav span {
+#container .resume .horizontal_nav span {
   font-size: 2em;
   cursor: pointer;
   margin-right: 10px;
 }
-#container .horizontal_nav span:hover {
+#container .resume .horizontal_nav span:hover {
   color: #e74c3c;
 }
-#container .horizontal_nav span[selected="true"] {
+#container .resume .horizontal_nav span[selected="true"] {
   color: #e74c3c;
+}
+#container .article {
+  padding: 10px;
+}
+#container .article .title {
+  font-size: 2em;
+  font-weigth: bolder;
+}
+#container .form_article {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 4px;
+  border: 10px solid rgba(0,0,0,0.15);
+}
+#container .form_article .form_title {
+  background: #e74c3c;
+  width: 400px;
+  height: 60px;
+  margin: auto;
+  margin-top: -60px;
+  padding-top: 20px;
+  box-shadow: 5px 5px 5px #c0c0c0;
+  color: #fff;
+  font-size: 1.6em;
+  text-align: center;
+  border-radius: 4px;
+}
+#container .form_article .form_label {
+  font-size: 2em;
+}
+#container .form_article .form_article_title {
+  display: block;
+  width: 90%;
+  height: 40px;
+  border-radius: 2px;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+#container .form_article .form_article_title:hover {
+  border: 10px solid #3498db;
+  transition: 1s;
+}
+#container .form_article .form_article_title:focus {
+  border: 10px solid #2ecc71;
+  transition: 1s;
+}
+#container .form_article .form_article_body {
+  display: block;
+  width: 90%;
+  height: 142px;
+  border-radius: 2px;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+#container .form_article .form_article_body:hover {
+  border: 10px solid #3498db;
+  transition: 1s;
+}
+#container .form_article .form_article_body:focus {
+  border: 10px solid #2ecc71;
+  transition: 1s;
+}
+#container .form_article textarea {
+  resize: none;
+}
+#container .form_article .form_button_validate {
+  display: block;
+  width: 200px;
+  height: 50px;
+  margin: auto;
+  margin-top: 40px;
+  padding-top: 20px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.5em;
+  text-align: center;
+  background: #3498db;
+  border-radius: 4px;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+#container .form_article .form_button_validate:hover {
+  background: #2ecc71;
+  transition: 1s;
+}
+#container .message {
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 4px;
+  background: #2ecc71;
+}
+#container .message .ok {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.4em;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 30px;
+  border-color: #fff;
+  cursor: pointer;
+  transition: 1s;
+}
+#container .message .ok:hover {
+  color: #000;
+  background: #fff;
+  transition: 1s;
 }
 a {
   color: #000;

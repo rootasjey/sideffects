@@ -6,6 +6,7 @@
 
 #Jeremie Corpinot
 
+<div class="resume">
 <div class="horizontal_nav">
 	<span data="english" selected="true" class="lang_button">english</span>
 	<span data="francais" selected="false" class="lang_button">français</span>
@@ -80,4 +81,6 @@ Voici les liens de mon profil professionel
 	<li>[LinkedIn](http://resume.linkedinlabs.com/afzzl9sl4)</li>
 	<li>[ResumUp](http://resumup.com/25041915)</li>
 </ul>
+</div>
+
 </div>

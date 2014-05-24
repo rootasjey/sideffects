@@ -22,6 +22,8 @@ My personal website
 #node_modules
 * [express](https://www.npmjs.org/package/express)
 * [morgan](https://www.npmjs.org/package/morgan)
+* [body-parser](https://github.com/expressjs/body-parser)
+* [method-override](https://github.com/expressjs/method-override)
 * [jade](https://www.npmjs.org/package/jade)
 * [stylus](https://www.npmjs.org/package/stylus)
 * [nib](https://www.npmjs.org/package/nib)

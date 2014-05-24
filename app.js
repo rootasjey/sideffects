@@ -14,15 +14,22 @@ var express = require('express'),	// web dev framework
 var fs = require('fs');				// file stream
 var marked = require('marked');		// markdown module
 
+var ArticleProvider = require('./articleprovider-memory').ArticleProvider;
+var articleProvider = new ArticleProvider();
+
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+
+
 // ---------------//
 // APP - CREATION //
 // ---------------//
-var app = express()
+var app = express();
 // ----------------
-function compile(str, path){
+function compile(str, path) {
 	return stylus(str)
 		.set('filename', path)
-		.use(nib())
+		.use(nib());
 };
 
 
@@ -34,8 +41,9 @@ function compile(str, path){
 app.set('views', __dirname + '/views');	// folder templates
 app.set('view engine', 'jade');			// template engine
 app.use(morgan('dev'));					// logging output (will log incoming requests to the console)
-app.use(stylus.middleware(
-{
+app.use(bodyParser());
+app.use(methodOverride());
+app.use(stylus.middleware({
 	src: __dirname + '/public',
 	compile: compile
 }));
@@ -52,12 +60,24 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function (req, res) {
 	res.render('index', {title: 'Accueil'});
 })
-
-.get('/about', function (req, res) {
-	res.setHeader('Content-Type', 'text/plain');
-	res.end('A propos!');
+.get('/blog', function(req, res) {
+    articleProvider.findAll(function(error, docs) {
+        if(docs){
+            res.send(200, docs);
+        }
+    });
 })
-
+.post('/blog/new', function (req, res) {
+    articleProvider.save({
+        title: req.param('title'),
+        body: req.param('body')},
+                         
+         function (error, docs) {
+             if (error) res.send(404);
+             res.send(200);
+         }
+    );
+})
 .get('/projects', function (req, res) {
 	var jsonArray = [];
 	var path = __dirname + '/public/projects';
@@ -66,7 +86,7 @@ app.get('/', function (req, res) {
 	fs.readdir(path, function (err, files) {
 		if(err) {
 			// if the directory is not found
-			res.send(404)
+			res.send(404);
 		}
 
 		var count = 1; // watch when result must be sent
@@ -125,8 +145,7 @@ app.get('/', function (req, res) {
 	});
 })
 .use(function (req, res, next) {
-	res.setHeader('Content-Type', 'text/plain');
-	res.send(404, 'Vous vous etes perdu dans l\'espace temps');
+    res.render('pages/404', {title: '404'});
 });
 
 app.listen(8080);
