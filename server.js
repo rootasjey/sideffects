@@ -14,12 +14,13 @@ var express = require('express'),	// web dev framework
 var fs = require('fs');				// file stream
 var marked = require('marked');		// markdown module
 
-var ArticleProvider = require('./articleprovider-mongodb').ArticleProvider;
+var ArticleProvider = require('./articleprovider-memory').ArticleProvider;
 var articleProvider = new ArticleProvider();
 
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+var port = process.env.port || 8080;
 
 // ---------------//
 // APP - CREATION //
@@ -148,7 +149,7 @@ app.get('/', function (req, res) {
     res.render('pages/404', {title: '404'});
 });
 
-app.listen(80);
+app.listen(port);
 
 
 // PROTOTYPES
