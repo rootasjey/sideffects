@@ -148,7 +148,7 @@ app.get('/', function (req, res) {
     res.render('pages/404', {title: '404'});
 });
 
-app.listen(8080);
+app.listen(80);
 
 
 // PROTOTYPES
