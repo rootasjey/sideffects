@@ -14,7 +14,7 @@ var express = require('express'),	// web dev framework
 var fs = require('fs');				// file stream
 var marked = require('marked');		// markdown module
 
-var ArticleProvider = require('./articleprovider-memory').ArticleProvider;
+var ArticleProvider = require('./articleprovider-mongodb').ArticleProvider;
 var articleProvider = new ArticleProvider();
 
 var bodyParser = require('body-parser');
