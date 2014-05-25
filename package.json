@@ -1,8 +1,20 @@
 {
   "name": "sideffects",
-  "version": "0.7.0",
+  "version": "0.7.6",
   "author": "Jeremie Corpinot <jeremiecorpinot@outlook.com>",
   "description": "A personal web site",
+  "contributors": [
+    {
+      "name": "Jeremie Corpinot",
+      "email": "jeremiecorpinot@outlook.com"
+    }
+  ],
+  "main": "./server.js",
+  "keywords": [
+    "tech",
+    "geek",
+    "dev"
+  ],
   "dependencies": {
     "body-parser": "~1.2",
     "express": "~4.2",
@@ -11,5 +23,10 @@
     "method-override": "^1.0.2",
     "nib": "~1.0",
     "stylus": "~0.45"
+  },
+  "noAnalyze": true,
+  "license": "Apache",
+  "engines": {
+    "node": ">=0.6.14"
   }
 }

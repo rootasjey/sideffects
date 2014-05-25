@@ -9,7 +9,11 @@
 var express = require('express'),	// web dev framework
 	stylus = require('stylus'),		// css pre-compiler
 	morgan = require('morgan'),		// loggin middleware
-	nib = require('nib');			// Stylus utilities
+	nib = require('nib'),          // Stylus utilities
+    routes = require('./routes'),
+    user = require('./routes/user'),
+    http = require('http'),
+    path = require('path');			
 
 var fs = require('fs');				// file stream
 var marked = require('marked');		// markdown module
@@ -20,7 +24,7 @@ var articleProvider = new ArticleProvider();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
-var port = process.env.port || 8080;
+//var port = process.env.port || 8080;
 
 // ---------------//
 // APP - CREATION //
@@ -39,6 +43,7 @@ function compile(str, path) {
 // containing templates
 // and the static folder
 // ---------------------------------------------------
+app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');	// folder templates
 app.set('view engine', 'jade');			// template engine
 app.use(morgan('dev'));					// logging output (will log incoming requests to the console)
@@ -149,7 +154,10 @@ app.get('/', function (req, res) {
     res.render('pages/404', {title: '404'});
 });
 
-app.listen(port);
+//app.listen(port);
+http.createServer(app).listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+});
 
 
 // PROTOTYPES
