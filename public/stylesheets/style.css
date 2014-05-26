@@ -16,11 +16,92 @@ body {
   min-height: 100%;
   position: relative;
 }
-#header {
-  width: 500px;
-  margin: auto;
+#header .top_box {
+  height: 5px;
+  width: 100%;
+  color: #fff;
+  background: #3498db;
+  transition: 0.5s;
+}
+#header .top_box:hover {
+  background: #2980b9;
+  transition: 0.5s;
+}
+#header .top_box .profil {
+  display: none;
+  overflow: hide;
+  cursor: pointer;
+  width: 200px;
+  height: 200px;
+  margin-left: 10px;
+  background-color: transparent;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 0.5s;
+}
+#header .top_box .profil:hover {
+  border: 10px solid rgba(200,40,50,0.15);
+  transition: 0.5s;
+}
+#header .top_box .cv {
+  font-size: 1em;
+  display: none;
+  padding: 20px;
+  overflow: hide;
+  min-width: 300px;
+  max-width: 80%;
+}
+#header .top_box .cv .resume {
+  padding-bottom: 10px;
+}
+#header .top_box .cv .resume a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.5s;
+}
+#header .top_box .cv .resume a:hover {
+  color: #bdc3c7;
+  transition: 0.5s;
+}
+#header .top_box .cv .resume .english_resume {
+  display: block;
+}
+#header .top_box .cv .resume .french_resume {
+  display: none;
+}
+#header .top_box .cv .resume .horizontal_nav {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+#header .top_box .cv .resume .horizontal_nav span {
+  font-size: 2em;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: 0.5s;
+}
+#header .top_box .cv .resume .horizontal_nav span:hover {
+  color: #bdc3c7;
+  transition: 0.5s;
+}
+#header .top_box .cv .resume .horizontal_nav span[selected="true"] {
+  color: #bdc3c7;
+}
+#header .top_arrow {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  padding: 10px;
+  background: #3498db;
+  transition: 0.5s;
+}
+#header .top_arrow:hover {
+  background: #e74c3c;
+  transition: 0.5s;
 }
 #header .top_header {
+  width: 500px;
+  margin: auto;
   font-size: 4em;
   font-family: great_vibesregular;
   margin-top: 20px;
@@ -37,7 +118,7 @@ body {
   color: #e74c3c;
   transition: 1s;
 }
-#header .border_box {
+#header .top_header .border_box {
   width: 300px;
   margin: auto;
   border-top-style: solid;
@@ -49,12 +130,12 @@ body {
   opacity: 0;
   transition: 1s;
 }
-#header .nav_horizontal {
+#header .top_header .nav_horizontal {
   margin: auto;
   margin-top: 100px;
   transition: 1s;
 }
-#header .nav_horizontal .icon_index {
+#header .top_header .nav_horizontal .icon_index {
   width: 142px;
   height: 142px;
   margin: 10px;
@@ -62,27 +143,21 @@ body {
   cursor: pointer;
   transition: 0.5s;
 }
-#header .nav_horizontal .icon_index:hover {
-  width: 138px;
-  height: 138px;
-  opacity: 1;
-  transition: 0.5s;
-}
-#header .sidebar {
+#header .top_header .sidebar {
   position: absolute;
   top: 340px;
   left: 80px;
   width: 300px;
   dislay: none;
 }
-#header .sidebar .sidebar_icon {
+#header .top_header .sidebar .sidebar_icon {
   width: 44px;
   height: 44px;
   display: none;
   cursor: pointer;
   transition: 0.5s;
 }
-#header .sidebar .sidebar_icon:hover {
+#header .top_header .sidebar .sidebar_icon:hover {
   width: 40px;
   height: 40px;
   transition: 0.5s;
@@ -138,27 +213,6 @@ body {
   font-size: 1em;
   font-weight: bolder;
   opacity: 0;
-}
-#container .resume .english_resume {
-  display: block;
-}
-#container .resume .french_resume {
-  display: none;
-}
-#container .resume .horizontal_nav {
-  display: inline-block;
-  margin-bottom: 20px;
-}
-#container .resume .horizontal_nav span {
-  font-size: 2em;
-  cursor: pointer;
-  margin-right: 10px;
-}
-#container .resume .horizontal_nav span:hover {
-  color: #e74c3c;
-}
-#container .resume .horizontal_nav span[selected="true"] {
-  color: #e74c3c;
 }
 #container .article {
   padding: 10px;

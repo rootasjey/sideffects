@@ -1,6 +1,7 @@
 sideffects
 ==========
-My personal website
+A personal website
+Lives at [http://www.sideffects.fr](http://www.sideffects.fr)
 
 #build
 
@@ -30,3 +31,14 @@ My personal website
 * [marked](https://www.npmjs.org/package/marked)
 
 It's good to have [npm](https://www.npmjs.org/) installed on your machine, if you want to add a new module.
+
+#graphics resources
+* [iconmonstr](http://iconmonstr.com/)
+* [icons8](http://icons8.com/)
+
+#thanks
+Thanks to these great tutorials which speed up my project :)
+
+* [JavaScript - OpenClassrooms](http://fr.openclassrooms.com/informatique/cours/dynamisez-vos-sites-web-avec-javascript)
+* [Node.js - OpenClassrooms](http://fr.openclassrooms.com/informatique/cours/des-applications-ultra-rapides-avec-node-js)
+* [jquery - OpenClassrooms](http://fr.openclassrooms.com/informatique/cours/jquery-ecrivez-moins-pour-faire-plus)

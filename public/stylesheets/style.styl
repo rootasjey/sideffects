@@ -7,8 +7,10 @@ center-size = 500px
 main-font = aleolightitalic
 second-font = aleolight
 color-alizarin = #e74c3c
-color-peter-silver = #3498db
+color-peter-river = #3498db
 color-emerald = #2ecc71
+color-belize-hole = #2980b9
+color-silver = #bdc3c7
 /*------------------*/
 
 
@@ -27,92 +29,201 @@ html, body{
 }
 
 #header {
-	width: 500px;
-	margin: auto;
+    .top_box {
+        height: 5px;
+        width: 100%;
+        
+        color: white;
+        background: color-peter-river;
+        
+        transition: 0.5s;
+        
+        &:hover {
+            background: color-belize-hole;
+            transition: 0.5s;
+        }
+        
+        .profil {
+            display: none;
+            overflow: hide;
+            cursor: pointer;
+            
+            width: 200px;
+            height: 200px;
+            
+            margin-left: 10px;
+            background-color: transparent;
+            border: 10px solid rgba(0, 0, 0, 0.15);
+            transition: 0.5s;
+            
+            &:hover {
+                border: 10px solid rgba(200, 40, 50, 0.15);
+                transition: 0.5s;
+            }
+        }
+        .cv {
+            font-size: 1em;
+            display: none;
+            
+            padding: 20px;
+            overflow: hide;
+            
+            min-width: 300px;
+            max-width: 80%;
+            
+                .resume {
+                    padding-bottom: 10px;
+                    
+                    a {
+                        color: white;
+                        text-decoration: none;
+                        transition:0.5s;
 
+                        &:hover{
+                          color: color-silver;
+                          transition:0.5s;
+                        }
+                    }
+                    
+                    .english_resume {
+                        display: block;
+                    }
+
+                    .french_resume {
+                        display: none;
+                    }
+
+                    .horizontal_nav {
+                        display: inline-block;
+                        margin-bottom: 20px;
+
+                        span {
+                            font-size: 2em;
+                            cursor: pointer;
+                            margin-right: 10px;
+                            transition: 0.5s;
+                                &:hover {
+                                    color: color-silver;
+                                    transition: 0.5s;
+                                }
+                        }
+
+                        span[selected="true"] {
+                            color: color-silver;
+                        }
+                    }
+                }
+        }
+    }
+    
+    .top_arrow{
+        height: 30px;
+        width: 30px;
+        
+        position: absolute;
+        right: 0;
+        
+        cursor: pointer;
+        padding: 10px;
+        background: color-peter-river;
+        
+        
+        transition: 0.5s;
+        
+        &:hover {
+            background: color-alizarin;
+            transition: 0.5s;
+        }
+    }
+    
 	.top_header {
+        width: 500px;
+        margin: auto;
+    
 		font-size: 4em;
 		font-family: great_vibesregular;
 		margin-top: 20px;
 
 		text-align: center;
-	
-		.title {
-            font-size: 1.5em;
-			color: black;
-			text-decoration: none;
-            cursor: pointer;
-			transition: 1s;
-
-			&:hover {
-				color: color-alizarin;
-				transition: 1s;
-			}
-		}
-	}
-
-	.border_box{
-		width: 300px;
-		margin: auto;
-
-		border-top-style: solid;
-		border-top-width: 1px;
-		border-top-color: black;
-
-		text-align: center;
-		margin-top: 20px;
-		font-size: 0.8em;
-
-		opacity: 0;
-		transition: 1s;
-	}
-
-	.nav_horizontal{
-		// width: 500px;
-		margin: auto;
-		margin-top: 100px;
-		transition: 1s;
-	
-		.icon_index{
-			width: 142px;
-			height: 142px;
-			margin: 10px;
-			opacity: 0.5;
-			cursor: pointer;
-			transition: 0.5s;
-
-			&:hover {
-				width: 138px;
-				height: 138px;
-				opacity: 1;
-				transition: 0.5s;
-			}
-		}
-	}
-    
-    .sidebar {
-        position: absolute;
-        top: 340px;
-        left: 80px;
-        
-        width: 300px;
-        dislay: none;
-        
-        .sidebar_icon {
-            width: 44px;
-            height: 44px;
-            display: none;
             
-            cursor: pointer;
-            transition: 0.5s;
-            
-            &:hover {
-                width: 40px;
-                height: 40px;
-                transition: 0.5s;
+            .title {
+                font-size: 1.5em;
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+                transition: 1s;
+
+                &:hover {
+                    color: color-alizarin;
+                    transition: 1s;
+                }
             }
-        }
-    }
+        
+        	.border_box{
+                width: 300px;
+                margin: auto;
+
+                border-top-style: solid;
+                border-top-width: 1px;
+                border-top-color: black;
+
+                text-align: center;
+                margin-top: 20px;
+                font-size: 0.8em;
+
+                opacity: 0;
+                transition: 1s;
+            }
+
+            .nav_horizontal{
+                // width: 500px;
+                margin: auto;
+                margin-top: 100px;
+                transition: 1s;
+
+                .icon_index{
+                    width: 142px;
+                    height: 142px;
+                    margin: 10px;
+                    opacity: 0.5;
+                    cursor: pointer;
+                    transition: 0.5s;
+
+                    //&:hover {
+                        //width: 138px;
+                        //height: 138px;
+                        //opacity: 1;
+                        //transition: 0.5s;
+                    //}
+                }
+            }
+
+            .sidebar {
+                position: absolute;
+                top: 340px;
+                left: 80px;
+
+                width: 300px;
+                dislay: none;
+
+                .sidebar_icon {
+                    width: 44px;
+                    height: 44px;
+                    display: none;
+
+                    cursor: pointer;
+                    transition: 0.5s;
+
+                    &:hover {
+                        width: 40px;
+                        height: 40px;
+                        transition: 0.5s;
+                    }
+                }
+            }
+	}
+
+
 }
 
 
@@ -184,33 +295,6 @@ html, body{
 			}
 	}
 
-    .resume {
-        .english_resume {
-            display: block;
-        }
-        
-        .french_resume {
-            display: none;
-        }
-
-        .horizontal_nav {
-            display: inline-block;
-            margin-bottom: 20px;
-
-            span {
-                font-size: 2em;
-                cursor: pointer;
-                margin-right: 10px;
-                    &:hover {
-                        color: color-alizarin;
-                    }
-            }
-
-            span[selected="true"] {
-                color: color-alizarin;
-            }
-        }
-    }
 
 	.article {
         .title {
@@ -268,7 +352,7 @@ html, body{
             transition: 1s;
             
             &:hover {
-                border: 10px solid color-peter-silver;
+                border: 10px solid color-peter-river;
                 transition: 1s;
             }
             
@@ -291,7 +375,7 @@ html, body{
             transition: 1s;
             
             &:hover {
-                border: 10px solid color-peter-silver;
+                border: 10px solid color-peter-river;
                 transition: 1s;
             }
             &:focus {
@@ -320,7 +404,7 @@ html, body{
             color: white;
             font-size: 1.5em;
             text-align: center;
-            background: color-peter-silver;
+            background: color-peter-river;
             
             border-radius: 4px;
             border: 10px solid rgba(0, 0, 0, 0.15);
@@ -387,7 +471,7 @@ a {
     transition:0.5s;
 
     &:hover{
-      color: #e74c3c;
+      color: color-alizarin;
       transition:0.5s;
     }
 }

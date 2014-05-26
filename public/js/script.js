@@ -6,27 +6,143 @@
 // -----------------------------
 
 // Run when the page is loaded
-// -------------------------
+// --------------------------
 window.onload = function () {
 	animate_index_icons();
 	click_index_icons();
+    animate_top_box();
     go_home();
 };
+
+function animate_top_box() {
+    // initial & ending value
+    // for the cv section (for animations)
+    var _minHeigh = '5px';
+    var _maxHeight = '400px';
+    
+    // CLICK
+    $('.top_arrow').click(function() {
+        if($(this)[0].getAttribute('alt') == 'down') {
+            slide_top_box(_minHeigh, _maxHeight, '180');
+            
+            
+            $(this)[0].setAttribute('alt', 'up');
+        }
+        else {
+            slide_top_box(_maxHeight, _minHeigh, '0');
+            
+            
+            $(this)[0].setAttribute('alt', 'down');
+        }
+    });
+    
+    // MOUSE ENTER/ MOUSE LEAVE
+//    $('.top_box').mouseenter(function() {
+//        if($(('.top_arrow'))[0].getAttribute('alt') == 'down') {
+//            slide_top_box(_minHeigh, _maxHeight, '180');
+//            $('.cv').css('display', 'inline-block');
+//            $('.top_arrow')[0].setAttribute('alt', 'up');
+//        }
+//        else {
+//        }
+//    });
+//    $('.top_box').mouseleave(function() {
+//        if($(('.top_arrow'))[0].getAttribute('alt') == 'down') {
+//        }
+//        else {
+//            slide_top_box(_maxHeight, _minHeigh, '0');
+//            $('.cv').css('display', 'none');
+//            $('.top_arrow')[0].setAttribute('alt', 'down');
+//        }
+//    });
+}
+
+function slide_top_box(startHeight, endHeight, angleRotate) {
+    check_cv_displayed();
+    
+    $('.top_box')
+         .css('height', startHeight)
+         .animate({
+             height: endHeight
+         },{
+             easing: 'linear',
+             complete: function() {
+                 $('.top_arrow').css({
+                     '-webkit-transform': 'rotate(' + angleRotate + 'deg)',
+                     '-moz-transform': 'rotate(' + angleRotate + 'deg)',
+                     '-ms-transform': 'rotate(' + angleRotate + 'deg)',
+                     '-o-transform': 'rotate(' + angleRotate + 'deg)',
+                     'transform': 'rotate(' + angleRotate + 'deg)'
+                     });
+                 
+                 // check: resume + image profil diaplay
+                 if(angleRotate == '180') {
+                     window.setTimeout(function() {
+                        $('.cv').css('display', 'inline-block');
+                        $('.profil').css('display', 'inline-block');
+                     }, 500);
+                 }
+                 else {
+                     $('.cv').css('display', 'none');
+                     $('.profil').css('display', 'none');
+                 }
+                 
+             }
+         });
+}
 
 // Show section's title when
 // the mouse is over the icon
 function animate_index_icons() {
+    // show some text
+    // when the mouse cursor is hover index_icon(s)
 	$('.icon_index').hover(function () {
 		// mouseEnter
-		$('.text_helper').text($(this)[0].getAttribute('alt'));
-		$('.border_box').css('opacity', 1);
+        // set the text above index_icons to the 'alt' icon value
+        var alt = $(this)[0].getAttribute('alt');
+		$('.text_helper').text(alt);
+        $('.border_box').css({opacity: 1});
+        
+        // animate icon
+        if($('#container').html() == '' || $('#container').html() == null) {
+            $($('.icon_index[alt ="' + alt + '"]')).css({
+                height: '138px',
+                width: '138px',
+                opacity: '1.0'
+            });
+        }
+        
 	}, function () {
 		// mouseLeave
 		$('.border_box').css('opacity', 0.0);
+        
+        
+        // animate icon
+        if($('#container').html() == '' || $('#container').html() == null) {
+            var alt = $(this)[0].getAttribute('alt');
+            $($('.icon_index[alt ="' + alt + '"]')).css({
+                height: '142px',
+                width: '142px',
+                opacity: '0.5'
+            });
+        }
 	});
+    
+    // show 'cv'
+    // when the mouse cursor is hover the dropdown arrow
+    $('.top_arrow').hover(function() {
+        // mouseEnter
+        // set the text above index_icons to the 'alt' icon value
+        $('.text_helper').text('cv');
+        $('.border_box').css({opacity: 1});
+    }, function() {
+        // mouseLeave
+		$('.border_box').css('opacity', 0.0);
+    })
 }
 
 // Click on an icon on the index page
+// --------------------------------
 function click_index_icons () {
 	$('.icon_index').each(function () {
 		$(this).click(function () {
@@ -34,12 +150,34 @@ function click_index_icons () {
             
             // send ajax request
             prepare_ajax(url);
-
+            
+            minimize_top();
+            // animate icon
+//                var alt = $(this)[0].getAttribute('alt');
+                $(this).css({
+                    height: '142px',
+                    width: '142px',
+                    opacity: '1'
+                });
 		});
 	});
 }
 
 
+// Get the Resume content
+// if hasn't been retrieved yet
+// ----------------------------
+function check_cv_displayed() {
+    if($('.cv').html() === "" || $('.cv').html() === null) {
+        prepare_ajax('cv');
+    }
+}
+
+
+// Create a ajax object
+// and call a route in 'server.js',
+// then send the response to a sub-function
+// -----------------------------
 function prepare_ajax(url) {
     if(!url) return;
     
@@ -82,12 +220,12 @@ function prepare_ajax(url) {
     }
 }
 
+
 // Post process ajax request
 // > show projects
 // -------------------------------
 function ajax_projects(response) {
     response = JSON.parse(response);
-    minimize_top();
 
     // add projects to the page
     for (var i = 0; i < response.length; i++) {
@@ -109,12 +247,10 @@ function ajax_projects(response) {
 // > show resume (cv)
 // -------------------------
 function ajax_cv(response) {
-    minimize_top();
-
     $('<div>', {
         class: 'cv',
         html: response,
-    }).appendTo('#container');
+    }).appendTo('.cv');
 
     // add click event on text
     active_lang_selector();
@@ -127,7 +263,6 @@ function ajax_cv(response) {
 function ajax_blog(response) {
     if(response) {
         response = JSON.parse(response);
-        minimize_top();
 
         for(var i=0; i< response.length; i++) {
             $('<div>', {
@@ -279,7 +414,7 @@ function show_message(message) {
 }
 
 
-// Minimize top bar
+// Minimize index_icon
 // end empty the #container
 // ----------------------
 function minimize_top() {
@@ -351,9 +486,13 @@ function go_home() {
 function set_default_layout() {
     // re-arrange contain (on top)
     $('#container').css('width', '100%');
-    $('.icon_index').css({
-        width: '142px',
-        height: '142px'});
+//    $('.icon_index').css({
+//        width: '142px',
+//        height: '142px'});
+    
+    $('.icon_index').css('width', '145px');
+    $('.icon_index').css('height', '145px');
+    
     $('.nav_horizontal').css({
         marginTop: '100px'
     });
