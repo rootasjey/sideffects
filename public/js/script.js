@@ -23,16 +23,18 @@ function animate_top_box() {
     // CLICK
     $('.top_arrow').click(function() {
         if($(this)[0].getAttribute('alt') == 'down') {
+            // show about section
             slide_top_box(_minHeigh, _maxHeight, '180');
             
-            
             $(this)[0].setAttribute('alt', 'up');
+            hide_sidebar();
         }
         else {
+            // hide about section
             slide_top_box(_maxHeight, _minHeigh, '0');
             
-            
             $(this)[0].setAttribute('alt', 'down');
+            show_sidebar();
         }
     });
     
@@ -262,21 +264,20 @@ function ajax_cv(response) {
 // ---------------------------
 function ajax_blog(response) {
     if(response) {
-        response = JSON.parse(response);
-
+		response = JSON.parse(response);
+//		console.log(response);
+		
         for(var i=0; i< response.length; i++) {
+			var date = new Date(response[i].Created_at);
+			date = date.toLocaleString();
+			
             $('<div>', {
                 class: 'article',
-                html: "<span class='title'>" + response[i].title + "</span>" + "<br>" +
-                      "<san class='date'>" + response[i].created_at + "</span>" + "<br>"+
-                      "<span class='body'>" + response[i].body + "</span>",
+                html: "<span class='title'>" + response[i].Title + "</span>" + "<br>" +
+                      "<san class='date'>" + date + "</span>" + "<br>"+
+                      "<span class='body'>" + response[i].Body + "</span>",
             }).appendTo('#container');
         }
-
-        // add 'Plus' button to the page
-        // to add new article in admin mode
-        $('.sidebar').css('display', 'block');
-        $('.sidebar').children().each( function() {$(this).css('display', 'inline');} );
 
         // add click event on this plus icon
         $('.sidebar_icon[alt="new article"]').click(create_article_form);
@@ -370,7 +371,7 @@ function add_send_form_event() {
             
             $.ajax({
                 type: 'POST',
-                url: '/blog/new',
+                url: '/blog/add_post',
                 data: $('.form_article').serialize(),
                 success: function(data)
                 {
@@ -405,10 +406,11 @@ function show_message(message) {
     
     // click event on OK button
     $('.ok').click(function() {
-//        set_default_layout();
-        
+		var parent = $(this).parent()[0];
+		console.log(parent);
+		
         // return to blog posts
-        setTimeout(prepare_ajax('blog'), 2000);
+        prepare_ajax('blog');
     });
     
 }
@@ -419,7 +421,7 @@ function show_message(message) {
 // ----------------------
 function minimize_top() {
     // re-arrange contain (on top)
-    $('#container').css('width', '50%');
+    $('#container').css('width', '70%');
     $('.icon_index').css({
         width: '90px',
         height: '90px'});
@@ -430,10 +432,24 @@ function minimize_top() {
 
     // empty #contain page
     $('#container').html('');
-    
+}
+
+
+// Set to 'none'
+// sidebar panel for admin
+// -----------------------
+function hide_sidebar() {
     // hide side bar
     $('.sidebar').css('display', 'none');
     $('.sidebar').children().each( function() {$(this).css('display', 'none');} );
+}
+
+// Set to 'block'
+// sidebar panel for admin
+// -----------------------
+function show_sidebar() {
+    $('.sidebar').css('display', 'block');
+    $('.sidebar').children().each( function() {$(this).css('display', 'block');} );
 }
 
 // Add click event on text (lang selector)
@@ -486,20 +502,14 @@ function go_home() {
 function set_default_layout() {
     // re-arrange contain (on top)
     $('#container').css('width', '100%');
-//    $('.icon_index').css({
-//        width: '142px',
-//        height: '142px'});
-    
-    $('.icon_index').css('width', '145px');
-    $('.icon_index').css('height', '145px');
+    $('.icon_index').css({
+        width: '145px',
+        height: '145px'});
     
     $('.nav_horizontal').css({
         marginTop: '100px'
     });
 
     // empty #contain page
-    $('#container').html('');
-    
-    $('.sidebar').css('display', 'none');
-    $('.sidebar').children().each( function() {$(this).css('display', 'none');} );
+    $('#container').html('');    
 }

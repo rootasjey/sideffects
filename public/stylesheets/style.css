@@ -143,29 +143,60 @@ body {
   cursor: pointer;
   transition: 0.5s;
 }
-#header .top_header .sidebar {
-  position: absolute;
-  top: 340px;
-  left: 80px;
-  width: 300px;
-  dislay: none;
+.sidebar {
+  position: fixed;
+  top: 40%;
+  left: -40px;
+  overflow: hide;
+  width: auto;
+  dislay: block;
+  transition: 0.5s;
 }
-#header .top_header .sidebar .sidebar_icon {
+.sidebar:hover {
+  left: 0;
+  transition: 0.5s;
+}
+.sidebar .sidebar_icon {
+  display: block;
+  height: 44px;
+  width: 44px;
+}
+.sidebar .sidebar_icon:hover {
+  width: auto;
+}
+.sidebar .sidebar_icon:hover p {
+  display: inline-block;
+}
+.sidebar .sidebar_icon img {
+  position: relative;
+  top: 0;
+  left: 0;
   width: 44px;
   height: 44px;
-  display: none;
   cursor: pointer;
+  background: #3498db;
+  display: inline-block;
   transition: 0.5s;
 }
-#header .top_header .sidebar .sidebar_icon:hover {
-  width: 40px;
-  height: 40px;
+.sidebar .sidebar_icon img:hover {
+  background: #000;
   transition: 0.5s;
+}
+.sidebar .sidebar_icon p {
+  display: none;
+  color: #fff;
+  font-size: 1em;
+  height: 30px;
+  padding: 7px;
+  position: relative;
+  top: -22px;
+  background: #3498db;
 }
 #container {
   width: 500px;
   margin: auto;
   padding-bottom: 150px;
+  transition: 1s;
 }
 #container .project_box {
   padding: 15px;

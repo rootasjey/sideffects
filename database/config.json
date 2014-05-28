@@ -1,0 +1,6 @@
+{
+    "STORAGE_NAME": "Storage_Account_Name",
+    "STORAGE_KEY": "Primary_Access_Key ",
+    "PARTITION_KEY": "blog",
+    "TABLE_NAME": "posts"
+}

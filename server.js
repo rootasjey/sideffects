@@ -11,7 +11,6 @@ var express = require('express'),	// web dev framework
 	morgan = require('morgan'),		// loggin middleware
 	nib = require('nib'),          // Stylus utilities
     routes = require('./routes'),
-    user = require('./routes/user'),
     http = require('http'),
     path = require('path');			
 
@@ -57,6 +56,23 @@ app.use(express.static(__dirname + '/public'));
 // static folder containing css, img & others contents
 // ---------------------------------------------------
 
+// DATABASE
+// Azure
+// -------
+var azure = require('azure');
+var nconf = require('nconf');
+var uuid = require('node-uuid');
+
+nconf.env()
+     .file({ file: './database/config.json'});
+var tableName = nconf.get("TABLE_NAME")
+var partitionKey = nconf.get("PARTITION_KEY")
+var accountName = nconf.get("STORAGE_NAME")
+var accountKey = nconf.get("STORAGE_KEY");
+
+var Table = require('./database/table');
+var post_table = new Table(azure.createTableService(accountName, accountKey), tableName, partitionKey);
+
 
 
 // -------------------------------
@@ -66,23 +82,36 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function (req, res) {
 	res.render('index', {title: 'Accueil'});
 })
+
 .get('/blog', function(req, res) {
-    articleProvider.findAll(function(error, docs) {
-        if(docs){
-            res.send(200, docs);
-        }
-    });
+	var query = azure.TableQuery
+		.select()
+		.from('posts');
+	
+	post_table.storageClient.queryEntities(query, function(error, entities){
+		if(!error){
+			//entities contains an array of entities
+			res.send(200, entities);
+		}
+	});
 })
-.post('/blog/new', function (req, res) {
-    articleProvider.save({
-        title: req.param('title'),
-        body: req.param('body')},
-                         
-         function (error, docs) {
-             if (error) res.send(404);
-             res.send(200);
-         }
-    );
+.post('/blog/add_post', function (req, res) {
+	// create a query
+	var task = {
+		PartitionKey : post_table.partitionKey
+		, RowKey : uuid()
+		, Title : req.param('title')
+		, Body  : req.param('body')
+		, Created_at: new Date()
+	};
+	
+	// add to table storage
+	post_table.storageClient.insertEntity(post_table.tableName, task, function(error){
+		if(!error){
+			// Entity inserted
+			res.send(200);
+		}
+	});
 })
 .get('/projects', function (req, res) {
 	var jsonArray = [];
