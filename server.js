@@ -9,25 +9,23 @@
 var express = require('express'),	// web dev framework
 	stylus = require('stylus'),		// css pre-compiler
 	morgan = require('morgan'),		// loggin middleware
-	nib = require('nib'),          // Stylus utilities
+	nib = require('nib'),           // Stylus utilities
     routes = require('./routes'),
     http = require('http'),
-    path = require('path');			
+    path = require('path');
 
 var fs = require('fs');				// file stream
 var marked = require('marked');		// markdown module
 
-var ArticleProvider = require('./articleprovider-memory').ArticleProvider;
-var articleProvider = new ArticleProvider();
-
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-
 //var port = process.env.port || 8080;
 
-// ---------------//
-// APP - CREATION //
-// ---------------//
+
+
+// ---------------
+// APP - CREATION
+// ---------------
 var app = express();
 // ----------------
 function compile(str, path) {
@@ -56,38 +54,70 @@ app.use(express.static(__dirname + '/public'));
 // static folder containing css, img & others contents
 // ---------------------------------------------------
 
-// DATABASE
-// Azure
-// -------
+
+// ---------------
+// DATABASE: AZURE
+// ---------------
 var azure = require('azure');
 var nconf = require('nconf');
 var uuid = require('node-uuid');
-
+// -----------------------------
+// -----------------------------
+// configuration for local developpement
+// -----------------------------
 nconf.env()
      .file({ file: './database/config.json'});
 var tableName = nconf.get("TABLE_NAME")
 var partitionKey = nconf.get("PARTITION_KEY")
 var accountName = nconf.get("STORAGE_NAME")
 var accountKey = nconf.get("STORAGE_KEY");
-
+// -----------------------------
+// -----------------------------
+// An object (Table) for table access storage
+// -----------------------------
 var Table = require('./database/table');
 var post_table = new Table(azure.createTableService(accountName, accountKey), tableName, partitionKey);
+// -----------------------------
+// intern security
+var sha1 = require('js-sha1');
+var _user = 'dc76e9f0c0006e8f919e0c515c66dbba3982f785';
+var _pass = 'a141005e8413ee86855c36cafbb63eae454178b1';
+var _ADMIN = 0; // 0 if user, 1 if logged as administrator
 
 
 
 // -------------------------------
-// ROUTING
+// ROUTING -----------------------
 // -------------------------------
-// -------------------------------
+// Home
+// ----
 app.get('/', function (req, res) {
 	res.render('index', {title: 'Accueil'});
 })
+.post('/login/admin', function (req, res) {
+	// get variables (from form)
+	var u = req.param('user');
+	var p = req.param('pass');
 
+	// escape special chars
+	u = escape(u);
+	p = escape(p);
+
+	// check validity
+	if(sha1(u) === _user && sha1(p) === _pass) {
+		_ADMIN = 1;
+		res.send(200);
+	}
+	else res.send(401);
+})
+
+// Blog
+// ----
 .get('/blog', function(req, res) {
 	var query = azure.TableQuery
 		.select()
 		.from('posts');
-	
+
 	post_table.storageClient.queryEntities(query, function(error, entities){
 		if(!error){
 			//entities contains an array of entities
@@ -95,24 +125,111 @@ app.get('/', function (req, res) {
 		}
 	});
 })
+
+// Add a new post
+// -----------------
 .post('/blog/add_post', function (req, res) {
-	// create a query
-	var task = {
-		PartitionKey : post_table.partitionKey
-		, RowKey : uuid()
-		, Title : req.param('title')
-		, Body  : req.param('body')
-		, Created_at: new Date()
-	};
-	
-	// add to table storage
-	post_table.storageClient.insertEntity(post_table.tableName, task, function(error){
-		if(!error){
-			// Entity inserted
-			res.send(200);
+	if(_ADMIN) {
+		// check if we've the privilege
+
+		// get the text body + markdown conversion
+		var bodyformated = req.param('body');
+		bodyformated = marked(bodyformated);
+
+		// create a query
+		var task = {
+			PartitionKey : post_table.partitionKey
+			, RowKey : uuid()
+			, Title : req.param('title')
+			, Body  : bodyformated
+			, Created_at : new Date()
+			, Category : 'blogpost'
+			, Tags : req.param('tags')
+		};
+
+		// check if it's an update
+		// > so we've a rowkey
+		var rowkey = req.param('rowkey');
+		if(rowkey.length > 0) {
+			task.RowKey = rowkey;
 		}
-	});
+
+		// add to table storage
+		post_table.storageClient.insertOrReplaceEntity(post_table.tableName, task, function(error){
+			if(!error){
+				// Success: Entity inserted
+				res.send(200);
+			}
+			else res.send(404); // error
+		});
+	}
+	else res.send(401); // NOT authorized
 })
+
+// Delete a post
+// -------------
+.post('/blog/delete_post', function(req, res) {
+	if(_ADMIN) {
+		// check if we've the privilege
+
+		// get the uniques identifiers
+		var partitionkey = req.param('partitionkey');
+		var rowkey = req.param('rowkey');
+
+		// check they're not empty
+		if(!(partitionkey && rowkey)) res.send(404);
+
+		// execute the query on the table storage
+		post_table.storageClient.deleteEntity(post_table.tableName,
+								{
+									PartitionKey: partitionkey,
+									RowKey		: rowkey
+								},
+
+							   function(error) {
+								   if(!error) {
+									   // Success: Entity deleted
+									   res.send(200);
+								   }
+								   else res.send(404); // error
+							   });
+	}
+	else {
+		res.send(401); // NOT authorized
+	}
+})
+
+// Edit a post
+// -----------
+.post('/blog/edit_post', function(req, res) {
+
+	if(_ADMIN) {
+		// check if we've the privilege
+
+		// check the entity's availability
+		// from table storage
+
+		// create a query
+		var query = azure.TableQuery
+			.select()
+			.from('posts')
+			.where('RowKey eq ?', req.param('rowkey'));
+
+		post_table.storageClient.queryEntities(query, function(error, entities){
+			if(!error){
+				//entities contains an array of entities
+				res.send(200, entities);
+			}
+			else res.send(404); // error
+		});
+	}
+	else {
+		res.send(401); // NOT authorized
+	}
+})
+
+// Show personal projects
+// ----------------------
 .get('/projects', function (req, res) {
 	var jsonArray = [];
 	var path = __dirname + '/public/projects';
@@ -126,9 +243,9 @@ app.get('/', function (req, res) {
 
 		var count = 1; // watch when result must be sent
 		for (var i = 0; i < files.length; i++) {
-			
+
 			if(files[i].endsWith(".json")){
-				// do nothing				
+				// do nothing
 			}
 			else {
 				// remove file (from array) if not .json
@@ -160,7 +277,7 @@ app.get('/', function (req, res) {
 				// it reached the end of array
 				if(count == files.length)
 					res.json(200, jsonArray)
-				
+
 				count++; // number of files read
 			});
 		}
@@ -179,11 +296,15 @@ app.get('/', function (req, res) {
 		res.send(200, content);
 	});
 })
+
+// Handle inexistant routes
+// ------------------------
 .use(function (req, res, next) {
     res.render('pages/404', {title: '404'});
 });
 
-//app.listen(port);
+// listen port => server start
+// ---------------------------
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });

@@ -1,7 +1,11 @@
 sideffects
 ==========
 A personal website
-Lives at [http://www.sideffects.fr](http://www.sideffects.fr)
+lives at [http://www.sideffects.fr](http://www.sideffects.fr)
+
+#update
+* **last : **built blog section
+* **todo : **update project section
 
 #build
 
@@ -29,6 +33,10 @@ Lives at [http://www.sideffects.fr](http://www.sideffects.fr)
 * [stylus](https://www.npmjs.org/package/stylus)
 * [nib](https://www.npmjs.org/package/nib)
 * [marked](https://www.npmjs.org/package/marked)
+* [js-sha1](https://www.npmjs.org/package/js-sha1)
+* [azure](https://github.com/Azure/azure-sdk-for-node)
+* [node-uui](https://www.npmjs.org/package/node-uuid)
+* [async](https://www.npmjs.org/package/async)
 
 It's good to have [npm](https://www.npmjs.org/) installed on your machine, if you want to add a new module.
 

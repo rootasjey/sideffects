@@ -32,30 +32,30 @@ html, body{
     .top_box {
         height: 5px;
         width: 100%;
-        
+
         color: white;
         background: color-peter-river;
-        
+
         transition: 0.5s;
-        
+
         &:hover {
             background: color-belize-hole;
             transition: 0.5s;
         }
-        
+
         .profil {
             display: none;
             overflow: hide;
             cursor: pointer;
-            
+
             width: 200px;
             height: 200px;
-            
+
             margin-left: 10px;
             background-color: transparent;
             border: 10px solid rgba(0, 0, 0, 0.15);
             transition: 0.5s;
-            
+
             &:hover {
                 border: 10px solid rgba(200, 40, 50, 0.15);
                 transition: 0.5s;
@@ -64,16 +64,16 @@ html, body{
         .cv {
             font-size: 1em;
             display: none;
-            
+
             padding: 20px;
             overflow: hide;
-            
+
             min-width: 300px;
             max-width: 80%;
-            
+
                 .resume {
                     padding-bottom: 10px;
-                    
+
                     a {
                         color: white;
                         text-decoration: none;
@@ -84,7 +84,7 @@ html, body{
                           transition:0.5s;
                         }
                     }
-                    
+
                     .english_resume {
                         display: block;
                     }
@@ -115,37 +115,37 @@ html, body{
                 }
         }
     }
-    
+
     .top_arrow{
         height: 30px;
         width: 30px;
-        
+
         position: absolute;
         right: 0;
-        
+
         cursor: pointer;
         padding: 10px;
         background: color-peter-river;
-        
-        
+
+
         transition: 0.5s;
-        
+
         &:hover {
             background: color-alizarin;
             transition: 0.5s;
         }
     }
-    
+
 	.top_header {
         width: 500px;
         margin: auto;
-    
+
 		font-size: 4em;
 		font-family: great_vibesregular;
 		margin-top: 20px;
 
 		text-align: center;
-            
+
             .title {
                 font-size: 1.5em;
                 color: black;
@@ -158,7 +158,7 @@ html, body{
                     transition: 1s;
                 }
             }
-        
+
         	.border_box{
                 width: 300px;
                 margin: auto;
@@ -209,7 +209,7 @@ html, body{
     width: auto;
     dislay: block;
     transition: 0.5s
-    
+
     &:hover {
         left: 0;
         transition: 0.5s
@@ -219,14 +219,14 @@ html, body{
         display: block;
         height: 44px;
         width: 44px;
-        
+
         &:hover {
             width: auto;
             p {
                 display: inline-block;
             }
         }
-        
+
         img {
             position: relative;
             top: 0;
@@ -243,21 +243,21 @@ html, body{
                 transition: 0.5s;
             }
         }
-        
+
         p {
             display: none;
             color: white;
             font-size: 1em;
             height: 30px;
             padding: 7px;
-            
+
             position: relative;
             top: -22px;
-            
+
             background: color-peter-river;
         }
-        
-        
+
+
     }
 }
 
@@ -266,8 +266,54 @@ html, body{
 	width: center-size;
 	margin: auto;
 	padding-bottom: 150px;
-    
+
     transition: 1s;
+
+	.side {
+
+		.box {
+			opacity: 0.1;
+			cursor: pointer;
+
+			height: 60px;
+			width: 60px;
+
+			margin: auto;
+			margin-top: 60px;
+			background: color-peter-river;
+
+			border-radius: 10px;
+			border: 10px solid rgba(0, 0, 0, 0.15);
+
+			-webkit-transform: rotate(45deg);
+			-moz-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			-o-transform: rotate(45deg);
+			transform: rotate(45deg);
+
+			transition: 0.5s;
+
+			&:hover {
+				opacity: 1;
+
+				height: 65px;
+				width: 65px;
+
+				-webkit-transform: rotate(90deg);
+				-moz-transform: rotate(90deg);
+				-ms-transform: rotate(90deg);
+				-o-transform: rotate(90deg);
+				transform: rotate(90deg);
+
+				transition: 0.5s;
+			}
+		}
+
+		.dialog {
+			background: color-peter-river;
+			opacity: 0.7;
+		}
+	}
 
 	.project_box {
 		//width: 260px;
@@ -332,83 +378,263 @@ html, body{
 
 
 	.article {
+		padding: 10px;
+		margin:  10px;
+
         .title {
             font-size: 2em;
             font-weigth: bolder;
+
+			cursor: pointer;
+			transition: 0.5s;
+
+			&:hover {
+				color: color-alizarin;
+				transition: 0.5s;
+			}
         }
-        
-        padding: 10px;
+
+		.tag {
+			color: white;
+			padding: 4px;
+			margin-right: 2px;
+			margin-bottom: 5px;
+			cursor: pointer;
+
+			display: inline-block
+			background: color-alizarin;
+			transition: 0.5s;
+
+			&:hover {
+				background: black;
+				transition: 0.5s;
+			}
+		}
+
+		.body {
+			opacity: 0;
+			display: none;
+		}
+
+		.close {
+			width: 0;
+			height: 0;
+			display: inline-block;
+			opacity: 0;
+		}
+
+		.admin_icons {
+			display: none;
+
+			.icon {
+				display: none;
+			}
+		}
     }
-    
-    
+
+	.fullscreen_article {
+		color: white;
+		padding: 10px;
+		margin-left: 10px;
+		margin-bottom: 20px;
+
+		background: color-alizarin;
+		border: 10px solid rgba(0, 0, 0, 0.15);
+
+		transition: 1s;
+
+		.title {
+			font-size: 2em;
+			cursor: pointer;
+			margin-bottom: 10px;
+			display: inline-block;
+		}
+
+		.date {
+			margin-left: 24px;
+		}
+
+		.body {
+			opacity: 1;
+			margin-left: 24px;
+			display: inline-block;
+		}
+
+		.tags {
+			margin-left: 24px;
+
+			.tag {
+				color: white;
+				padding: 4px;
+				cursor: pointer;
+
+				opacity: 0.5;
+				background: black;
+				display: inline-block
+				transition: 0.5s;
+
+				&:hover {
+					opacity: 1;
+					background: black;
+					transition: 0.5s;
+				}
+			}
+		}
+
+
+		.close {
+			background: transparent;
+
+			width: 20px;
+			height: 20px;
+
+			cursor: pointer;
+			padding: 5px;
+			display: inline-block;
+
+			-webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+
+			opacity: 0.4;
+			transition: 0.5s;
+
+			&:hover {
+				opacity: 1;
+				transition: 0.5s;
+			}
+		}
+
+		.admin_icons {
+			margin-left: 20px;
+			display: inline-block;
+
+			.icon {
+				width: 24px;
+				height: 24px;
+
+				margin-right: 5px;
+				cursor: pointer;
+
+				opacity: 0.5;
+				background: transparent;
+				transition: 0.5s;
+
+				&:hover {
+					width: 17px;
+					height: 17px;
+					opacity: 1;
+					transition: 0.5s;
+				}
+			}
+		}
+	}
+
+
     // FORM: NEW ARTICLE
     // -----------------
-    .form_article{
+    .form_article {
         padding: 20px;
         margin-top: 20px;
         border-radius: 4px;
-	    border: 10px solid rgba(0, 0, 0, 0.15);
-        
-        // TITLE 
+	    	border: 10px solid rgba(0, 0, 0, 0.15);
+
+        // TITLE
         // -----
         .form_title {
             background: color-alizarin;
             width: 400px;
             height: 60px;
-            
+
             margin: auto;
             margin-top: -60px;
             padding-top: 20px;
-            
+
             box-shadow: 5px 5px 5px silver;
-            
+
             color: white;
             font-size: 1.6em;
             text-align: center
-            
+
             border-radius: 4px;
         }
-        
+
         // LABELS
         // ----------
         .form_label {
             font-size: 2em;
+						margin-bottom: 0px;
         }
-        
+				.mini_label {
+					display: inline-block;
+					margin-right: 20px;
+					font-size: 1.3em;
+					width: auto;
+				}
+
         // ARTICLE TITLE
         // -----------------
-        .form_article_title {
-            display: block;
+        .input_title {
             width: 90%;
             height: 40px;
-            
+						display: block;
+
+						font-size: 1.4em;
+
             border-radius: 2px;
-	        border: 10px solid rgba(0, 0, 0, 0.15);
+	        	border: 10px solid rgba(0, 0, 0, 0.15);
             transition: 1s;
-            
+
             &:hover {
                 border: 10px solid color-peter-river;
                 transition: 1s;
             }
-            
+
             &:focus {
                 border: 10px solid color-emerald;
                 transition: 1s;
             }
-            
+
         }
-        
+
+				.input_tags {
+					width: 90%;
+					height: 20px;
+					display: inline-block;
+
+					color: white;
+					background: color-peter-river;
+					border-radius: 2px;
+			        border: 10px solid rgba(0, 0, 0, 0.15);
+
+		            transition: 1s;
+
+		            &:hover {
+		                border: 10px solid color-peter-river;
+		                transition: 1s;
+		            }
+
+		            &:focus {
+		                //border: 10px solid color-emerald;
+		                transition: 1s;
+		            }
+				}
+
         // ARTICLE BODY - TEXT AREA
         // -----------------
-        .form_article_body {
-            display: block;
+        .input_body {
             width: 90%;
-            height: 142px;
-            
+            height: 250px;
+						display: inline-block;
+
+            font-size: 1.4em;
+
             border-radius: 2px;
-	        border: 10px solid rgba(0, 0, 0, 0.15);
+	        	border: 10px solid rgba(0, 0, 0, 0.15);
             transition: 1s;
-            
+
             &:hover {
                 border: 10px solid color-peter-river;
                 transition: 1s;
@@ -421,77 +647,212 @@ html, body{
         textarea {
             resize: none;
         }
-        
+
         // VALIDATION BUTTON
         // -----------------
-        .form_button_validate {
+        .button_validate {
             display: block;
             width: 200px;
             height: 50px;
-            
+
             margin: auto;
             margin-top: 40px;
-            
+
             padding-top: 20px;
-            
+
             cursor: pointer;
-            
+
             color: white;
             font-size: 1.5em;
             text-align: center;
             background: color-peter-river;
-            
+
             border-radius: 4px;
             border: 10px solid rgba(0, 0, 0, 0.15);
-            
+
             transition: 1s;
-            
+
             &:hover {
                 // color: black;
                 background: color-emerald;
-                
+
                 transition: 1s;
             }
         }
+
+				.icons_panel {
+					width: 50px;
+					padding: 5px;
+
+					position: relative;
+					top: 0;
+
+					display: inline-block;
+
+					.icon{
+						width: 40px;
+						height: 40px;
+						cursor: pointer;
+						background: color-silver;
+
+						transition: 0.5s;
+
+						&:hover {
+							background: black;
+							transition: 0.5s;
+						}
+					}
+				}
     }
-    
-    // BODY MESSAGE
+
+	// FORM: ADMIN LOGIN
+	.form_login {
+		padding: 20px;
+	    margin-top: 20px;
+	    border-radius: 4px;
+    	border: 10px solid rgba(0, 0, 0, 0.15);
+
+		// TITLE
+	    // -----
+	    .form_title {
+	        background: color-alizarin;
+	        width: 400px;
+	        height: 60px;
+
+	        margin: auto;
+	        margin-top: -60px;
+	        padding-top: 20px;
+
+	        box-shadow: 5px 5px 5px silver;
+
+	        color: white;
+	        font-size: 1.6em;
+	        text-align: center
+
+	        border-radius: 4px;
+	    }
+
+	    // LABELS
+	    // ----------
+	    .form_label {
+	        font-size: 2em;
+	    }
+
+	    // LOGIN INPUT
+	    // -----------------
+	    .form_user {
+	        display: block;
+	        width: 90%;
+	        height: 40px;
+
+	        border-radius: 2px;
+	      border: 10px solid rgba(0, 0, 0, 0.15);
+	        transition: 1s;
+
+	        &:hover {
+	            border: 10px solid color-peter-river;
+	            transition: 1s;
+	        }
+
+	        &:focus {
+	            border: 10px solid color-emerald;
+	            transition: 1s;
+	        }
+
+	    }
+
+        // PASSWORD INPUT
+        // -----------------
+        .form_pass {
+            display: block;
+            width: 90%;
+            height: 40px;
+
+            border-radius: 2px;
+	        border: 10px solid rgba(0, 0, 0, 0.15);
+            transition: 1s;
+
+            &:hover {
+                border: 10px solid color-peter-river;
+                transition: 1s;
+            }
+            &:focus {
+                border: 10px solid color-emerald;
+                transition: 1s;
+            }
+        }
+
+				// VALIDATION BUTTON
+        // -----------------
+        .form_button_validate {
+            display: block;
+            width: 200px;
+            height: 90px;
+
+            margin: auto;
+            margin-top: 40px;
+
+            cursor: pointer;
+
+            color: white;
+            font-size: 1.5em;
+            text-align: center;
+						font-family: main-font;
+            background: color-peter-river;
+
+            border-radius: 4px;
+            border: 10px solid rgba(0, 0, 0, 0.15);
+
+            transition: 1s;
+
+            &:hover {
+                // color: black;
+                background: color-emerald;
+
+                transition: 1s;
+            }
+        }
+	}
+
+    // MESSAGE
     .message {
         color: white;
         text-align: center;
-        
+
         padding: 10px;
+				margin-left: 10px;
+				margin-bottom: 20px;
+
         border-radius: 4px;
-        
         background: color-emerald;
-        
+
         .ok {
             width: 40px;
             height: 40px;
-            
+
             padding: 10px;
             //padding-top: 15px;
-            
+
             margin: auto;
             margin-top: 20px;
             margin-bottom: 20px;
-            
+
             text-align: center;
             font-size: 1.4em;
-            
+
             border-style: solid;
             border-width: 1px;
             border-radius: 30px;
             border-color: white;
-            
+
             cursor: pointer;
-            
+
             transition: 1s;
-            
+
             &:hover {
                 color: black;
                 background: white;
-                
+
                 transition: 1s;
             }
         }
