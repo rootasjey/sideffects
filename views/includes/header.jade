@@ -1,23 +1,25 @@
-div.top_box
-  img.profil(src='/images/profil_picture.gif', alt='profil')
-  div.cv
-img.top_arrow(src='/icons/arrow_white.png', alt='down')
-div.top_header  
-  span.title Sideffects
-  div.border_box
-    span.text_helper test
-  div.nav_horizontal
-    img.icon_index(src='/icons/blog_icon.png', alt='blog')
-    img.icon_index(src='/icons/projects_icon.png', alt='projects')
-    img.icon_index(src='/icons/heart_icon.png', alt='love')
+//- ------------------------
+//- HEADER.JADE - SIDEFFECTS
+//- ------------------------
+
+div.top-header
+  div.supericon
+    img(src='/icons/s_lowercase-white.png')
+  span.title sideffects
+  div.border-box
+    span.text-helper nothing
+  div.nav-horizontal
+    img.header-icon(src='/icons/blog_icon.png', alt='blog')
+    img.header-icon(src='/icons/exp_icon.png', alt='experiments')
+    img.header-icon(src='/icons/fire_element_icon.png', alt='passions')
     
 div.sidebar
-  div.sidebar_icon(data='login')
+  div.sidebar-icon(data='login')
     img(src='/icons/log_icon.png', alt='log in')
     p log in
-  div.sidebar_icon(data='addpost')
-    img.sidebar_icon(src='/icons/plus_icon.png', alt='new article')
+  div.sidebar-icon(data='addpost')
+    img.sidebar-icon(src='/icons/plus_icon.png', alt='new article')
     p new article
-  div.sidebar_icon(data='admin')
-    img.sidebar_icon(src='/icons/data_icon.png', alt='manage data')
+  div.sidebar-icon(data='admin')
+    img.sidebar-icon(src='/icons/data_icon.png', alt='manage data')
     p manage data

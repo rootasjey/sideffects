@@ -1,0 +1,62 @@
+// -------------------------
+// SIDEBAR.STYL - SIDEFFECTS
+// -------------------------
+
+.sidebar {
+  position: fixed;
+  top: 40%;
+  left: -40px;
+  overflow: hide;
+
+  width: auto;
+  dislay: block;
+  transition: 0.5s
+
+  &:hover {
+      left: 0;
+      transition: 0.5s
+  }
+
+  .sidebar-icon {
+    display: block;
+    height: 44px;
+    width: 44px;
+
+    &:hover {
+      width: auto;
+      p {
+          display: inline-block;
+      }
+    }
+
+    img {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      background: color-peter-river;
+      display: inline-block;
+      transition: 0.5s;
+
+      &:hover {
+        background: black;
+        transition: 0.5s;
+      }
+    }
+
+    p {
+      display: none;
+      color: white;
+      font-size: 1em;
+      height: 30px;
+      padding: 7px;
+
+      position: relative;
+      top: -22px;
+
+      background: color-peter-river;
+    }
+  }
+}

@@ -3,10 +3,14 @@ doctype html
 html(lang='fr')
   head
     <meta charset="utf-8" >
-    title #{title} - sideffects
+    title Sideffects
     link(type='text/css', rel='stylesheet', href='/stylesheets/style.css')
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    
+    script(src='js/jquery-2.1.1.min.js')
     script(src='/js/script.js')
+    script(src='/js/blog.js')
+    script(src='/js/experiments.js')
+    script(src='/js/passions.js')
 
   body
     div#header
@@ -15,4 +19,3 @@ html(lang='fr')
       block content
     div#footer
       include includes/footer
-    script google.load('jquery', '1')

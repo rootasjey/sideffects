@@ -92,7 +92,8 @@ var _ADMIN = 0; // 0 if user, 1 if logged as administrator
 // Home
 // ----
 app.get('/', function (req, res) {
-	res.render('index', {title: 'Accueil'});
+	// res.render('index', {title: 'Accueil'});
+	res.render('index');
 })
 .post('/login/admin', function (req, res) {
 	// get variables (from form)
@@ -230,9 +231,9 @@ app.get('/', function (req, res) {
 
 // Show personal projects
 // ----------------------
-.get('/projects', function (req, res) {
+.get('/experiments', function (req, res) {
 	var jsonArray = [];
-	var path = __dirname + '/public/projects';
+	var path = __dirname + '/public/experiments';
 
 	// open the projects directory
 	fs.readdir(path, function (err, files) {
@@ -285,12 +286,13 @@ app.get('/', function (req, res) {
 })
 
 .get('/cv', function (req, res) {
-	var path = __dirname + '/public/docs/cv.md';
+	var path = __dirname + '/public/docs/cv.html';
 	fs.readFile(path, 'utf-8', function(err, data) {
 		if (err) res.send(404);
 
 		// convert the .md to .html
-		var content = marked(data);
+		// var content = marked(data);
+		var content = data;
 
 		// return the response
 		res.send(200, content);

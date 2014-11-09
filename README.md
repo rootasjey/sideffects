@@ -4,8 +4,7 @@ A personal website
 lives at [http://www.sideffects.fr](http://www.sideffects.fr)
 
 #update
-* **last : **built blog section
-* **todo : **update project section
+* graphic design
 
 #build
 
@@ -13,7 +12,6 @@ lives at [http://www.sideffects.fr](http://www.sideffects.fr)
 * Run **app.js** :
 	* node app.js
 * Open your browser and go to **http://localhost:8080**
-* And it's all!
 
 #prerequisites
 

@@ -1,0 +1,317 @@
+.uicontainer .article {
+  padding: 10px;
+  margin: 10px;
+}
+.uicontainer .article .title {
+  font-size: 2em;
+  font-weigth: bolder;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.uicontainer .article .title:hover {
+  color: color-alizarin;
+  transition: 0.5s;
+}
+.uicontainer .article .tag {
+  color: #fff;
+  padding: 4px;
+  margin-right: 2px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  display: inline-block;
+  background: color-alizarin;
+  transition: 0.5s;
+}
+.uicontainer .article .tag:hover {
+  background: #000;
+  transition: 0.5s;
+}
+.uicontainer .article .body {
+  opacity: 0;
+  display: none;
+}
+.uicontainer .article .close {
+  width: 0;
+  height: 0;
+  display: inline-block;
+  opacity: 0;
+}
+.uicontainer .article .admin_icons {
+  display: none;
+}
+.uicontainer .article .admin_icons .icon {
+  display: none;
+}
+.uicontainer .fullscreen_article {
+  color: #fff;
+  padding: 10px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  background: color-alizarin;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+.uicontainer .fullscreen_article .title {
+  font-size: 2em;
+  cursor: pointer;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.uicontainer .fullscreen_article .date {
+  margin-left: 24px;
+}
+.uicontainer .fullscreen_article .body {
+  opacity: 1;
+  margin-left: 24px;
+  display: inline-block;
+}
+.uicontainer .fullscreen_article .tags {
+  margin-left: 24px;
+}
+.uicontainer .fullscreen_article .tags .tag {
+  color: #fff;
+  padding: 4px;
+  cursor: pointer;
+  opacity: 0.5;
+  background: #000;
+  display: inline-block;
+  transition: 0.5s;
+}
+.uicontainer .fullscreen_article .tags .tag:hover {
+  opacity: 1;
+  background: #000;
+  transition: 0.5s;
+}
+.uicontainer .fullscreen_article .close {
+  background: transparent;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  padding: 5px;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  opacity: 0.4;
+  transition: 0.5s;
+}
+.uicontainer .fullscreen_article .close:hover {
+  opacity: 1;
+  transition: 0.5s;
+}
+.uicontainer .fullscreen_article .admin_icons {
+  margin-left: 20px;
+  display: inline-block;
+}
+.uicontainer .fullscreen_article .admin_icons .icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+  cursor: pointer;
+  opacity: 0.5;
+  background: transparent;
+  transition: 0.5s;
+}
+.uicontainer .fullscreen_article .admin_icons .icon:hover {
+  width: 17px;
+  height: 17px;
+  opacity: 1;
+  transition: 0.5s;
+}
+.uicontainer .form_article {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 4px;
+  border: 10px solid rgba(0,0,0,0.15);
+}
+.uicontainer .form_article .form_title {
+  background: color-alizarin;
+  width: 400px;
+  height: 60px;
+  margin: auto;
+  margin-top: -60px;
+  padding-top: 20px;
+  box-shadow: 5px 5px 5px #c0c0c0;
+  color: #fff;
+  font-size: 1.6em;
+  text-align: center;
+  border-radius: 4px;
+}
+.uicontainer .form_article .form_label {
+  font-size: 2em;
+  margin-bottom: 0px;
+}
+.uicontainer .form_article .mini_label {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 1.3em;
+  width: auto;
+}
+.uicontainer .form_article .input_title {
+  width: 90%;
+  height: 40px;
+  display: block;
+  font-size: 1.4em;
+  border-radius: 2px;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+.uicontainer .form_article .input_title:hover {
+  border: 10px solid color-peter-river;
+  transition: 1s;
+}
+.uicontainer .form_article .input_title:focus {
+  border: 10px solid color-emerald;
+  transition: 1s;
+}
+.uicontainer .form_article .input_tags {
+  width: 90%;
+  height: 20px;
+  display: inline-block;
+  color: #fff;
+  background: color-peter-river;
+  border-radius: 2px;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+.uicontainer .form_article .input_tags:hover {
+  border: 10px solid color-peter-river;
+  transition: 1s;
+}
+.uicontainer .form_article .input_tags:focus {
+  transition: 1s;
+}
+.uicontainer .form_article .input_body {
+  width: 90%;
+  height: 250px;
+  display: inline-block;
+  font-size: 1.4em;
+  border-radius: 2px;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+.uicontainer .form_article .input_body:hover {
+  border: 10px solid color-peter-river;
+  transition: 1s;
+}
+.uicontainer .form_article .input_body:focus {
+  border: 10px solid color-emerald;
+  transition: 1s;
+}
+.uicontainer .form_article textarea {
+  resize: none;
+}
+.uicontainer .form_article .button_validate {
+  display: block;
+  width: 200px;
+  height: 50px;
+  margin: auto;
+  margin-top: 40px;
+  padding-top: 20px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.5em;
+  text-align: center;
+  background: color-peter-river;
+  border-radius: 4px;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+.uicontainer .form_article .button_validate:hover {
+  background: color-emerald;
+  transition: 1s;
+}
+.uicontainer .form_article .icons_panel {
+  width: 50px;
+  padding: 5px;
+  position: relative;
+  top: 0;
+  display: inline-block;
+}
+.uicontainer .form_article .icons_panel .icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: color-silver;
+  transition: 0.5s;
+}
+.uicontainer .form_article .icons_panel .icon:hover {
+  background: #000;
+  transition: 0.5s;
+}
+.uicontainer .form_login {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 4px;
+  border: 10px solid rgba(0,0,0,0.15);
+}
+.uicontainer .form_login .form_title {
+  background: color-alizarin;
+  width: 400px;
+  height: 60px;
+  margin: auto;
+  margin-top: -60px;
+  padding-top: 20px;
+  box-shadow: 5px 5px 5px #c0c0c0;
+  color: #fff;
+  font-size: 1.6em;
+  text-align: center;
+  border-radius: 4px;
+}
+.uicontainer .form_login .form_label {
+  font-size: 2em;
+}
+.uicontainer .form_login .form_user {
+  display: block;
+  width: 90%;
+  height: 40px;
+  border-radius: 2px;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+.uicontainer .form_login .form_user:hover {
+  border: 10px solid color-peter-river;
+  transition: 1s;
+}
+.uicontainer .form_login .form_user:focus {
+  border: 10px solid color-emerald;
+  transition: 1s;
+}
+.uicontainer .form_login .form_pass {
+  display: block;
+  width: 90%;
+  height: 40px;
+  border-radius: 2px;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+.uicontainer .form_login .form_pass:hover {
+  border: 10px solid color-peter-river;
+  transition: 1s;
+}
+.uicontainer .form_login .form_pass:focus {
+  border: 10px solid color-emerald;
+  transition: 1s;
+}
+.uicontainer .form_login .form_button_validate {
+  display: block;
+  width: 200px;
+  height: 90px;
+  margin: auto;
+  margin-top: 40px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.5em;
+  text-align: center;
+  font-family: main-font;
+  background: color-peter-river;
+  border-radius: 4px;
+  border: 10px solid rgba(0,0,0,0.15);
+  transition: 1s;
+}
+.uicontainer .form_login .form_button_validate:hover {
+  background: color-emerald;
+  transition: 1s;
+}
