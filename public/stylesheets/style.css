@@ -7,7 +7,6 @@
 .experiments .project-box {
   padding: 15px;
   margin: 10px;
-  color: #000;
   text-decoration: none;
   background: transparent;
   border-radius: 4px;
@@ -18,7 +17,6 @@
   transition: 1s;
 }
 .experiments .project-box:hover {
-  color: #000;
   background: #eee;
   border: 10px solid rgba(0,0,0,0.12);
   box-shadow: 5px 5px 5px #eee;
@@ -385,7 +383,6 @@
 }
 #header .top-header .title {
   font-size: 1.9em;
-  color: #000;
   text-decoration: none;
   cursor: pointer;
   transition: 1s;
