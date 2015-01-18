@@ -231,9 +231,9 @@ app.get('/', function (req, res) {
 
 // Show personal projects
 // ----------------------
-.get('/experiments', function (req, res) {
+.get('/projects', function (req, res) {
 	var jsonArray = [];
-	var path = __dirname + '/public/experiments';
+	var path = __dirname + '/public/projects';
 
 	// open the projects directory
 	fs.readdir(path, function (err, files) {
@@ -308,9 +308,13 @@ app.get('/', function (req, res) {
 // listen port => server start
 // ---------------------------
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+  console.log("Express server listening on port: " + app.get('port'));
 });
 
+// reload the browser automatically
+livereload = require('livereload');
+server = livereload.createServer({exts: ['less']});
+server.watch(__dirname + "/public");
 
 // PROTOTYPES
 // ----------

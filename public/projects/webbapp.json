@@ -1,0 +1,13 @@
+{
+	"title": "webbapp",
+	"description": "Une plateforme d'apprentissage pour s'exercer aux maths et à l'informatique. Elle a été codée en python. ",
+	"platform": "Python, Web",
+	"authors": "Jérémie Corpinot, Somia Katir",
+	"contributors": "Luca De Feo",
+	"year": "2014",
+	"preview" : "projects/screenshots/webbapp_preview.jpg",
+	"miniature" : "projects/screenshots/webbapp_img.jpg",
+	"link": "https://github.com/rootasjey/webbapp",
+	"progress": "90%"
+
+}

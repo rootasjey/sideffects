@@ -2,24 +2,14 @@
 //- HEADER.JADE - SIDEFFECTS
 //- ------------------------
 
-div.top-header
-  div.supericon
-    img(src='/icons/s_lowercase-white.png')
-  span.title sideffects
-  div.border-box
-    span.text-helper nothing
-  div.nav-horizontal
-    img.header-icon(src='/icons/blog_icon.png', alt='blog')
-    img.header-icon(src='/icons/exp_icon.png', alt='experiments')
-    img.header-icon(src='/icons/fire_element_icon.png', alt='passions')
-    
-div.sidebar
-  div.sidebar-icon(data='login')
-    img(src='/icons/log_icon.png', alt='log in')
-    p log in
-  div.sidebar-icon(data='addpost')
-    img.sidebar-icon(src='/icons/plus_icon.png', alt='new article')
-    p new article
-  div.sidebar-icon(data='admin')
-    img.sidebar-icon(src='/icons/data_icon.png', alt='manage data')
-    p manage data
+//- Header
+header
+  div.container
+    div.row
+      div.col-lg-12
+        <img class="img-responsive" src="img/profile.png" alt="">
+        div.intro-text
+          <span class="name">SIDEFFECTS</span>
+          <hr class="star-light">
+          <span class="skills">Tout est pixels</span>
+          
