@@ -121,11 +121,7 @@ function addPortfolioModal(element, number) {
            .append(description).append(list).append(button);
 
   container.append(row).append(col).append(modalBody);
-
   modalContent.append(closeModal).append(container);
-
   modal.append(modalContent);
-
-  // modal.appendTo("#container");
   modal.insertAfter("#portfolio");
 }

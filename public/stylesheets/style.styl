@@ -3,6 +3,8 @@
 // -----------
 @import variables
 @import projects
+@import lessons
+@import blog
 
 .link-icon {
   height 110px
@@ -19,4 +21,20 @@
 .tiny-text-blue {
   font-size: 0.6em
   color: dogerblue
+}
+
+#about {
+  .profile {
+    height 230px
+    width 230px
+    border-radius 200px
+    cursor pointer
+    transition 0.5s
+
+    &:hover {
+      height 240px
+      width 240px
+      transition 0.5s
+    }
+  }
 }

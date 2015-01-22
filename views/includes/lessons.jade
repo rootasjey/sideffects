@@ -1,0 +1,42 @@
+//- Lessons grid section
+section#lessons
+  div.container
+    div.row
+      div.col-lg-12.text-center
+        h2 Cours
+        hr.star-primary
+    div.row
+      div.col-lg-12
+        h3 récents
+        ul.lessons-list.list-unstyled
+
+//- Portfolio Modals
+div#lessonsModal.portfolio-modal.modal.fade(tabindex="-1" role="dialog" aria-hidden="true")
+    div.modal-content
+        div.close-modal(data-dismiss="modal")
+            div.lr
+                div.rl
+                    
+        div.container
+            div.row
+                div.col-lg-8.col-lg-offset-2
+                    div.modal-body
+                        h2.lesson-title Lesson Title
+                        hr.star-primary
+                        img.img-responsive.img-centered(src="img/portfolio/cabin.png" alt="")
+                        p.lesson-content Lesson content
+                        ul.list-inline.item-details
+                            li Domaine:
+                                strong 
+                                    a(href="http://startbootstrap.com") Domaine
+                            
+                            li Date:
+                                strong 
+                                    a(href="http://startbootstrap.com") Date
+                            
+                            li Auteur:
+                                strong 
+                                    a(href="http://startbootstrap.com") Jérémie Corpinot
+                            
+                        button.btn.btn-danger(type="button" data-dismiss="modal")
+                            i.fa.fa-times Close

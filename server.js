@@ -7,20 +7,20 @@
 // ----------require------------
 // -----------------------------
 var express = require('express'),	// web dev framework
-	stylus = require('stylus'),		// css pre-compiler
-	morgan = require('morgan'),		// loggin middleware
-	nib = require('nib'),           // Stylus utilities
-    routes = require('./routes'),
-    http = require('http'),
-    path = require('path');
+		stylus 	= require('stylus'),		// css pre-compiler
+		morgan 	= require('morgan'),		// loggin middleware
+		nib 		= require('nib'),           // Stylus utilities
+    routes 	= require('./routes'),
+    http 		= require('http'),
+    path 		= require('path');
 
-var fs = require('fs');				// file stream
-var marked = require('marked');		// markdown module
+var fs 			= require('fs');				// file stream
 
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+var bodyParser 			= require('body-parser');
+var methodOverride 	= require('method-override');
 //var port = process.env.port || 8080;
 
+var md = require('node-markdown').Markdown;
 
 
 // ---------------
@@ -60,29 +60,29 @@ app.use(express.static(__dirname + '/public'));
 // ---------------
 var azure = require('azure');
 var nconf = require('nconf');
-var uuid = require('node-uuid');
+var uuid 	= require('node-uuid');
 // -----------------------------
 // -----------------------------
 // configuration for local developpement
 // -----------------------------
 nconf.env()
      .file({ file: './database/config.json'});
-var tableName = nconf.get("TABLE_NAME")
-var partitionKey = nconf.get("PARTITION_KEY")
-var accountName = nconf.get("STORAGE_NAME")
-var accountKey = nconf.get("STORAGE_KEY");
+var tableName 		= nconf.get("TABLE_NAME")
+var partitionKey 	= nconf.get("PARTITION_KEY")
+var accountName 	= nconf.get("STORAGE_NAME")
+var accountKey 		= nconf.get("STORAGE_KEY");
 // -----------------------------
 // -----------------------------
 // An object (Table) for table access storage
 // -----------------------------
-var Table = require('./database/table');
-var post_table = new Table(azure.createTableService(accountName, accountKey), tableName, partitionKey);
+var Table 	= require('./database/table');
+// var post_table = new Table(azure.createTableService(accountName, accountKey), tableName, partitionKey);
 // -----------------------------
 // intern security
-var sha1 = require('js-sha1');
-var _user = 'dc76e9f0c0006e8f919e0c515c66dbba3982f785';
-var _pass = 'a141005e8413ee86855c36cafbb63eae454178b1';
-var _ADMIN = 0; // 0 if user, 1 if logged as administrator
+var sha1 		= require('js-sha1');
+var _user 	= 'dc76e9f0c0006e8f919e0c515c66dbba3982f785';
+var _pass 	= 'a141005e8413ee86855c36cafbb63eae454178b1';
+var _ADMIN 	= 0; // 0 if user, 1 if logged as administrator
 
 
 
@@ -92,7 +92,6 @@ var _ADMIN = 0; // 0 if user, 1 if logged as administrator
 // Home
 // ----
 app.get('/', function (req, res) {
-	// res.render('index', {title: 'Accueil'});
 	res.render('index');
 })
 .post('/login/admin', function (req, res) {
@@ -135,7 +134,7 @@ app.get('/', function (req, res) {
 
 		// get the text body + markdown conversion
 		var bodyformated = req.param('body');
-		bodyformated = marked(bodyformated);
+		bodyformated = md(bodyformated);
 
 		// create a query
 		var task = {
@@ -263,7 +262,6 @@ app.get('/', function (req, res) {
 			if(i >= files.length) break;
 
 
-			// -------------------
 			// build the file path
 			var path_file = path + '/' + files[i];
 			// open the file
@@ -291,11 +289,59 @@ app.get('/', function (req, res) {
 		if (err) res.send(404);
 
 		// convert the .md to .html
-		// var content = marked(data);
 		var content = data;
 
 		// return the response
 		res.send(200, content);
+	});
+})
+
+.get('/lessons', function (req, res) {
+	var jsonArray = [];
+	var path = __dirname + '/public/docs/lessons';
+
+	// open the projects directory
+	fs.readdir(path, function (err, files) {
+		if(err) {
+			// if the directory is not found
+			res.send(404);
+		}
+
+		var count = 1; // watch when result must be sent
+		for (var i = 0; i < files.length; i++) {
+
+			if(files[i].endsWith(".md")){
+				// build the file path
+				var file = files[i].replace(".md", "");
+				var path_file = path + '/' + files[i];
+
+				// Add the file to the array
+				jsonArray.push({"title" : file, "path" : path_file});
+			}
+			else {
+				continue;
+			}
+		}
+
+		res.send(200, jsonArray);
+	});
+})
+
+.get('/lesson', function (req, res) {
+	var p = req.query.path;
+	var t = req.query.title;
+	var jsonArray = [];
+	// console.log("path : " + p);
+
+	// open the file
+	fs.readFile(p, 'utf-8', function (err2, data) {
+		if (err2) res.send(404);
+
+		// parse the data as markdown
+		var content = md(data);
+		jsonArray.push({'title' : t, 'content' : content});
+
+		res.send(200, jsonArray);
 	});
 })
 
