@@ -38,7 +38,7 @@ function getProjectsResponse(response) {
 // Add an item to the portfolio section
 function addSectionToPortfolio(element, number) {
   var item = $('<div>', {
-    class: 'col-sm-4 portfolio-item'
+    class: 'col-sm-3 portfolio-item'
   });
 
   var link = $('<a>', {

@@ -7,21 +7,18 @@
 // ----------require------------
 // -----------------------------
 var express = require('express'),	// web dev framework
-		stylus 	= require('stylus'),		// css pre-compiler
-		morgan 	= require('morgan'),		// loggin middleware
-		nib 		= require('nib'),           // Stylus utilities
+	stylus 	= require('stylus'),		// css pre-compiler
+	morgan 	= require('morgan'),		// loggin middleware
+	nib 	= require('nib'),           // Stylus utilities
     routes 	= require('./routes'),
-    http 		= require('http'),
-    path 		= require('path');
-
-var fs 			= require('fs');				// file stream
-
-var bodyParser 			= require('body-parser');
+    http 	= require('http'),
+    path 	= require('path');
+var fs 		= require('fs');				// file stream
+var bodyParser 		= require('body-parser');
 var methodOverride 	= require('method-override');
 //var port = process.env.port || 8080;
 
-var md = require('node-markdown').Markdown;
-
+var marked = require('marked');
 
 // ---------------
 // APP - CREATION
@@ -338,7 +335,8 @@ app.get('/', function (req, res) {
 		if (err2) res.send(404);
 
 		// parse the data as markdown
-		var content = md(data);
+		var content = marked(data);
+		// console.log(marked('I am using __markdown__.'));
 		jsonArray.push({'title' : t, 'content' : content});
 
 		res.send(200, jsonArray);
