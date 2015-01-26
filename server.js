@@ -110,18 +110,18 @@ app.get('/', function (req, res) {
 
 // Blog
 // ----
-.get('/blog', function(req, res) {
-	var query = azure.TableQuery
-		.select()
-		.from('posts');
-
-	post_table.storageClient.queryEntities(query, function(error, entities){
-		if(!error){
-			//entities contains an array of entities
-			res.send(200, entities);
-		}
-	});
-})
+// .get('/blog', function(req, res) {
+// 	var query = azure.TableQuery
+// 		.select()
+// 		.from('posts');
+//
+// 	post_table.storageClient.queryEntities(query, function(error, entities){
+// 		if(!error){
+// 			//entities contains an array of entities
+// 			res.send(200, entities);
+// 		}
+// 	});
+// })
 
 // Add a new post
 // -----------------
