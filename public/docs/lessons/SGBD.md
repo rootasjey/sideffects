@@ -1,3 +1,5 @@
+![img-cover](/images/lessons/hard-drive-0.jpg)
+
 MECANISMES INTERNES DES SGBD
 ----------------------------
 <br>
@@ -79,3 +81,39 @@ L'identité d'un objet a été instauré pour pouvoir le séparer sur plusieurs 
 
 <br>
 <br>
+
+* Index plaçant : ordre de la clé primaire - 1 par table - nécessite 1 E/S
+* Index non plaçant : est un pointeur vers le tuple demandé - Autant qu'on veut - nécessite nb  + 1 E/S
+
+Améliorer les performances : créer des tablespaces -> permet de réserver un nombre de blocks contigues pour améliorer la lecture
+
+Un Rid trié permet de récupérer un groupe de tuples en 1 E/S.
+
+Questions diapo 17 :
+
+* 1000I/O
+* 100I/O (avec optimisation)
+* 10 000I/O
+
+Tri -> projection : ordre de tri conservé
+Tri -> jointure : ordre de tri non conservé
+
+Fonction de hachage place les mêmes tuples dans le même bloc.
+Si on veut obtenir l'ensemble des tuples sans doublons, on ne lit que les blocs.
+
+Coût du hashage = Coût du Tri fusion
+
+Pour chaque opération de jointure : une partie *build* et une partie *prob*
+
+* build : réorganise les données
+* prob  : applique les opérations de jointure
+
+Pipeline : plusieurs processus qui tournent en même temps qui peuvent s'échanger des données grâce à une mémoire tampon.
+
+Diapo 46 : les opérations Scan, Restriction la chaîne d'exécution à gauche (en orange)
+
+Le tri, l'aggrégat (et les opérateurs ensemblistes) ne permettent pas de faire du pipeline. Le *build* est bloquant.
+
+L'élimination des doublons ne permet pas de pipeline car il faut exécuter un hash ou un tri.
+
+Opérateurs bloquant : *build* et *probe*

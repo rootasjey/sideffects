@@ -280,18 +280,6 @@ app.get('/', function (req, res) {
 	});
 })
 
-.get('/cv', function (req, res) {
-	var path = __dirname + '/public/docs/cv.html';
-	fs.readFile(path, 'utf-8', function(err, data) {
-		if (err) res.send(404);
-
-		// convert the .md to .html
-		var content = data;
-
-		// return the response
-		res.send(200, content);
-	});
-})
 
 .get('/lessons', function (req, res) {
 	var jsonArray = [];

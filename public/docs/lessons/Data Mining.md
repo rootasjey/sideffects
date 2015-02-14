@@ -1,7 +1,6 @@
-DATAMINING
-==========
+![img-cover](/images/lessons/africa-0.jpg)
 
-#ORGANISATION DU MODULE
+### ORGANISATION DU MODULE
 
 * 8 séances de 3h cours/TD
 * 4 séances de 3h **projet** -> début le 4 fév.
@@ -9,7 +8,7 @@ DATAMINING
 * 1 contrôle?
 
 
-#INTRDUCTION
+### INTRODUCTION
 Extraction de connaissances à partir de données = L’extraction d’informations originales, auparavant inconnues, potentiellement utiles à partir de données
 
 Contexte de Big Data
@@ -21,7 +20,7 @@ Outils de fouille de données
 *	Orange
 *	Tanagra
 
-##DEFINITIONS
+### DEFINITIONS
 
 * Fouille de données = application d’algorithmes efficaces qui identifient les motifs contenus dans une base de données.
 * Détection d’outlier = une mesure se trouvant à l’extérieur de la courbe de convergence.
@@ -29,7 +28,7 @@ Outils de fouille de données
 * Classification = ranger des données par classes pour ensuite créer un modèle.
 * Evaluation = présentation des motifs découverts avec une visualisation appropriée
 
-Extraction de motif fréquent :
+<!-- Extraction de motif fréquent : -->
 <!--
       |  A1 |  A2 |  An |
 ---------------------------
@@ -43,19 +42,21 @@ Extraction de motif fréquent :
 -->
 
 Les techniques de fouille sert à **superviser**
+
 **Superviser** = injecter une partie résultat dans l'algorithme pour arriver au résultat total.
 
-Qu'est-ce que la fouille de données?
+## Qu'est-ce que la fouille de données?
+
 * Analyser ds résultats de requêtes d'une recherche
 * Analyser une structuration
 
 Ce n'est pas juste faire une requête de recherche
 
 
-#MOTIFS FREQUENTS ET REGLES D'ASSOCIATION
+## MOTIFS FREQUENTS ET REGLES D'ASSOCIATION
 Sert à chercher les régularités dans les données
 
-##DONNEES
+### DONNEES
 
 * TICKET 1
   * Farine
@@ -84,88 +85,78 @@ Les lignes = les transaction (individus)
 Chaque élément = item
 
 
-BASE DE DONNEES BINAIRE
+### BASE DE DONNEES BINAIRE
 
-<!--
-        |farine |sucre|lait  |oeuf  |chocolat| thé  |
---------------------------------------------------------
-  T1    |  1    |  1  |   1  |   0  |  0     |   0  |
---------------------------------------------------------
-  T2    |   0   |  1  |  0   |  1   |    1   |   0   |  
---------------------------------------------------------
-  T3    |   1   |  1  |   0  |   1  |   1    |   0   |  
---------------------------------------------------------
-  T4    |   0   |  0  |  0   |  1   |  1     |   1   |  
---------------------------------------------------------
--->
 
-BASE DE DONNEES TRANSACTIONNEL
-<!--
---------------------------------------------------------
-  T1    |farine |sucre      |lait  
---------------------------------------------------------
-  T2    |oeuf   |sucre      |chocolat |
---------------------------------------------------------
-  T3    |farine |oeuf       |sucre    |chocolat|
---------------------------------------------------------
-  T4    |oeuf   |chocolat   |thé      |
---------------------------------------------------------
--->
+|TRANSACTION|farine |sucre|lait  |oeuf  |chocolat| thé  |
+|--------------------------------------------------------
+|T1         |  1    |  1  |   1  |   0  |  0     |   0  |
+|T2         |   0   |  1  |  0   |  1   |    1   |   0  |
+|T3         |   1   |  1  |   0  |   1  |   1    |   0  |
+|T4         |   0   |  0  |  0   |  1   |  1     |   1  |
 
-/*------------------------*/
-FORMAT ATTRIBUT-VALEUR
-<!--
-      | VOITURE | COULEUR
---------------------------------------------------------
-P1    |C2       |rouge
---------------------------------------------------------
-P2    |Clio     |vert
---------------------------------------------------------
-P3    |BMW      |rouge
---------------------------------------------------------
--->
 
-ITEMS
-<!--
-------------------------------
-voiture = C2
-------------------------------
-voiture = Clio
-------------------------------
-voiture = BMW
-------------------------------
-couleur = rouge
-------------------------------
-couleur = vert
-------------------------------
--->
+<br>
+### BASE DE DONNEES TRANSACTIONNEL
 
-BASE DE DONNEES TRANSACTIONNEL
-<!--
-      | item
---------------------------------------------------------
-P1    |voiture = C2       |couleur = rouge
---------------------------------------------------------
-P2    |voiture = Clio     |couleur = vert
---------------------------------------------------------
-P3    |voiture = BMW      |couleur = rouge
---------------------------------------------------------
--->
+|TRANSACTION |
+|------------------------------------------------
+|  T1    |farine |sucre      |lait  
+|  T2    |oeuf   |sucre      |chocolat |
+|  T3    |farine |oeuf       |sucre    |chocolat|
+|  T4    |oeuf   |chocolat   |thé      |
 
-I = {i1, i2, i3, ... i(n)} -> ensemble d'items de la BD
 
-###Itemset : X _C_(inclu dans) I :
+<br>
+### FORMAT ATTRIBUT-VALEUR
+
+|TRANSACTION     | VOITURE | COULEUR
+|------------------------------------
+|P1              |C2       |rouge
+|P2              |Clio     |vert
+|P3              |BMW      |rouge
+
+
+<br>
+### ITEMS
+
+|ITEMS
+|-------------
+|voiture = C2
+|voiture = Clio
+|voiture = BMW
+|couleur = rouge
+|couleur = vert
+
+<br>
+### BASE DE DONNEES TRANSACTIONNEL
+
+| PRODUIT | MARQUE            | COULEUR
+|-------------------------------------------
+|P1       |voiture = C2       |couleur = rouge
+|P2       |voiture = Clio     |couleur = vert
+|P3       |voiture = BMW      |couleur = rouge
+
+
+I = { i1, i2, i3, ... i(n) } -> ensemble d'items de la BD
+
+### Itemset : X _C_(inclu dans) I :
+
 X =
+
 * {Farine, Sucre }
 * farine sucre
+
 
 X C T1 -> T1 contient l'itemset X
 
 X :
+
 * longueur 2
 * 2 itemset
 
-###Support absolu
+### Support absolu
+
 SuppA(X) = 2  -> Transactions (Individus) contenant l'itemset X
 
 Supp(X) (relatif) = SuppA(X) / |DELTA| = 2/4 = 50%
@@ -175,7 +166,7 @@ Oui, car en général on se fixe un seuil de 10%.
 De plus, en prenant un grand échantillon (>1M), la proportion de satifaire la condition n'est pas négligeable.
 
 
-#REGLES D'ASSOCIATION
+### REGLES D'ASSOCIATION
 
 X -> Y, X,Y _C_ I et X (inter) Y = 0
 
@@ -184,24 +175,22 @@ Supp (support) = Support relatif (par défaut)
 Supp(X -> Y) = Supp(X u Y) = SuppA(X u Y) / |DELTA|
 
 
-##EXEMPLE
+### EXEMPLE
 
-<!--
---------------------------------------------------------
-T1    |farine |sucre      |lait  
---------------------------------------------------------
-T2    |oeuf   |sucre      |chocolat |
---------------------------------------------------------
-T3    |farine |oeuf       |sucre    |chocolat|
---------------------------------------------------------
-T4    |oeuf   |chocolat   |thé      |
---------------------------------------------------------
--->
+
+|TRANSACTION |
+|--------------------------------------------------
+|T1          |farine |sucre      |lait  
+|T2          |oeuf   |sucre      |chocolat |
+|T3          |farine |oeuf       |sucre    |chocolat |
+|T4          |oeuf   |chocolat   |thé      |
+
+
 
 Supp(farine -> sucre) = Supp(farine sucre) = 2/4 = 50%
 
 
-#CONFIANCE
+### CONFIANCE
 
 C'est le rapport suivant:
 
@@ -234,7 +223,7 @@ TRANSACTIONS  |
 --------------------------------------------------------
 -->
 
-**f -> c?**
+#### f -> c?
 
 Dans l'exemple précédent, la règle **f -> c** n'est pas valide.
 
@@ -249,7 +238,7 @@ NOTE :
 * dénominateur  : intervalle totale contenant c
 
 
-#ALGORITHME DE BASE **APRIORI**
+### ALGORITHME DE BASE **APRIORI**
 
 1. Génération des candidats -> C(k)
 2. Elaguage de C(k)
@@ -260,13 +249,15 @@ Complexité en O(m)
 
 Comment calculer un nombre important d'item set?
 
-###Propriété d'anti-monotonie du support:
 
-Tous les sous ensembles d'un itmset fréquent sont fréquents
+#### Propriété d'anti-monotonie du support:
 
-Ajouter un itemset fréquent au support ne le rend pas fréquent.
+Tous les sous ensembles d'un *itmset* fréquent sont fréquents
 
-##Application de l'algorithme
+Ajouter un *itemset* fréquent au support ne le rend pas fréquent.
+
+
+#### Application de l'algorithme
 
 I = { farine, sucre, lait, oeufs, chocolat, thé }
 
@@ -275,6 +266,8 @@ k = 1
 1. Génération des candidats
 
 G = {f, s, l, o, c, t}
+
+<!--
                 0
                 |
                 |
@@ -286,6 +279,13 @@ G = {f, s, l, o, c, t}
   |       |    |     |    |     |
 farine  sucre lait oeuf choco thé
   2       3     1   3     3     1
+-->
+
+|          |      |  0  |     |      |     |
+|----------|------|-----|-----|------|-----|
+|  farine  |sucre |lait |oeuf |choco |thé  |
+|    2     |  3   |  1  | 3   |  3   |  1  |
+
 
 Les nombres correspondent au nombre de fois que l'on voit les items dans la base de données.
 
@@ -298,6 +298,9 @@ min_supp = 30% -> 1.2 => 2 transactions au minimum où l'item doit être trouvé
 4. L1 = { f, s, o, c }
 
 k = 2
+
+
+#### Déroulement de l'algo
 
 1. Générer les candidats
 

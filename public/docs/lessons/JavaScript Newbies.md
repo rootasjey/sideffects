@@ -1,5 +1,4 @@
-JAVASCRIPT
-----------
+![img-cover](http://fgribreau.com/articles/_voyage-au-coeur-de-javascript/js_logo.png)
 
 ###QUELLE EST LA PARTICULARITE DES TYPES DE VARIABLES EN JS?
 

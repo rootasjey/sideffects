@@ -1,7 +1,9 @@
 extend ../layout
 block content
-  a.message404(style='font-size:3em; text-align: center; cursor:pointer; opacity: 1;', href="javascript:history.go(-1)")
-    h1 404
-    p You lost in the space time...Please go back.
-
-  style a.message404{ transition: 1s; } a.message404:hover{ color:#27ae60; opacity: 1.0; transition: 1s; }
+  <div id='error-page'>
+  <div id='error-inner'>
+  <h1> You are lost in the internet</h1>
+  <div class="pesan-eror">404</div>
+  <p class="balik-home"><a href="javascript:history.go(-1)">Let's get Back on the road!</a></p><br/>
+  </div>
+  </div>
