@@ -91,6 +91,7 @@ var _ADMIN 	= 0; // 0 if user, 1 if logged as administrator
 app.get('/', function (req, res) {
 	res.render('index');
 })
+
 .post('/login/admin', function (req, res) {
 	// get variables (from form)
 	var u = req.param('user');
@@ -329,6 +330,15 @@ app.get('/', function (req, res) {
 
 		res.send(200, jsonArray);
 	});
+})
+
+.get('/counters', function (req, res)  {
+	res.render('../public/modules/counters/counters');
+})
+
+.get('/counters/save', function (req, res) {
+	// Save the values to a local file
+
 })
 
 // Handle inexistant routes
