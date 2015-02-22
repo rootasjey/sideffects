@@ -1,23 +1,29 @@
 // -----------------------------
-// WEB SITE APP
+// WWW.SIDEFFECT.FR
 // -----------------------------
 // by Jeremie Corpinot
 // jeremiecorpinot@outlook.com
+
 // -----------------------------
-// ----------require------------
+// ----------requires-----------
 // -----------------------------
-var express = require('express'),	// web dev framework
-	stylus 	= require('stylus'),		// css pre-compiler
-	morgan 	= require('morgan'),		// loggin middleware
-	nib 	= require('nib'),           // Stylus utilities
-    routes 	= require('./routes'),
-    http 	= require('http'),
-    path 	= require('path');
-var fs 		= require('fs');				// file stream
-var bodyParser 		= require('body-parser');
-var methodOverride 	= require('method-override');
+var express 		= require('express'),	// web dev framework
+	stylus 			= require('stylus'),		// css pre-compiler
+	morgan 			= require('morgan'),		// loggin middleware
+	nib 			= require('nib'),           // Stylus utilities
+    routes 			= require('./routes'),
+    http 			= require('http'),
+    path 			= require('path'),
+	fs 				= require('fs'),				// file stream
+	bodyParser 		= require('body-parser'),
+	methodOverride 	= require('method-override'),
+	sha1 			= require('js-sha1'),
+	jf				= require('jsonfile'),
+	util			= require('util');
+
 //var port = process.env.port || 8080;
 
+// Markdown module
 var marked = require('marked');
 
 // ---------------
@@ -33,7 +39,7 @@ function compile(str, path) {
 
 
 // ---------------------------------------------------
-// set the default views folder
+// Set the default views folder
 // containing templates
 // and the static folder
 // ---------------------------------------------------
@@ -42,6 +48,10 @@ app.set('views', __dirname + '/views');	// folder templates
 app.set('view engine', 'jade');			// template engine
 app.use(morgan('dev'));					// logging output (will log incoming requests to the console)
 app.use(bodyParser());
+app.use(bodyParser.json());				// to suport JSON-encoded bodies
+app.use(bodyParser.urlencoded({			// to suport URL-encoded bodies
+	extended: true
+}));
 app.use(methodOverride());
 app.use(stylus.middleware({
 	src: __dirname + '/public',
@@ -57,18 +67,18 @@ app.use(express.static(__dirname + '/public'));
 // ---------------
 var azure = require('azure');
 var nconf = require('nconf');
-var uuid 	= require('node-uuid');
-// -----------------------------
-// -----------------------------
+var uuid  = require('node-uuid');
+
+// -------------------------------------
 // configuration for local developpement
-// -----------------------------
+// -------------------------------------
 nconf.env()
      .file({ file: './database/config.json'});
 var tableName 		= nconf.get("TABLE_NAME")
 var partitionKey 	= nconf.get("PARTITION_KEY")
 var accountName 	= nconf.get("STORAGE_NAME")
 var accountKey 		= nconf.get("STORAGE_KEY");
-// -----------------------------
+
 // -----------------------------
 // An object (Table) for table access storage
 // -----------------------------
@@ -76,7 +86,6 @@ var Table 	= require('./database/table');
 // var post_table = new Table(azure.createTableService(accountName, accountKey), tableName, partitionKey);
 // -----------------------------
 // intern security
-var sha1 		= require('js-sha1');
 var _user 	= 'dc76e9f0c0006e8f919e0c515c66dbba3982f785';
 var _pass 	= 'a141005e8413ee86855c36cafbb63eae454178b1';
 var _ADMIN 	= 0; // 0 if user, 1 if logged as administrator
@@ -84,10 +93,10 @@ var _ADMIN 	= 0; // 0 if user, 1 if logged as administrator
 
 
 // -------------------------------
-// ROUTING -----------------------
+// -----------ROUTING ------------
 // -------------------------------
+
 // Home
-// ----
 app.get('/', function (req, res) {
 	res.render('index');
 })
@@ -125,7 +134,6 @@ app.get('/', function (req, res) {
 // })
 
 // Add a new post
-// -----------------
 .post('/blog/add_post', function (req, res) {
 	if(_ADMIN) {
 		// check if we've the privilege
@@ -165,7 +173,6 @@ app.get('/', function (req, res) {
 })
 
 // Delete a post
-// -------------
 .post('/blog/delete_post', function(req, res) {
 	if(_ADMIN) {
 		// check if we've the privilege
@@ -198,7 +205,6 @@ app.get('/', function (req, res) {
 })
 
 // Edit a post
-// -----------
 .post('/blog/edit_post', function(req, res) {
 
 	if(_ADMIN) {
@@ -227,7 +233,6 @@ app.get('/', function (req, res) {
 })
 
 // Show personal projects
-// ----------------------
 .get('/projects', function (req, res) {
 	var jsonArray = [];
 	var path = __dirname + '/public/projects';
@@ -281,7 +286,7 @@ app.get('/', function (req, res) {
 	});
 })
 
-
+// Show all lessons
 .get('/lessons', function (req, res) {
 	var jsonArray = [];
 	var path = __dirname + '/public/docs/lessons';
@@ -313,6 +318,7 @@ app.get('/', function (req, res) {
 	});
 })
 
+// Get a single lesson
 .get('/lesson', function (req, res) {
 	var p = req.query.path;
 	var t = req.query.title;
@@ -336,19 +342,46 @@ app.get('/', function (req, res) {
 	res.render('../public/modules/counters/counters');
 })
 
-.get('/counters/save', function (req, res) {
-	// Save the values to a local file
+// Save the json array to a local file (data.json)
+.post('/counters/save', function (req, res) {
+	// Path to the json file (to save)
+	var file = __dirname + '/public/modules/counters/data.json';
 
+	// Get the object from the queryString
+	// and normalize it to a json object
+	var obj = req.query.json;
+	obj = JSON.parse(obj);
+
+	// Open and write in the file
+	jf.writeFile(file, obj, function (err) {
+		if (err == null) {
+			res.send(201);
+		} else {
+			res.send(409); // if there's an error
+		}
+	});
+})
+
+// Load the data.json file into the app
+.get('/counters/load', function (req, res) {
+
+	// Path to the json file (to read)
+	var file = __dirname + '/public/modules/counters/data.json';
+
+	// Open and read the file
+	jf.readFile(file, function (err, obj) {
+		if (err == null) {
+			res.status(200).json(obj);
+		} else res.send(409); // if there's an error
+	});
 })
 
 // Handle inexistant routes
-// ------------------------
 .use(function (req, res, next) {
     res.render('pages/404', {title: '404'});
 });
 
 // listen port => server start
-// ---------------------------
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port: " + app.get('port'));
 });

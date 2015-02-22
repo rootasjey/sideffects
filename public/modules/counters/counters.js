@@ -1,9 +1,17 @@
+// ------------------------------
+// COUNTERS.JS (PROJECT COUNTERS)
+// ------------------------------
 
-var _players = ["Coffe Script", "JQuery", "Mysqli", "Mysqlii"];
+// Initial players array
+var _players = [];
 
+// Contains player's statistics
+var _stats = {};
+
+// Fired up when the page is completly loaded
 window.onload = function () {
     // Add players to the table
-    pushPlayers(_players);
+    // pushPlayers(_players);
 
     // Events
     clickPlusOne();
@@ -11,6 +19,9 @@ window.onload = function () {
     clickSave();
     clickPayed();
     clickSaveTaxes();
+
+    // Load data
+    loadFromFile();
 }
 
 // Add players to the table
@@ -43,6 +54,34 @@ function pushPlayers(players) {
         addRow(player, dataTypes);
         addCard(player, dataTypes);
     }
+}
+
+function pushSinglePlayers(player) {
+    // Contains player's values
+    var player = [];
+
+    // Push initial values
+    player.push(player);
+    player.push(0);
+    player.push("1000K");
+    player.push(0);
+    player.push("+");
+    player.push("-");
+
+    // Contains data types for the player array
+    var dataTypes = [];
+
+    // Values match these types
+    dataTypes.push("name");
+    dataTypes.push("points");
+    dataTypes.push("taxes");
+    dataTypes.push("total");
+    dataTypes.push("plus");
+    dataTypes.push("minus");
+
+    // Add elements to the DOM
+    addRow(player, dataTypes);
+    addCard(player, dataTypes);
 }
 
 // Add a row to the table
@@ -128,9 +167,14 @@ function addCard(player, dataTypes) {
 // - Save the valu to the player's card
 function clickSave() {
     $(".save").click(function () {
-        $("#counters tbody tr").each(function () {
-            updateCard(this);
-        });
+        var children = $("#counters tbody tr");
+        for (var i = 0; i < children.length +1; i++) {
+            if (i == children.length) {
+                saveToFile();
+                break;
+            }
+            updateCard(children[i]);
+        }
     });
 }
 
@@ -154,6 +198,13 @@ function updateCard(player) {
 
     // Reset the player's points
     clearValues(name);
+
+
+    // Save stats
+    var stats = {};
+
+    stats['fees'] = newTotal;
+    _stats[name] = stats;
 }
 
 // Clear the points values in the counters table
@@ -180,7 +231,7 @@ function clickSaveTaxes() {
         var taxes = $("#taxes-table input[data-type='taxes']");
 
         // Get the value
-        taxes = taxes.val();
+        taxes = (taxes.val() !== '') ? taxes.val() : 0;
         taxes = parseInt(taxes);
 
         // Put the updated value in the taxes-table
@@ -189,4 +240,72 @@ function clickSaveTaxes() {
         // // Put the updated value in the counters table
         $("#counters td[data-type='taxes']").html(taxes + "K");
     });
+}
+
+// Save stats to a file to retrieve values later
+function saveToFile() {
+    var jsonArray = JSON.stringify(_stats);
+    jsonArray = encodeURIComponent(jsonArray);
+
+    // Send an Ajax request to the server
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/counters/save?json=' + jsonArray, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(null);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // console.log("Data correctly saved!");
+        }
+        else if (xhr.readyState == 4 && xhr.status != 200) {
+            // Notify to the user that an error happened
+        }
+    }
+}
+
+function loadFromFile() {
+    // Send an Ajax request to the server
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/counters/load', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(null);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // console.log("Data correctly loaded!");
+            var response = xhr.response;
+            fillData(response)
+        }
+        else if (xhr.readyState == 4 && xhr.status != 200) {
+            // Notify to the user that an error happened
+        }
+    }
+}
+
+// Populate object with previously saved data
+function fillData(data) {
+    data = JSON.parse(data); // parse the data
+
+    // Loop into the data
+    // to get the list of the last saved players
+    for (player in data) {
+        if (data.hasOwnProperty(player)) {
+            _players.push(player);
+        }
+    }
+
+    // Create rows' and cards' players
+    pushPlayers(_players);
+
+    // Loop into the data
+    // to update player's cards
+    for (player in data) {
+        if (data.hasOwnProperty(player)) {
+            // Get the player's card element
+            var card = $(".card[player='"+ player +"']");
+
+            // Update the value
+            card.find(".amount").html(data[player].fees);
+        }
+    }
 }

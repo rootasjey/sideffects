@@ -66,3 +66,47 @@ Exemple avec une mère et deux filles:
 * Soit trois tables, une table pour chaque classe et ous-classes
 
 * Soit que les tables filles
+
+### HIBERNATE AVEC ANNOTATIONS
+
+* La représentation d'une factory est une *HashMap*
+* Il faut déclarer la classe dans le fichier de configuration d'Hibernate .confhb
+* Dans la classe correspondante, il faut annoter les attributes de la classe et la classe elle-même pour indiquer que l'objet doit être insérer dans la bdd.
+
+* un attribut qui ne persiste pas, est appelé **transcient**.
+  * il y a la notation **@transcient**
+  * le mot clé **transcient** existe en java
+
+Erreurs fréquentes :
+
+* Oublié les getters et setters
+* Oublié de mettre la correspondance dans le fichier de configuration d'Hibernate "hibernate.cfg.xml"
+* Oublié les annotations dans une classe
+
+On peut avoir un serveur d'application ou rien du tout.
+
+Combos :
+
+* Struts/ Hibernate
+* Struts/ Hibernate - Spring/Jboss
+
+Jboss est un serveur d'application lourd (on l'installe et le run) sert à gérer la monter en charge.
+Il fait des new à notre place et gérer la taille.
+
+Spring est un serveur d'application léger (on l'installe pas, ni ne le run).
+
+IOC = Inversion Of Control = un objet au lieu d'attendre pour résoudre ses dépedances, va les chercher au moment où il en a besoin.
+
+EX : on a un panier et une classe commande
+* Programmation normale : le constructeur de la classe commande a besoin d'un objet panier
+* Programmation IOC : le constructeur est vierge et la classe possède une méthode "Aller chercher panier"
+
+PAO = programmation par aspect = programmation horzontale
+On fait un fichier xml qui ajoute des méthodes aux classes.
+
+Spring a un IOC et est en PAO
+
+
+Pourquoi serveur d'app lourds et léger?
+
+Car il fait des news à notre place.
