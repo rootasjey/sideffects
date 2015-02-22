@@ -1,14 +1,14 @@
 {
   "Coffe Script": {
-    "fees": 1000
+    "fees": 972
   },
   "JQuery": {
-    "fees": 2138
+    "fees": 1620
   },
   "Mysqli": {
-    "fees": 1090
+    "fees": 0
   },
   "Mysqlii": {
-    "fees": 339
+    "fees": 24234
   }
 }

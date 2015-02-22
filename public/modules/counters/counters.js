@@ -10,14 +10,8 @@ var _stats = {};
 
 // Fired up when the page is completly loaded
 window.onload = function () {
-    // Add players to the table
-    // pushPlayers(_players);
-
     // Events
-    clickPlusOne();
-    clickMinusOne();
     clickSave();
-    clickPayed();
     clickSaveTaxes();
 
     // Load data
@@ -202,7 +196,6 @@ function updateCard(player) {
 
     // Save stats
     var stats = {};
-
     stats['fees'] = newTotal;
     _stats[name] = stats;
 }
@@ -214,14 +207,17 @@ function clearValues(name) {
 }
 
 // Clear the fees for a player
-function clickPayed() {
-    $(".payed-button").click(function () {
-        var parent = this.parentNode;
-        var name = parent.getAttribute("player");
+function clickPayed(card) {
+    var parent = card.parentNode;
+    var name = parent.getAttribute("player");
 
-        $(".card[player='"+ name +"']").find(".amount").html(0);
-        // console.log(parent);
-    });
+    // Update the stats tab
+    // and update the player's card
+    _stats[name].fees = 0;
+    $(".card[player='"+ name +"']").find(".amount").html(0);
+
+    // Save data
+    saveToFile();
 }
 
 // Update new taxes
@@ -232,7 +228,7 @@ function clickSaveTaxes() {
 
         // Get the value
         taxes = (taxes.val() !== '') ? taxes.val() : 0;
-        taxes = parseInt(taxes);
+        taxes = parseInt(taxes) || 0;
 
         // Put the updated value in the taxes-table
         $("#taxes-table .taxes-value").html(taxes);
@@ -255,7 +251,7 @@ function saveToFile() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            // console.log("Data correctly saved!");
+            console.log("Data correctly saved!");
         }
         else if (xhr.readyState == 4 && xhr.status != 200) {
             // Notify to the user that an error happened
@@ -294,8 +290,11 @@ function fillData(data) {
         }
     }
 
+    // Add players to the table
     // Create rows' and cards' players
     pushPlayers(_players);
+
+    // Will serve to fill the stats tab
 
     // Loop into the data
     // to update player's cards
@@ -306,6 +305,18 @@ function fillData(data) {
 
             // Update the value
             card.find(".amount").html(data[player].fees);
+            card.find(".payed-button").click(function () {
+                clickPayed(this);
+            });
+
+            // Create the stats tab
+            var stats = {};
+            stats['fees'] = data[player].fees;
+            _stats[player] = stats;
         }
     }
+
+    // EVENTS
+    clickPlusOne();
+    clickMinusOne();
 }
