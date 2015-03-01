@@ -233,7 +233,7 @@ app.get('/', function (req, res) {
 })
 
 // Show personal projects
-.get('/proj', function (req, res) {
+.get('/projects', function (req, res) {
 	var jsonArray = [];
 	var path = __dirname + '/public/proj';
 
@@ -283,6 +283,37 @@ app.get('/', function (req, res) {
 				count++; // number of files read
 			});
 		}
+	});
+})
+
+.get('/api/test', function (req, res) {
+	var jsonArray = [];
+	var path = __dirname + '/public/projects';
+
+	// open the projects directory
+	fs.readdir(path, function (err, files) {
+		if(err) {
+			// if the directory is not found
+			res.send(404);
+		}
+
+		var count = 1; // watch when result must be sent
+		for (var i = 0; i < files.length; i++) {
+
+			if(files[i].endsWith(".json")){
+				// build the file path
+				var file = files[i].replace(".md", "");
+				var path_file = path + '/' + files[i];
+
+				// Add the file to the array
+				jsonArray.push({"title" : file, "path" : path_file});
+			}
+			else {
+				continue;
+			}
+		}
+
+		res.send(200, jsonArray);
 	});
 })
 
