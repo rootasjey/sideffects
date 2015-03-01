@@ -237,53 +237,67 @@ app.get('/', function (req, res) {
 	var jsonArray = [];
 	var path = __dirname + '/public/proj';
 
-	// open the projects directory
-	fs.readdir(path, function (err, files) {
-		if(err) {
-			// if the directory is not found
-			res.send(404);
-		}
-
-		var count = 1; // watch when result must be sent
-		for (var i = 0; i < files.length; i++) {
-
-			if(files[i].endsWith(".json")){
-				// do nothing
-			}
-			else {
-				// remove file (from array) if not .json
-				var index = files.indexOf(files[i]);
-				if(index > -1) {
-					files.splice(index, 1);
-					i--;
-					continue;
-				}
-			}
-
-			// security loop
-			// (i can be greater than files.length if items are removed)
-			if(i >= files.length) break;
-
-
-			// build the file path
-			var path_file = path + '/' + files[i];
-			// open the file
-			fs.readFile(path_file, function (err2, data) {
-				if (err2) res.send(404);
-
-				// parse the data as json
-				var content = JSON.parse(data);
-				jsonArray.push(content);
-
-				// return the response if
-				// it reached the end of array
-				if(count == files.length)
-					res.json(200, jsonArray)
-
-				count++; // number of files read
-			});
-		}
+	jsonArray.push({
+		"title": "citations365",
+		"description": "Une application Windows Phone 8 réalisée en C#. <br>Elle présente chaque jour une citation à l'utilisateur et contient un historique des citations quotidiennes. Les citations peuvent être partagées sur les réseaux sociaux et autres moyens de communication, et la citation du jour peut être affichée sur l'écran d'accueil. Les citations proviennent du site <a href='http://evene.lefigaro.fr/'>http://evene.lefigaro.fr/</a>",
+		"platform": "Windows Phone",
+		"authors": "Jérémie Corpinot",
+		"contributors": "none",
+		"year": "2013",
+		"preview" : "projects/screenshots/citations365_preview.png",
+		"miniature" : "projects/screenshots/citations365_img.png",
+		"link": "http://www.windowsphone.com/fr-fr/store/app/citations365/2896fa7c-cc90-4288-8016-43d0eb4855e5",
+		"progress": "100%"
+	
 	});
+	res.json(200, jsonArray);
+	// open the projects directory
+	// fs.readdir(path, function (err, files) {
+	// 	if(err) {
+	// 		// if the directory is not found
+	// 		res.send(404);
+	// 	}
+	//
+	// 	var count = 1; // watch when result must be sent
+	// 	for (var i = 0; i < files.length; i++) {
+	//
+	// 		if(files[i].endsWith(".json")){
+	// 			// do nothing
+	// 		}
+	// 		else {
+	// 			// remove file (from array) if not .json
+	// 			var index = files.indexOf(files[i]);
+	// 			if(index > -1) {
+	// 				files.splice(index, 1);
+	// 				i--;
+	// 				continue;
+	// 			}
+	// 		}
+	//
+	// 		// security loop
+	// 		// (i can be greater than files.length if items are removed)
+	// 		if(i >= files.length) break;
+	//
+	//
+	// 		// build the file path
+	// 		var path_file = path + '/' + files[i];
+	// 		// open the file
+	// 		fs.readFile(path_file, function (err2, data) {
+	// 			if (err2) res.send(404);
+	//
+	// 			// parse the data as json
+	// 			var content = JSON.parse(data);
+	// 			jsonArray.push(content);
+	//
+	// 			// return the response if
+	// 			// it reached the end of array
+	// 			if(count == files.length)
+	// 				res.json(200, jsonArray);
+	//
+	// 			count++; // number of files read
+	// 		});
+	// 	}
+	// });
 })
 
 .get('/api/test', function (req, res) {
