@@ -4,7 +4,7 @@ A personal website
 lives at [http://www.sideffects.fr](http://www.sideffects.fr)
 
 #update
-* graphic design
+* switched to [io.js](http://iojs.org)
 
 #build
 
@@ -15,6 +15,7 @@ lives at [http://www.sideffects.fr](http://www.sideffects.fr)
 
 #prerequisites
 
+* [io.js](http://iojs.org)
 * [node.js](http://nodejs.org)
 	* install node.js on your computer, open node.js command prompt and go inside the project directory (cd C:/Users/Me/Downloads/sideffects-master)
 	* then run the application with : **node app.js**

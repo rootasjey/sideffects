@@ -1,6 +1,6 @@
 {
   "name": "sideffects",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Jeremie Corpinot <jeremiecorpinot@outlook.com>",
   "description": "A personal web site",
   "contributors": [
@@ -22,7 +22,7 @@
     "express": "~4.2",
     "jade": "~1.3",
     "js-sha1": "~0.1",
-    "jsdom": "^4.0.1",
+    "jsdom": "~4.0",
     "jsonfile": "^2.0.0",
     "marked": "^0.3.2",
     "method-override": "^1.0.2",
