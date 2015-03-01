@@ -5,8 +5,8 @@
   "authors": "Jérémie Corpinot, Somia Katir, Souleyman Belem, Youness Chafia, Mohammed Hameg, Ange-Marie N'Dri, Sokhna",
   "contributors": "Stephane Lopez",
   "year": "2014",
-  "preview" : "projects/screenshots/rdf_preview.jpg",
-  "miniature" : "projects/screenshots/rdf_img.png",
+  "preview" : "docs/projects/screenshots/rdf_preview.jpg",
+  "miniature" : "docs/projects/screenshots/rdf_img.png",
   "link": "https://github.com/rootasjey/RDF",
   "progress": "30%"
 

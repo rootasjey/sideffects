@@ -302,10 +302,14 @@ app.get('/', function (req, res) {
 			if(files[i].endsWith(".json")){
 				// build the file path
 				var file = files[i];
-				var path_file = path + '/' + files[i];
+				var pathFile = path + '/' + files[i];
 
-				// Add the file to the array
-				jsonArray.push({"title" : file, "path" : path_file});
+
+				// Open the file
+				// Get the file's content
+				// and push the content to the json array
+				var fileContent = jf.readFileSync(pathFile);
+				jsonArray.push(fileContent);
 			}
 			else {
 				continue;
@@ -445,7 +449,7 @@ app.get('/', function (req, res) {
 
 // Handle inexistant routes
 .use(function (req, res, next) {
-    res.render('pages/404', {title: '404'});
+    res.render('includes/404', {title: '404'});
 });
 
 // listen port => server start

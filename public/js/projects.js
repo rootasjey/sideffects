@@ -5,72 +5,73 @@
 function getProjects() {
     $.get("/getprojects", function (data) {
         console.log(data);
+        getProjectsResponse(data);
+
+        // for (var i = 0; i < data.length; i++) {
+        //     console.log(data[i].title);
+        // }
     });
-  // var xhr = new XMLHttpRequest();
-  //
-  // xhr.open('GET', '/projects');
-  // xhr.onreadystatechange = function () {
-  //   if(xhr.readyState == 4 && xhr.status == 200){
-  //     var response  = xhr.response;
-  //     if (response) {
-  //       // PROJECTS
-  //       getProjectsResponse(response);
-  //     }
-  //     else {
-  //       // null response
-  //       console.log("une erreur est survenue");
-  //     }
-  //   }
-  // };
-  // xhr.send();
 }
 
 // Post process ajax request
 // > show projects
 // -------------------------------
-function getProjectsResponse(response) {
-    response = JSON.parse(response);
+function getProjectsResponse(data) {
+    // response = JSON.parse(response);
 
     // add projects to the page
-    for (var i = 0; i < response.length; i++) {
-      addSectionToPortfolio(response[i], i);
-      addPortfolioModal(response[i], i);
+    for (var i = 0; i < data.length; i++) {
+      addSectionToPortfolio(data[i], i);
+    //   addPortfolioModal(response[i], i);
     };
 }
 
 // Add an item to the portfolio section
-function addSectionToPortfolio(element, number) {
-  var item = $('<div>', {
+function addSectionToPortfolio(element) {
+    var item = $('<div>', {
     class: 'col-sm-3 portfolio-item'
-  });
+    });
 
-  var link = $('<a>', {
-    class: 'portfolio-link',
-    href: '#portfolioModal' + number,
+    var link = $('<a>', {
+        class: 'portfolio-link',
+        href: '#portfolioModal',
+    }).attr("data-toggle", 'modal');
 
-  }).attr("data-toggle", 'modal');
+    var caption = $('<div>', {
+        class: 'caption'
+    });
 
-  var caption = $('<div>', {
-    class: 'caption'
-  });
+    var captionContent = $('<div>', {
+        class: 'caption-content'
+    });
 
-  var captionContent = $('<div>', {
-    class: 'caption-content'
-  });
+    var information = $('<i>', {
+        class: 'fa fa-search-plus fa-3x'
+    });
 
-  var information = $('<i>', {
-    class: 'fa fa-search-plus fa-3x'
-  });
+    var img = $('<img>', {
+        class: 'img-responsive img-projects',
+        src : element.preview,
+        alt: ''
+    });
 
-  var img = $('<img>', {
-    class: 'img-responsive img-projects',
-    src : element.preview,
-    alt: ''
-  });
+    caption.append(captionContent.append(information));
+    item.append(link.append(caption).append(img));
+    item.appendTo("#portfolio .container .items");
 
-  caption.append(captionContent.append(information));
-  item.append(link.append(caption).append(img));
-  item.appendTo("#portfolio .container .items");
+    item.click(function () {
+        clickProject(element);
+    });
+}
+
+// Click event when a project is clicked
+// Update the modal
+function clickProject(project) {
+    console.log(project);
+    var modalName = "#portfolioModal";
+    // $(modalName + " .project-title").html(project[0].title);
+    // $(modalName + " .project-content").html(project[0].content);
+    // $(modalName + " .img-responsive").attr('src', project.preview);
 }
 
 // Add a modal according to the current portfolio item

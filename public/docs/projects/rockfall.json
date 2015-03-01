@@ -4,8 +4,8 @@
   "platform": "Node.js, HTML, CSS",
   "authors": "Jérémie Corpinot, Emmanuel Elisa",
   "year": "2014",
-  "preview" : "projects/screenshots/rockfall_preview.jpg",
-  "miniature" : "projects/screenshots/rockfall_img.jpg",
+  "preview" : "docs/projects/screenshots/rockfall_preview.jpg",
+  "miniature" : "docs/projects/screenshots/rockfall_img.jpg",
   "link": "https://github.com/rootasjey/rockfall",
   "progress": "60%"
 

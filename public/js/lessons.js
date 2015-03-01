@@ -29,24 +29,24 @@ function getLessonsResponse(response) {
 }
 
 function addLesson(element, number) {
-  var lesson = $('<li>', {
+    var lesson = $('<li>', {
       title : element.title,
       path  : element.path,
-  });
+    });
 
-  var content = $('<a>', {
+    var content = $('<a>', {
       html  : element.title,
       class : 'portfolio-link',
       href  : '#lessonsModal'
-  });
-  content.attr('data-toggle', 'modal');
+    });
+    content.attr('data-toggle', 'modal');
 
-  lesson.click(function () {
-    clickLesson(this)
-  })
+    lesson.click(function () {
+        clickLesson(this);
+    });
 
-  lesson.append(content);
-  lesson.appendTo("#lessons .lessons-list");
+    lesson.append(content);
+    lesson.appendTo("#lessons .lessons-list");
 }
 
 function clickLesson(lesson) {
@@ -72,6 +72,8 @@ function clickLesson(lesson) {
   xhr.send( );
 }
 
+// Click event when a lesson is clicked
+// Update the modal
 function clickLessonResponse(response) {
   var data = JSON.parse(response);
   addLessonToModal(data);

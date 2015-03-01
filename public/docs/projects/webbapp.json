@@ -5,8 +5,8 @@
 	"authors": "Jérémie Corpinot, Somia Katir",
 	"contributors": "Luca De Feo",
 	"year": "2014",
-	"preview" : "projects/screenshots/webbapp_preview.jpg",
-	"miniature" : "projects/screenshots/webbapp_img.jpg",
+	"preview" : "docs/projects/screenshots/webbapp_preview.jpg",
+	"miniature" : "docs/projects/screenshots/webbapp_img.jpg",
 	"link": "https://github.com/rootasjey/webbapp",
 	"progress": "90%"
 
