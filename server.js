@@ -233,9 +233,9 @@ app.get('/', function (req, res) {
 })
 
 // Show personal projects
-.get('/projects', function (req, res) {
+.get('/proj', function (req, res) {
 	var jsonArray = [];
-	var path = __dirname + '/public/projects';
+	var path = __dirname + '/public/proj';
 
 	// open the projects directory
 	fs.readdir(path, function (err, files) {
@@ -424,9 +424,9 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 
 // reload the browser automatically
-livereload = require('livereload');
-server = livereload.createServer({exts: ['less']});
-server.watch(__dirname + "/public");
+// livereload = require('livereload');
+// server = livereload.createServer({exts: ['less']});
+// server.watch(__dirname + "/public");
 
 // PROTOTYPES
 // ----------

@@ -5,7 +5,7 @@
 function getProjects() {
   var xhr = new XMLHttpRequest();
 
-  xhr.open('GET', '/projects');
+  xhr.open('GET', '/proj');
   xhr.onreadystatechange = function () {
     if(xhr.readyState == 4 && xhr.status == 200){
       var response  = xhr.response;
