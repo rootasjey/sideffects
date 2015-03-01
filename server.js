@@ -285,9 +285,9 @@ app.get('/', function (req, res) {
 	// });
 })
 
-.get('/api/test', function (req, res) {
+.get('/getprojects', function (req, res) {
 	var jsonArray = [];
-	var path = __dirname + '/public/projects';
+	var path = __dirname + '/public/docs/projects';
 
 	// open the projects directory
 	fs.readdir(path, function (err, files) {

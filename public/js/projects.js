@@ -3,7 +3,7 @@
 // ---------------------------
 
 function getProjects() {
-    $.get("/api/test", function (data) {
+    $.get("/getprojects", function (data) {
         console.log(data);
     });
   // var xhr = new XMLHttpRequest();
