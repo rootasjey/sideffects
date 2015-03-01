@@ -248,9 +248,9 @@ app.get('/', function (req, res) {
 		"miniature" : "projects/screenshots/citations365_img.png",
 		"link": "http://www.windowsphone.com/fr-fr/store/app/citations365/2896fa7c-cc90-4288-8016-43d0eb4855e5",
 		"progress": "100%"
-	
+
 	});
-	res.json(200, jsonArray);
+	res.send(200, jsonArray);
 	// open the projects directory
 	// fs.readdir(path, function (err, files) {
 	// 	if(err) {
