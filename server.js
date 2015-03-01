@@ -235,56 +235,55 @@ app.get('/', function (req, res) {
 // Show personal projects
 .get('/projects', function (req, res) {
 	var jsonArray = [];
-	var path = __dirname + '/public/projects/';
+	var path = __dirname + '/public/projects';
 
-	res.send(200);
 	// open the projects directory
-	// fs.readdir(path, function (err, files) {
-	// 	if(err) {
-	// 		// if the directory is not found
-	// 		res.send(404);
-	// 	}
-	//
-	// 	var count = 1; // watch when result must be sent
-	// 	for (var i = 0; i < files.length; i++) {
-	//
-	// 		if(files[i].endsWith(".json")){
-	// 			// do nothing
-	// 		}
-	// 		else {
-	// 			// remove file (from array) if not .json
-	// 			var index = files.indexOf(files[i]);
-	// 			if(index > -1) {
-	// 				files.splice(index, 1);
-	// 				i--;
-	// 				continue;
-	// 			}
-	// 		}
-	//
-	// 		// security loop
-	// 		// (i can be greater than files.length if items are removed)
-	// 		if(i >= files.length) break;
-	//
-	//
-	// 		// build the file path
-	// 		var path_file = path + '/' + files[i];
-	// 		// open the file
-	// 		fs.readFile(path_file, function (err2, data) {
-	// 			if (err2) res.send(404);
-	//
-	// 			// parse the data as json
-	// 			var content = JSON.parse(data);
-	// 			jsonArray.push(content);
-	//
-	// 			// return the response if
-	// 			// it reached the end of array
-	// 			if(count == files.length)
-	// 				res.json(200, jsonArray)
-	//
-	// 			count++; // number of files read
-	// 		});
-	// 	}
-	// });
+	fs.readdir(path, function (err, files) {
+		if(err) {
+			// if the directory is not found
+			res.send(404);
+		}
+
+		var count = 1; // watch when result must be sent
+		for (var i = 0; i < files.length; i++) {
+
+			if(files[i].endsWith(".json")){
+				// do nothing
+			}
+			else {
+				// remove file (from array) if not .json
+				var index = files.indexOf(files[i]);
+				if(index > -1) {
+					files.splice(index, 1);
+					i--;
+					continue;
+				}
+			}
+
+			// security loop
+			// (i can be greater than files.length if items are removed)
+			if(i >= files.length) break;
+
+
+			// build the file path
+			var path_file = path + '/' + files[i];
+			// open the file
+			fs.readFile(path_file, function (err2, data) {
+				if (err2) res.send(404);
+
+				// parse the data as json
+				var content = JSON.parse(data);
+				jsonArray.push(content);
+
+				// return the response if
+				// it reached the end of array
+				if(count == files.length)
+					res.json(200, jsonArray)
+
+				count++; // number of files read
+			});
+		}
+	});
 })
 
 // Show all lessons

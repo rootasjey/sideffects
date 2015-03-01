@@ -20,7 +20,7 @@ window.onload = function () {
 
 // Load defaults functions
 function defaultLoad() {
-	getProjects();
+	// getProjects();
 	getLessons();
 	getRecentBlogPosts();
 }
