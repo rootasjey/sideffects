@@ -75,6 +75,9 @@ th {
 #blog {
   background: #ecf0f1;
 }
+#blog .blog-post {
+  text-align: left;
+}
 #error-page {
   background-color: #53c1c0;
   position: fixed !important;

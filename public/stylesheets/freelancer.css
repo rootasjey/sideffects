@@ -26,7 +26,8 @@ h6 {
   font-weight: 700;
 }
 hr.star-light,
-hr.star-primary {
+hr.star-primary,
+hr.star-clouds {
   padding: 0;
   border: none;
   border-top: solid 5px;
@@ -35,7 +36,8 @@ hr.star-primary {
   margin: 25px auto 30px;
 }
 hr.star-light:after,
-hr.star-primary:after {
+hr.star-primary:after,
+hr.star-clouds:after {
   content: "\f005";
   font-family: FontAwesome;
   display: inline-block;
@@ -56,6 +58,13 @@ hr.star-primary {
 }
 hr.star-primary:after {
   background-color: #fff;
+  color: #2c3e50;
+}
+hr.star-clouds {
+  border-color: #2c3e50;
+}
+hr.star-clouds:after {
+  background-color: #ecf0f1;
   color: #2c3e50;
 }
 .img-centered {

@@ -19,7 +19,8 @@ var express 		= require('express'),	// web dev framework
 	methodOverride 	= require('method-override'),
 	sha1 			= require('js-sha1'),
 	jf				= require('jsonfile'),
-	util			= require('util');
+	util			= require('util'),
+	jsdom			= require('jsdom');
 
 //var port = process.env.port || 8080;
 
@@ -374,6 +375,43 @@ app.get('/', function (req, res) {
 			res.status(200).json(obj);
 		} else res.send(409); // if there's an error
 	});
+})
+
+// Get the last articles from the blog
+.get('/getblog', function (req, res) {
+	var jqueryPath = __dirname + "/public/js/jquery-2.1.1.min.js";
+	jsdom.env(
+	  "http://rootasjey.github.io/",
+	  [jqueryPath],
+	  function (errors, window) {
+		// Jquery object
+		var $ = window.$;
+
+		// Posts titles array
+		var postTitles = $(".post .post-title a");
+
+		// Posts summaries array
+		var postSummaries = $(".post .post-excerpt p");
+
+		// Post links array
+		var postLinks = $(".post .post-excerpt p .read-more");
+
+		// json array to return
+		var jsonArray = [];
+
+		for (var i = 0; i < postTitles.length; i++) {
+			var title, summary, link;
+
+			title = $(postTitles[i]).text();
+			summary = $(postSummaries[i]).text();
+			link = $(postLinks[i]).attr("href");
+
+			jsonArray.push({"title" : title, "summary" : summary, "link" : link})
+		}
+
+		res.send(200, jsonArray);
+	  }
+	);
 })
 
 // Handle inexistant routes
