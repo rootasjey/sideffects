@@ -21,6 +21,6 @@ window.onload = function () {
 // Load defaults functions
 function defaultLoad() {
 	getProjects();
-	getLessons();
+	// getLessons();
 	getRecentBlogPosts();
 }
