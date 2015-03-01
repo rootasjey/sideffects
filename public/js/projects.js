@@ -3,23 +3,26 @@
 // ---------------------------
 
 function getProjects() {
-  var xhr = new XMLHttpRequest();
-
-  xhr.open('GET', '/projects');
-  xhr.onreadystatechange = function () {
-    if(xhr.readyState == 4 && xhr.status == 200){
-      var response  = xhr.response;
-      if (response) {
-        // PROJECTS
-        getProjectsResponse(response);
-      }
-      else {
-        // null response
-        console.log("une erreur est survenue");
-      }
-    }
-  };
-  xhr.send();
+    $.get("/api/test", function (data) {
+        console.log(data);
+    });
+  // var xhr = new XMLHttpRequest();
+  //
+  // xhr.open('GET', '/projects');
+  // xhr.onreadystatechange = function () {
+  //   if(xhr.readyState == 4 && xhr.status == 200){
+  //     var response  = xhr.response;
+  //     if (response) {
+  //       // PROJECTS
+  //       getProjectsResponse(response);
+  //     }
+  //     else {
+  //       // null response
+  //       console.log("une erreur est survenue");
+  //     }
+  //   }
+  // };
+  // xhr.send();
 }
 
 // Post process ajax request

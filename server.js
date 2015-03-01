@@ -236,21 +236,6 @@ app.get('/', function (req, res) {
 .get('/projects', function (req, res) {
 	var jsonArray = [];
 	var path = __dirname + '/public/proj';
-
-	jsonArray.push({
-		"title": "citations365",
-		"description": "Une application Windows Phone 8 réalisée en C#. <br>Elle présente chaque jour une citation à l'utilisateur et contient un historique des citations quotidiennes. Les citations peuvent être partagées sur les réseaux sociaux et autres moyens de communication, et la citation du jour peut être affichée sur l'écran d'accueil. Les citations proviennent du site <a href='http://evene.lefigaro.fr/'>http://evene.lefigaro.fr/</a>",
-		"platform": "Windows Phone",
-		"authors": "Jérémie Corpinot",
-		"contributors": "none",
-		"year": "2013",
-		"preview" : "projects/screenshots/citations365_preview.png",
-		"miniature" : "projects/screenshots/citations365_img.png",
-		"link": "http://www.windowsphone.com/fr-fr/store/app/citations365/2896fa7c-cc90-4288-8016-43d0eb4855e5",
-		"progress": "100%"
-
-	});
-	res.send(200, jsonArray);
 	// open the projects directory
 	// fs.readdir(path, function (err, files) {
 	// 	if(err) {
@@ -316,7 +301,7 @@ app.get('/', function (req, res) {
 
 			if(files[i].endsWith(".json")){
 				// build the file path
-				var file = files[i].replace(".md", "");
+				var file = files[i];
 				var path_file = path + '/' + files[i];
 
 				// Add the file to the array
