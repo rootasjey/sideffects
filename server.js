@@ -11,6 +11,7 @@ var express 		= require('express'),	// web dev framework
 	stylus 			= require('stylus'),		// css pre-compiler
 	morgan 			= require('morgan'),		// loggin middleware
 	nib 			= require('nib'),           // Stylus utilities
+    routes 			= require('./routes'),
     http 			= require('http'),
     path 			= require('path'),
 	fs 				= require('fs'),				// file stream
