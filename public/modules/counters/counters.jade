@@ -13,11 +13,17 @@ html(lang='fr')
     <meta name="author" content="">
     
     title counters
-    
     link(type='text/css', rel='stylesheet', href='modules/counters/counters.css')
     
   body
     div.center-content
+      table#add-player
+        tr
+          td Player's name
+          td 
+            input(type="text" name="player_name" value="" data-type="name")
+          td.add-player add
+          
       table#counters
         col(width="200px")
         col(width="60px")
@@ -31,6 +37,7 @@ html(lang='fr')
             th Total
             th UP
             th DOWN
+            th DELETE
         tbody
         
       table#taxes-table

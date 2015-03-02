@@ -2,11 +2,19 @@
 // COUNTERS.JS (PROJECT COUNTERS)
 // ------------------------------
 
+// -------------
+// GLOBALS VARS
+// -------------
+
 // Initial players array
 var _players = [];
 
 // Contains player's statistics
 var _stats = {};
+
+// Know when it's the first launch
+// to avoid adding events on objects multiple times
+var _firstLaunch = true;
 
 // Fired up when the page is completly loaded
 window.onload = function () {
@@ -32,6 +40,7 @@ function pushPlayers(players) {
         player.push(0);
         player.push("+");
         player.push("-");
+        player.push("x");
 
         // Contains data types for the player array
         var dataTypes = [];
@@ -43,6 +52,7 @@ function pushPlayers(players) {
         dataTypes.push("total");
         dataTypes.push("plus");
         dataTypes.push("minus");
+        dataTypes.push("delete");
 
         // Add elements to the DOM
         addRow(player, dataTypes);
@@ -95,6 +105,30 @@ function addRow(player, dataTypes) {
     tr.appendTo(tableBody);
 }
 
+// Add a player's card to the page
+function addCard(player, dataTypes) {
+    var card = $('<div>', {
+        class       : 'card',
+        "player"    : player[0]
+    });
+
+    var player = $('<span>', {
+        class: 'title',
+        html: player[0]
+    })
+    var due = $('<div>', {
+        class: 'due',
+        html: "due : <span class='amount'>0</span>",
+    });
+    var payedButton = $("<div>", {
+        class: 'payed-button',
+        html: 'payed?'
+    });
+
+    card.append(player).append(due).append(payedButton);
+    $(".center-content").append(card);
+}
+
 // Add +1 to the points counter
 function clickPlusOne() {
     $("td[data-type='plus']").click(function () {
@@ -131,30 +165,6 @@ function total(children) {
     var total = children[3];
 
     total.innerHTML = points.innerHTML * parseInt(taxes.innerHTML);
-}
-
-// Add a player's card to the page
-function addCard(player, dataTypes) {
-    var card = $('<div>', {
-        class       : 'card',
-        "player"    : player[0]
-    });
-
-    var player = $('<span>', {
-        class: 'title',
-        html: player[0]
-    })
-    var due = $('<div>', {
-        class: 'due',
-        html: "due : <span class='amount'>0</span>",
-    });
-    var payedButton = $("<div>", {
-        class: 'payed-button',
-        html: 'payed?'
-    });
-
-    card.append(player).append(due).append(payedButton);
-    $(".center-content").append(card);
 }
 
 //  Click Event on the save button
@@ -238,6 +248,25 @@ function clickSaveTaxes() {
     });
 }
 
+// Add a player
+function clickAddPlayer() {
+    $(".add-player").click(function () {
+        var name = $("#add-player input[name='player_name']");
+        name = (name.val() !== '') ? name.val() : "guest"+ (new Date()).getTime();
+        AddPlayer(name);
+    });
+}
+
+// Delete a player
+function clickRemovePlayer() {
+    $("td[data-type='delete']").click(function () {
+        var tr = this.parentNode;
+        var player_name = tr.getAttribute("name");
+        deletePlayer(player_name);
+    });
+}
+
+
 // Save stats to a file to retrieve values later
 function saveToFile() {
     var jsonArray = JSON.stringify(_stats);
@@ -268,7 +297,6 @@ function loadFromFile() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            // console.log("Data correctly loaded!");
             var response = xhr.response;
             fillData(response)
         }
@@ -281,6 +309,10 @@ function loadFromFile() {
 // Populate object with previously saved data
 function fillData(data) {
     data = JSON.parse(data); // parse the data
+
+    // Clear the arrays
+    _players.splice(0, _players.length);
+    _stats = {};
 
     // Loop into the data
     // to get the list of the last saved players
@@ -316,7 +348,58 @@ function fillData(data) {
         }
     }
 
-    // EVENTS
-    clickPlusOne();
-    clickMinusOne();
+    if (_firstLaunch) {
+        _firstLaunch = false;
+
+        // EVENTS
+        clickAddPlayer();
+    }
+        clickPlusOne();
+        clickMinusOne();
+        clickRemovePlayer();
+}
+
+// Clear the data in the table and delete the cards
+function clearData() {
+    $(".card").remove();
+    $("#counters tbody").html('');
+}
+
+//Delete player in object storage
+function deletePlayer(player_name){
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/counters/delete?name='+player_name, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(null);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            clearData();
+            loadFromFile();
+        }
+        else if (xhr.readyState == 4 && xhr.status != 200) {
+
+        }
+    }
+
+}
+
+//Delete player in object storage
+function AddPlayer(player_name){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/counters/add?name='+player_name, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(null);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            clearData();
+            loadFromFile();
+        }
+        else if (xhr.readyState == 4 && xhr.status != 200) {
+
+        }
+    }
+
 }

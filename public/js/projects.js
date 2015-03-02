@@ -4,12 +4,7 @@
 
 function getProjects() {
     $.get("/getprojects", function (data) {
-        console.log(data);
         getProjectsResponse(data);
-
-        // for (var i = 0; i < data.length; i++) {
-        //     console.log(data[i].title);
-        // }
     });
 }
 
@@ -69,9 +64,11 @@ function addSectionToPortfolio(element) {
 function clickProject(project) {
     console.log(project);
     var modalName = "#portfolioModal";
-    // $(modalName + " .project-title").html(project[0].title);
-    // $(modalName + " .project-content").html(project[0].content);
-    // $(modalName + " .img-responsive").attr('src', project.preview);
+
+    $(modalName + " .project-title").html(project.title);
+    $(modalName + " .project-content").html(project.description);
+    $(modalName + " .img-responsive").attr('src', project.miniature);
+    $(modalName + " .project-link").attr('href', project.link);
 }
 
 // Add a modal according to the current portfolio item

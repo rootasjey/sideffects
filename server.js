@@ -233,58 +233,6 @@ app.get('/', function (req, res) {
 })
 
 // Show personal projects
-.get('/projects', function (req, res) {
-	var jsonArray = [];
-	var path = __dirname + '/public/proj';
-	// open the projects directory
-	// fs.readdir(path, function (err, files) {
-	// 	if(err) {
-	// 		// if the directory is not found
-	// 		res.send(404);
-	// 	}
-	//
-	// 	var count = 1; // watch when result must be sent
-	// 	for (var i = 0; i < files.length; i++) {
-	//
-	// 		if(files[i].endsWith(".json")){
-	// 			// do nothing
-	// 		}
-	// 		else {
-	// 			// remove file (from array) if not .json
-	// 			var index = files.indexOf(files[i]);
-	// 			if(index > -1) {
-	// 				files.splice(index, 1);
-	// 				i--;
-	// 				continue;
-	// 			}
-	// 		}
-	//
-	// 		// security loop
-	// 		// (i can be greater than files.length if items are removed)
-	// 		if(i >= files.length) break;
-	//
-	//
-	// 		// build the file path
-	// 		var path_file = path + '/' + files[i];
-	// 		// open the file
-	// 		fs.readFile(path_file, function (err2, data) {
-	// 			if (err2) res.send(404);
-	//
-	// 			// parse the data as json
-	// 			var content = JSON.parse(data);
-	// 			jsonArray.push(content);
-	//
-	// 			// return the response if
-	// 			// it reached the end of array
-	// 			if(count == files.length)
-	// 				res.json(200, jsonArray);
-	//
-	// 			count++; // number of files read
-	// 		});
-	// 	}
-	// });
-})
-
 .get('/getprojects', function (req, res) {
 	var jsonArray = [];
 	var path = __dirname + '/public/docs/projects';
@@ -306,7 +254,7 @@ app.get('/', function (req, res) {
 
 
 				// Open the file
-				// Get the file's content
+				// Get the files content
 				// and push the content to the json array
 				var fileContent = jf.readFileSync(pathFile);
 				jsonArray.push(fileContent);
@@ -372,6 +320,48 @@ app.get('/', function (req, res) {
 	});
 })
 
+// Get the last articles from the blog
+.get('/getblog', function (req, res) {
+	var jqueryPath = __dirname + "/public/js/jquery-2.1.1.min.js";
+	jsdom.env(
+	  "http://rootasjey.github.io/",
+	  [jqueryPath],
+	  function (errors, window) {
+		// Jquery object
+		var $ = window.$;
+
+		// Posts titles array
+		var postTitles = $(".post .post-title a");
+
+		// Posts summaries array
+		var postSummaries = $(".post .post-excerpt p");
+
+		// Post links array
+		var postLinks = $(".post .post-excerpt p .read-more");
+
+		// json array to return
+		var jsonArray = [];
+
+		for (var i = 0; i < postTitles.length; i++) {
+			var title, summary, link;
+
+			title = $(postTitles[i]).text();
+			summary = $(postSummaries[i]).text();
+			link = $(postLinks[i]).attr("href");
+
+			jsonArray.push({"title" : title, "summary" : summary, "link" : link})
+		}
+
+		res.send(200, jsonArray);
+	  }
+	);
+})
+
+
+// ----------------
+// COUNTERS MODULE
+// ----------------
+
 .get('/counters', function (req, res)  {
 	res.render('../public/modules/counters/counters');
 })
@@ -410,42 +400,37 @@ app.get('/', function (req, res) {
 	});
 })
 
-// Get the last articles from the blog
-.get('/getblog', function (req, res) {
-	var jqueryPath = __dirname + "/public/js/jquery-2.1.1.min.js";
-	jsdom.env(
-	  "http://rootasjey.github.io/",
-	  [jqueryPath],
-	  function (errors, window) {
-		// Jquery object
-		var $ = window.$;
+.get('/counters/delete', function (req, res) {
+	// Path to the json file (to save)
+	var file = __dirname + '/public/modules/counters/data.json';
 
-		// Posts titles array
-		var postTitles = $(".post .post-title a");
+	var obj = jf.readFileSync(file);
+	obj[req.query.name] = null;
+	delete obj[req.query.name];
 
-		// Posts summaries array
-		var postSummaries = $(".post .post-excerpt p");
+	// Open and write in the file
+	jf.writeFileSync(file, obj);
 
-		// Post links array
-		var postLinks = $(".post .post-excerpt p .read-more");
-
-		// json array to return
-		var jsonArray = [];
-
-		for (var i = 0; i < postTitles.length; i++) {
-			var title, summary, link;
-
-			title = $(postTitles[i]).text();
-			summary = $(postSummaries[i]).text();
-			link = $(postLinks[i]).attr("href");
-
-			jsonArray.push({"title" : title, "summary" : summary, "link" : link})
-		}
-
-		res.send(200, jsonArray);
-	  }
-	);
+	res.send(200);
 })
+
+.get('/counters/add', function (req, res) {
+	// Path to the json file (to save)
+	var file = __dirname + '/public/modules/counters/data.json';
+
+	var obj = jf.readFileSync(file);
+	obj[req.query.name] = {"fees": 0};
+
+
+	// Open and write in the file
+	jf.writeFileSync(file, obj);
+
+	res.send(200);
+})
+
+// END COUNTERS MODULE
+// -------------------
+
 
 // Handle inexistant routes
 .use(function (req, res, next) {
