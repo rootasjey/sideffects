@@ -321,3 +321,12 @@ C2 = { fs, fo, fc, so, sc, oc }
 3. Calcul du Supp
 
 4. L2 = { fs, so, sc, oc }
+
+
+02/03/15
+
+## GROUPEMENT (CLUSTERING)
+
+Classification automatique d'objets
+
+Méthode non supervisée = on n'injecte pas de résultats dans l'algorithme

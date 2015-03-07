@@ -110,3 +110,47 @@ Spring a un IOC et est en PAO
 Pourquoi serveur d'app lourds et léger?
 
 Car il fait des news à notre place.
+
+### SPRING
+
+C'est un middleware.
+
+Conteneur lourd -> run as server (comme Jboss) -> fait tourner un service
+Conteneur léger -> import des lib et ça suffit (comme Spring)
+
+### Différences entre conteneur lourd et léger
+
+* Conteneur lourd gère la montée en charge (pas de new client)
+* Spring a une bonne organisation d'un projet,
+et a la programmation par aspect ->anti-bug
+
+### DEFINITIONS
+
+* Un composant = une classe
+* Tout composant a une interface
+* Un contrat = une interface (l'interface du **composant** vers le monde ext.)
+* Spring -> programmation par interface et faible couplage (bonnes pratiques)
+* Dépendance explicite = s'il y a un contrat avec un composant B, il faut que cela soit dit dans le fichier de configuration
+
+* Un service est un composant que l'on appelle qui fait qque chose et qui donne un résultat
+* Un bean est un composant
+* Le *ref bean* permet de définir les inter-dépendances
+* ref local -> définir les dépendances (nom du bean à l'intérieur d'un fichier xml)
+* injection de dépendance  = donner une valeur à une dépendance d'un composant (service). Se fait dans un fichier xml
+* un service est un composant métier qui fait une action (c'est un bean)
+* une property est un attribut renseigné par Spring
+* PAO = programmation transversale
+
+### POA (Programmation Orienté Aspect)
+
+C'est de la programmation transversale.
+
+Sert à
+
+* Gestion de transaction
+* Gestion du debug
+* Ne fait rien dans l'application
+
+Spring travaille en IOC (inversion de contrôle) -> on ne passe pas au composant les données dont il a besoin mais il va les chercher au moment où il en a besoin. (en opp. au contrôle direct)
+
+Spring a l'injection de dépendances.

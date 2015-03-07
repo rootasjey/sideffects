@@ -117,3 +117,12 @@ Le tri, l'aggrégat (et les opérateurs ensemblistes) ne permettent pas de faire
 L'élimination des doublons ne permet pas de pipeline car il faut exécuter un hash ou un tri.
 
 Opérateurs bloquant : *build* et *probe*
+
+05/03/15
+
+ACID
+
+* Atomicité
+* Cohérence
+* Isolation
+* Durabilité
