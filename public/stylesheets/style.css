@@ -78,6 +78,9 @@ th {
 #blog .blog-post {
   text-align: left;
 }
+#blog .blog-post .post-summary {
+  font-size: 1.5em;
+}
 #error-page {
   background-color: #53c1c0;
   position: fixed !important;

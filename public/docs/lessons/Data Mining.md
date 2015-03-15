@@ -330,3 +330,14 @@ C2 = { fs, fo, fc, so, sc, oc }
 Classification automatique d'objets
 
 Méthode non supervisée = on n'injecte pas de résultats dans l'algorithme
+
+## TP (10/03/15)
+
+### Exercice 2
+
+* 2.3 L'algorithme sort les itemsets fréquents ainsi que les règles d'association
+* 2.4.1 On ne peut pas lancer l'algorithme Apriori car certaines données du fichier *bank-data.cvs* sont continues et  l'espace de définition est infini. Il faut discrétiser les attributs en question afin de pouvoir exécuter l'algo.
+
+* 2.4.2 SELECTION ATTRIBUTS
+  * *AttributeSelection* permet de classer les attributs par pertinence
+  * *RemoveUseless* supprime un (ou plusieurs) attribut inutile(s)
