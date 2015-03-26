@@ -16,13 +16,18 @@ function getReport() {
         }).appendTo("#body");
 
         buttonClick();
-        processing();
+        applyHeightOnToggled();
     });
 }
 
 function buttonClick() {
-    $(".btn").click(function () {
-        console.log($(this));
+    $(".toggle").click(function () {
+        // console.log($(this));
+        var parent = $(this).parent();
+        var toggled = parent.find(".toggled");
+        // console.log(toggled);
+        // toggled.css("display", "none");
+        toggled.toggleClass("toggled-hidded");
     });
 }
 
@@ -30,39 +35,13 @@ function toggle(elem) {
 
 }
 
-function processing() {
+function applyHeightOnToggled() {
+    $(".toggled").each(function () {
+        var height = $(this).height();
+        console.log(height);
 
-    // Ripple-effect animation
-    (function($) {
-        $(".ripple-effect").click(function(e){
-            var rippler = $(this);
+        $(this).css("height", height + "px");
+    });
 
-            // create .ink element if it doesn't exist
-            if(rippler.find(".ink").length == 0) {
-                rippler.append("<span class='ink'></span>");
-            }
 
-            var ink = rippler.find(".ink");
-            console.log("totooo");
-            // prevent quick double clicks
-            ink.removeClass("animate");
-
-            // set .ink diametr
-            if(!ink.height() && !ink.width())
-            {
-                var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
-                ink.css({height: d, width: d});
-            }
-
-            // get click coordinates
-            var x = e.pageX - rippler.offset().left - ink.width()/2;
-            var y = e.pageY - rippler.offset().top - ink.height()/2;
-
-            // set .ink position and add class .animate
-            ink.css({
-              top: y+'px',
-              left:x+'px'
-            }).addClass("animate");
-        })
-    })(jQuery);
 }

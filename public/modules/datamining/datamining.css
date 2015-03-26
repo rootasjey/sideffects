@@ -30,7 +30,7 @@ body {
   padding-bottom: 220px;
 }
 #body .report {
-  width: 500px;
+  width: 600px;
   margin: auto;
 }
 #body .report h1#data-mining-rapport {
@@ -38,15 +38,16 @@ body {
   text-align: center;
   margin-bottom: 100px;
 }
-#body .report .button {
-  color: #fff;
-  text-align: center;
-  width: 80px;
-  height: 40px;
-  margin: 10px;
-  padding: 5px;
-  padding-top: 10px;
-  background: #2980b9;
+#body .report .toggled {
+  opacity: 1;
+  height: auto;
+  overflow: hidden;
+  transition: 0.5s;
+}
+#body .report .toggled-hidded {
+  height: 0px;
+  overflow: hidden;
+  transition: 0.5s;
 }
 #footer {
   position: absolute;
