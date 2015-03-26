@@ -55,6 +55,7 @@ body {
       }
       h3 {
         margin-top: 20px;
+        display: inline-block;
       }
 
       .authors {
@@ -65,6 +66,7 @@ body {
             list-style-type: none;
           }
       }
+
       .toggle {
         margin-left: 80px;
         margin-bottom: 10px;
@@ -72,20 +74,63 @@ body {
 
       .toggled {
         opacity: 1;
-        height: auto;
         overflow: hidden;
         transition: .5s;
       }
 
       .toggled-visible {
-        // height: 100px;
-        transition: .5s;
+        max-height: 200px;
+        transition: max-height .5s;
       }
       .toggled-hidded {
-        // opacity: 0;
-        height: 0px;
+        max-height: 0px;
         overflow: hidden;
-        transition: .5s;
+        transition: max-height .5s;
+      }
+    }
+
+    nav.summary {
+      top: 300px;
+      position: fixed;
+      background: #eee;
+      padding: 10px
+
+      opacity: .5;
+      overflow hidden;
+      max-width: 150px;
+      max-height: 44px;
+      transition: .5s;
+
+      -webkit-box-shadow: 0px 0px 0px 0px rgba(50, 50, 50, 0.75);
+      -moz-box-shadow:    0px 0px 0px 0px rgba(50, 50, 50, 0.75);
+      box-shadow:         0px 0px 0px 0px rgba(50, 50, 50, 0.75);;
+
+      &:hover {
+          opacity: 1;
+          overflow hidden;
+          max-width: 300px;
+          max-height: 700px;
+
+
+          -webkit-box-shadow: 2px 2px 18px 0px rgba(20, 20, 20, 0.5);
+          -moz-box-shadow:    2px 2px 18px 0px rgba(20, 20, 20, 0.5);
+          box-shadow:         2px 2px 18px 0px rgba(20, 20, 20, 0.5)
+
+          transition: .5s
+      }
+
+      .summary-title {
+        font-size: 1.8em;
+      }
+
+      .side-bar {
+          top 0
+          left 0
+          position absolute
+
+          width: 5px;
+          height: 100%;
+          background: #2980B9;
       }
     }
 }

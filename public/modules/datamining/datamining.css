@@ -46,6 +46,7 @@ body {
 }
 #body .report h3 {
   margin-top: 20px;
+  display: inline-block;
 }
 #body .report .authors {
   width: 280px;
@@ -60,17 +61,52 @@ body {
 }
 #body .report .toggled {
   opacity: 1;
-  height: auto;
   overflow: hidden;
   transition: 0.5s;
 }
 #body .report .toggled-visible {
-  transition: 0.5s;
+  max-height: 200px;
+  transition: max-height 0.5s;
 }
 #body .report .toggled-hidded {
-  height: 0px;
+  max-height: 0px;
   overflow: hidden;
+  transition: max-height 0.5s;
+}
+#body nav.summary {
+  top: 300px;
+  position: fixed;
+  background: #eee;
+  padding: 10px;
+  opacity: 0.5;
+  overflow: hidden;
+  max-width: 150px;
+  max-height: 44px;
   transition: 0.5s;
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(50,50,50,0.75);
+  -moz-box-shadow: 0px 0px 0px 0px rgba(50,50,50,0.75);
+  box-shadow: 0px 0px 0px 0px rgba(50,50,50,0.75);
+}
+#body nav.summary:hover {
+  opacity: 1;
+  overflow: hidden;
+  max-width: 300px;
+  max-height: 700px;
+  -webkit-box-shadow: 2px 2px 18px 0px rgba(20,20,20,0.5);
+  -moz-box-shadow: 2px 2px 18px 0px rgba(20,20,20,0.5);
+  box-shadow: 2px 2px 18px 0px rgba(20,20,20,0.5);
+  transition: 0.5s;
+}
+#body nav.summary .summary-title {
+  font-size: 1.8em;
+}
+#body nav.summary .side-bar {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  background: #2980b9;
 }
 #footer {
   position: absolute;
