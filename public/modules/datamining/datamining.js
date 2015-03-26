@@ -21,8 +21,8 @@ function getReport() {
 
 // Load functions after everything is set
 function loadontime() {
-    buttonClick();
     generateSummary();
+    buttonClick();
 }
 
 // Event when a click is fired on a button element
@@ -38,8 +38,18 @@ function buttonClick() {
 
 // Create a table of content
 function generateSummary() {
+    var container = $("<div>", {
+        class: "container-summary"
+    });
+
     var summary = $("<nav>", {
-        class: "summary"
+        class: "summary toggled toggled-hidded"
+    });
+
+    var buttonSum = $("<button>", {
+        type: "button",
+        html: "sommaire",
+        class: "btn btn-raised ripple-effect btn-primary toggle"
     });
 
     var newLine, el, title, link;
@@ -62,5 +72,7 @@ function generateSummary() {
     });
 
     summary.html(content + " </ul>");
-    summary.appendTo("#body");
+    container.append(buttonSum).append(summary);
+    container.appendTo("#body");
+    // summary.appendTo("#body");
 }

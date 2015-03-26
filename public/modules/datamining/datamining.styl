@@ -67,54 +67,32 @@ body {
           }
       }
 
-      .toggle {
-        margin-left: 80px;
-        margin-bottom: 10px;
-      }
-
-      .toggled {
-        opacity: 1;
-        overflow: hidden;
-        transition: .5s;
-      }
-
-      .toggled-visible {
-        max-height: 200px;
-        transition: max-height .5s;
-      }
-      .toggled-hidded {
-        max-height: 0px;
-        overflow: hidden;
-        transition: max-height .5s;
-      }
     }
 
-    nav.summary {
-      top: 300px;
+    .container-summary {
+      top: 440px;
       position: fixed;
-      background: #eee;
       padding: 10px
 
-      opacity: .5;
+
       overflow hidden;
-      max-width: 150px;
-      max-height: 44px;
+      max-width: 300px;
+      max-height: 300px;
       transition: .5s;
 
       -webkit-box-shadow: 0px 0px 0px 0px rgba(50, 50, 50, 0.75);
       -moz-box-shadow:    0px 0px 0px 0px rgba(50, 50, 50, 0.75);
-      box-shadow:         0px 0px 0px 0px rgba(50, 50, 50, 0.75);;
+      box-shadow:         0px 0px 0px 0px rgba(50, 50, 50, 0.75);
 
       &:hover {
-          opacity: 1;
-          overflow hidden;
-          max-width: 300px;
-          max-height: 700px;
+          // opacity: 1;
+          // max-width: 300px;
+          // max-height: 700px;
 
 
-          -webkit-box-shadow: 2px 2px 18px 0px rgba(20, 20, 20, 0.5);
-          -moz-box-shadow:    2px 2px 18px 0px rgba(20, 20, 20, 0.5);
-          box-shadow:         2px 2px 18px 0px rgba(20, 20, 20, 0.5)
+          // -webkit-box-shadow: 2px 2px 18px 0px rgba(20, 20, 20, 0.5);
+          // -moz-box-shadow:    2px 2px 18px 0px rgba(20, 20, 20, 0.5);
+          // box-shadow:         2px 2px 18px 0px rgba(20, 20, 20, 0.5);
 
           transition: .5s
       }
@@ -124,7 +102,7 @@ body {
       }
 
       .side-bar {
-          top 0
+          top 64px
           left 0
           position absolute
 
@@ -147,6 +125,27 @@ body {
         height: 180px;
         transition: 0.5s;
     }
+}
+
+.toggle {
+  margin-left: 80px;
+  margin-bottom: 10px;
+}
+
+.toggled {
+  opacity: 1;
+  overflow: hidden;
+  transition: .5s;
+}
+
+.toggled-visible {
+  max-height: 200px;
+  transition: max-height .5s;
+}
+.toggled-hidded {
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height .5s;
 }
 
 @font-face {

@@ -55,53 +55,26 @@ body {
 #body .report .authors ul {
   list-style-type: none;
 }
-#body .report .toggle {
-  margin-left: 80px;
-  margin-bottom: 10px;
-}
-#body .report .toggled {
-  opacity: 1;
-  overflow: hidden;
-  transition: 0.5s;
-}
-#body .report .toggled-visible {
-  max-height: 200px;
-  transition: max-height 0.5s;
-}
-#body .report .toggled-hidded {
-  max-height: 0px;
-  overflow: hidden;
-  transition: max-height 0.5s;
-}
-#body nav.summary {
-  top: 300px;
+#body .container-summary {
+  top: 440px;
   position: fixed;
-  background: #eee;
   padding: 10px;
-  opacity: 0.5;
   overflow: hidden;
-  max-width: 150px;
-  max-height: 44px;
+  max-width: 300px;
+  max-height: 300px;
   transition: 0.5s;
   -webkit-box-shadow: 0px 0px 0px 0px rgba(50,50,50,0.75);
   -moz-box-shadow: 0px 0px 0px 0px rgba(50,50,50,0.75);
   box-shadow: 0px 0px 0px 0px rgba(50,50,50,0.75);
 }
-#body nav.summary:hover {
-  opacity: 1;
-  overflow: hidden;
-  max-width: 300px;
-  max-height: 700px;
-  -webkit-box-shadow: 2px 2px 18px 0px rgba(20,20,20,0.5);
-  -moz-box-shadow: 2px 2px 18px 0px rgba(20,20,20,0.5);
-  box-shadow: 2px 2px 18px 0px rgba(20,20,20,0.5);
+#body .container-summary:hover {
   transition: 0.5s;
 }
-#body nav.summary .summary-title {
+#body .container-summary .summary-title {
   font-size: 1.8em;
 }
-#body nav.summary .side-bar {
-  top: 0;
+#body .container-summary .side-bar {
+  top: 64px;
   left: 0;
   position: absolute;
   width: 5px;
@@ -119,6 +92,24 @@ body {
 #footer:hover {
   height: 180px;
   transition: 0.5s;
+}
+.toggle {
+  margin-left: 80px;
+  margin-bottom: 10px;
+}
+.toggled {
+  opacity: 1;
+  overflow: hidden;
+  transition: 0.5s;
+}
+.toggled-visible {
+  max-height: 200px;
+  transition: max-height 0.5s;
+}
+.toggled-hidded {
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s;
 }
 @font-face {
   font-family: 'open_sanslight';
