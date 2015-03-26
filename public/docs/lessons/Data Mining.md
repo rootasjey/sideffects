@@ -341,3 +341,93 @@ Méthode non supervisée = on n'injecte pas de résultats dans l'algorithme
 * 2.4.2 SELECTION ATTRIBUTS
   * *AttributeSelection* permet de classer les attributs par pertinence
   * *RemoveUseless* supprime un (ou plusieurs) attribut inutile(s)
+
+* 2.4.3 DISCRETISATION
+    1. On discrétise les attributs en choisissant Filter -> unsupervised -> attribute -> Discretize
+    2. Pour discrétiser manuellement, on définit un espace de valeurs {0,1,2,3}. On peut aussi modifier le nom des attributs
+
+* 2.4.4 APPRIORI
+
+On exécute l'algorithme Apriori avec les paramètres suivant
+
+weka.associations.Apriori -N 10 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.1 -S -1.0 -c -1
+
+Et on obtient les règles d'association :
+
+1. revenues='(43758.136667-inf)' 80 ==> save_act=YES 80    conf:(1)
+2. age='(50.666667-inf)' revenues='(43758.136667-inf)' 76 ==> save_act=YES 76    conf:(1)
+3. revenues='(43758.136667-inf)' current_act=YES 63 ==> save_act=YES 63    conf:(1)
+4. age='(50.666667-inf)' revenues='(43758.136667-inf)' current_act=YES 61 ==> save_act=YES 61    conf:(1)
+5. enfants=0 save_act=YES mortgage=NO pep=NO 74 ==> marrie=YES 73    conf:(0.99)
+6. sex=FEMALE enfants=0 mortgage=NO pep=NO 64 ==> marrie=YES 63    conf:(0.98)
+7. enfants=0 current_act=YES mortgage=NO pep=NO 82 ==> marrie=YES 80    conf:(0.98)
+8. enfants=0 mortgage=NO pep=NO 107 ==> marrie=YES 104    conf:(0.97)
+9. revenues='(43758.136667-inf)' current_act=YES 63 ==> age='(50.666667-inf)' 61    conf:(0.97)
+10. revenues='(43758.136667-inf)' save_act=YES current_act=YES 63 ==> age='(50.666667-inf)' 61    conf:(0.97)
+
+
+**INTERPRETATIONS**
+
+1. Si une personne a des revenus inférieurs à 43758, alors elle a une épargne
+2. Si une personne a des revenus inférieurs à 43758 et a moins de 50 ans, alors elle a une épargne
+
+
+La variation des paramètres n'a pas d'impact significatif sur le temps d'exécution;
+
+Le min-sup (support minimum) est un paramètre critique.
+
+Pour la configuration suivante on obtient 41 résultats :
+
+(weka.associations.Apriori -N 100 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.1 -S -1.0 -c -1)
+
+* nombre de règles à sortir : 100
+* min-sup : 0.1
+
+Pour la configuration suivante on obtient 1 résultats :
+
+(weka.associations.Apriori -N 100 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.2 -S -1.0 -c -1)
+
+* nombre de règles à sortir : 100
+* min-sup : 0.2
+
+* 2.5.5 CLASSIFICATION INTUITIVE AVEC APRIORI
+
+Les régles obtenues :
+
+1. petalwidth='(-inf-0.34]' 41 ==> class=Iris-setosa 41    conf:(1)
+2. petallength='(-inf-1.59]' 37 ==> class=Iris-setosa 37    conf:(1)
+3. petallength='(-inf-1.59]' petalwidth='(-inf-0.34]' 33 ==> class=Iris-setosa 33    conf:(1)
+4. petalwidth='(1.06-1.3]' 21 ==> class=Iris-versicolor 21    conf:(1)
+5. petallength='(5.13-5.72]' 18 ==> class=Iris-virginica 18    conf:(1)
+6. sepallength='(4.66-5.02]' petalwidth='(-inf-0.34]' 17 ==> class=Iris-setosa 17    conf:(1)
+7. sepalwidth='(2.96-3.2]' class=Iris-setosa 16 ==> petalwidth='(-inf-0.34]' 16    conf:(1)
+8. sepalwidth='(2.96-3.2]' petalwidth='(-inf-0.34]' 16 ==> class=Iris-setosa 16    conf:(1)
+9. petallength='(3.95-4.54]' 26 ==> class=Iris-versicolor 25    conf:(0.96)
+10. petalwidth='(1.78-2.02]' 23 ==> class=Iris-virginica 22    conf:(0.96)
+
+### EXERCICE 3 : PROMOTION DANS UNE EPICERIE DE NUIT
+
+1. On a généré le fichier .arff à l'aide d'un fichier .csv à cause de la facilité decompréhension
+2. Règles obtenues avec un support de 0.5
+    1. produit1=YES 5 ==> produit5=YES 5    conf:(1)
+    2. produit2=NO 5 ==> produit5=YES 5    conf:(1)
+    3. produit3=NO 5 ==> produit5=YES 5    conf:(1)
+    4. produit4=YES 4 ==> produit5=YES 4    conf:(1)
+    5. produit1=YES produit3=NO 4 ==> produit5=YES 4    conf:(1)
+    6. produit2=NO produit3=NO 4 ==> produit5=YES 4    conf:(1)
+
+3. Règles obtenues avec un support de 1 (beaucoup de résultats)
+    1. produit1=YES 5 ==> produit5=YES 5    conf:(1)
+    2. produit2=NO 5 ==> produit5=YES 5    conf:(1)
+    3. produit3=NO 5 ==> produit5=YES 5    conf:(1)
+    4. produit4=YES 4 ==> produit5=YES 4    conf:(1)
+    5. produit1=YES produit3=NO 4 ==> produit5=YES 4    conf:(1)
+    6. produit2=NO produit3=NO 4 ==> produit5=YES 4    conf:(1)
+    7. produit1=YES produit2=NO 3 ==> produit3=NO 3    conf:(1)
+    8. produit1=YES produit2=NO 3 ==> produit5=YES 3    conf:(1)
+    9. produit1=YES produit4=YES 3 ==> produit5=YES 3    conf:(1)
+    10. produit2=NO produit4=YES 3 ==> produit5=YES 3    conf:(1)
+    11. produit4=NO produit5=YES 3 ==> produit3=NO 3    conf:(1)
+    12. produit3=NO produit4=NO 3 ==> produit5=YES 3    conf:(1)
+
+4. Le patron devrait faire des promotions sur le produit 5, 4 et 3 par exemple.

@@ -431,6 +431,25 @@ app.get('/', function (req, res) {
 // END COUNTERS MODULE
 // -------------------
 
+.get('/datamining', function (req, res) {
+	res.render('../public/modules/datamining/index');
+})
+
+.get('/datamining/rapport', function (req, res) {
+	var path = __dirname + '/public/modules/datamining/rapport.md';
+	var jsonArray = [];
+
+	// open the file
+	fs.readFile(path, 'utf-8', function (err2, data) {
+		if (err2) res.send(404);
+
+		// parse the data as markdown
+		var content = marked(data);
+		jsonArray.push({'content' : content});
+
+		res.send(200, jsonArray);
+	});
+})
 
 // Handle inexistant routes
 .use(function (req, res, next) {

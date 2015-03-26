@@ -71,3 +71,16 @@ Patricia peut tricher :
 * **Description de la défense contre le DDOS**
 * **MONEO** : Description technologique
 * **Scada / Stuxnet**
+
+Le vendredi 8 Avril
+
+9h      -> 10h30    3 GROUPES
+10h45   -> 12h15    3 GROUPES
+13h45   -> 15h15    3 GROUPES
+15h30   -> 17h      3 GROUPES
+
+Remise rapport
+
+-le Vendredi 3 Avril avant 15h chez Fab Chevalier
+
+Format Papier obligatoire sinon **0**.

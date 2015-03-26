@@ -126,3 +126,14 @@ ACID
 * Cohérence
 * Isolation
 * Durabilité
+
+* Requêtes dynamiques
+
+*SELECT * FROM TABLENAME WHERE ID=x*
+
+La requête est analysée, compilée, optimisée et sort dans une forme réduite.
+Lors de l'appel de la requête, la variable *x* devra être fournie.
+
+* Requêtes statiques
+
+Le résultat de la requête est stocckée qque part pour une réutilisation ultérieure.
