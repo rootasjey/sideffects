@@ -41,7 +41,7 @@ function toggle(elem) {
 function applyHeightOnToggled() {
     $(".toggled-visible").each(function () {
         var height = $(this).height();
-        console.log(height);
+        // console.log(height);
 
         $(this).css({
             height : height + "px",

@@ -12,8 +12,8 @@ body {
   position: relative;
 }
 #header {
-  height: 130px;
-  padding: 10px;
+  height: 5px;
+  padding: 5px;
   background: #be3757;
   color: #fff;
   font-size: 1.3em;
@@ -22,7 +22,7 @@ body {
   transition: 0.5s;
 }
 #header:hover {
-  height: 150px;
+  height: 80px;
   transition: 0.5s;
 }
 #body {
@@ -38,6 +38,14 @@ body {
   font-size: 4em;
   text-align: center;
   margin-bottom: 100px;
+}
+#body .report h1,
+#body .report h2 {
+  margin-top: 50px;
+  display: inline-block;
+}
+#body .report h3 {
+  margin-top: 20px;
 }
 #body .report .authors {
   width: 280px;
