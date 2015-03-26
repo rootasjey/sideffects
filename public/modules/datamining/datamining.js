@@ -22,12 +22,15 @@ function getReport() {
 
 function buttonClick() {
     $(".toggle").click(function () {
-        // console.log($(this));
         var parent = $(this).parent();
         var toggled = parent.find(".toggled");
-        // console.log(toggled);
-        // toggled.css("display", "none");
+
+        toggled.css({
+            height : "",
+        });
+        toggled.toggleClass("toggled-visible");
         toggled.toggleClass("toggled-hidded");
+        applyHeightOnToggled();
     });
 }
 
@@ -36,11 +39,13 @@ function toggle(elem) {
 }
 
 function applyHeightOnToggled() {
-    $(".toggled").each(function () {
+    $(".toggled-visible").each(function () {
         var height = $(this).height();
         console.log(height);
 
-        $(this).css("height", height + "px");
+        $(this).css({
+            height : height + "px",
+        });
     });
 
 

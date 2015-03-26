@@ -32,16 +32,31 @@ body {
 #body .report {
   width: 600px;
   margin: auto;
+  font-size: 1.4em;
 }
 #body .report h1#data-mining-rapport {
   font-size: 4em;
   text-align: center;
   margin-bottom: 100px;
 }
+#body .report .authors {
+  width: 280px;
+  margin: auto;
+}
+#body .report .authors ul {
+  list-style-type: none;
+}
+#body .report .toggle {
+  margin-left: 80px;
+  margin-bottom: 10px;
+}
 #body .report .toggled {
   opacity: 1;
   height: auto;
   overflow: hidden;
+  transition: 0.5s;
+}
+#body .report .toggled-visible {
   transition: 0.5s;
 }
 #body .report .toggled-hidded {

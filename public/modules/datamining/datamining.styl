@@ -41,11 +41,25 @@ body {
     .report {
       width: 600px;
       margin: auto;
+      font-size: 1.4em;
 
       h1#data-mining-rapport {
         font-size: 4em;
         text-align: center;
         margin-bottom 100px
+      }
+
+      .authors {
+          width: 280px;
+          margin: auto;
+          
+          ul {
+            list-style-type: none;
+          }
+      }
+      .toggle {
+        margin-left: 80px;
+        margin-bottom: 10px;
       }
 
       .toggled {
@@ -55,6 +69,10 @@ body {
         transition: .5s;
       }
 
+      .toggled-visible {
+        // height: 100px;
+        transition: .5s;
+      }
       .toggled-hidded {
         // opacity: 0;
         height: 0px;
