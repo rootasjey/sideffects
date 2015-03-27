@@ -32,9 +32,9 @@ body {
 #body .report {
   width: 600px;
   margin: auto;
-  font-size: 1.4em;
+  font-size: 1.5em;
 }
-#body .report h1#data-mining-rapport {
+#body .report h1#data-mining-presentation {
   font-size: 4em;
   text-align: center;
   margin-bottom: 100px;
@@ -42,11 +42,19 @@ body {
 #body .report h1,
 #body .report h2 {
   margin-top: 50px;
-  display: inline-block;
+  display: block;
 }
 #body .report h3 {
   margin-top: 20px;
-  display: inline-block;
+  display: block;
+}
+#body .report h1,
+#body .report h2,
+#body .report h3,
+#body .report h4,
+#body .report h5,
+#body .report h6 {
+  font-size: 2em;
 }
 #body .report .authors {
   width: 280px;
@@ -54,6 +62,24 @@ body {
 }
 #body .report .authors ul {
   list-style-type: none;
+}
+#body .report img {
+  max-width: 600px;
+  max-height: 600px;
+  cursor: pointer;
+  border-style: solid;
+  border-width: 15px;
+  border-color: #eee;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+#body .report .code-visible {
+  max-height: 600px;
+  transition: 0.5s;
+}
+#body .report .code-hidden {
+  max-height: 0px;
+  transition: 0.5s;
 }
 #body .container-summary {
   top: 440px;
@@ -63,18 +89,23 @@ body {
   max-width: 300px;
   max-height: 300px;
   transition: 0.5s;
-  -webkit-box-shadow: 0px 0px 0px 0px rgba(50,50,50,0.75);
-  -moz-box-shadow: 0px 0px 0px 0px rgba(50,50,50,0.75);
-  box-shadow: 0px 0px 0px 0px rgba(50,50,50,0.75);
 }
 #body .container-summary:hover {
+  transition: 0.5s;
+}
+#body .container-summary .button-summary {
+  opacity: 0.5;
+  transition: 0.5s;
+}
+#body .container-summary .button-summary:hover {
+  opacity: 1;
   transition: 0.5s;
 }
 #body .container-summary .summary-title {
   font-size: 1.8em;
 }
 #body .container-summary .side-bar {
-  top: 64px;
+  top: 66px;
   left: 0;
   position: absolute;
   width: 5px;
@@ -103,7 +134,7 @@ body {
   transition: 0.5s;
 }
 .toggled-visible {
-  max-height: 200px;
+  max-height: 500px;
   transition: max-height 0.5s;
 }
 .toggled-hidded {

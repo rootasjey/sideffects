@@ -431,3 +431,22 @@ Les régles obtenues :
     12. produit3=NO produit4=NO 3 ==> produit5=YES 3    conf:(1)
 
 4. Le patron devrait faire des promotions sur le produit 5, 4 et 3 par exemple.
+
+
+## NOTES PROJETS
+
+GROUPE 1 : 15 - Lemmatisation approximative
+
+GROUPE 2 : 14 - Bonne présentation
+
+GROUPE 3 : 13 - 
+
+GROUPE 4
+
+GROUPE 5
+
+GROUPE 6
+
+GROUPE 7
+
+GROUPE 8
