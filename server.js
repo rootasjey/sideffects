@@ -43,7 +43,7 @@ function compile(str, path) {
 // containing templates
 // and the static folder
 // ---------------------------------------------------
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 app.set('views', __dirname + '/views');	// folder templates
 app.set('view engine', 'jade');			// template engine
 app.use(morgan('dev'));					// logging output (will log incoming requests to the console)
@@ -388,6 +388,9 @@ app.get('/', function (req, res) {
 
 // Load the data.json file into the app
 .get('/counters/load', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 
 	// Path to the json file (to read)
 	var file = __dirname + '/public/modules/counters/data.json';
@@ -453,8 +456,13 @@ app.get('/', function (req, res) {
 
 // Handle inexistant routes
 .use(function (req, res, next) {
+	// res.header("Access-Control-Allow-Origin", "*");
+	// res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	// next();
+
     res.render('includes/404', {title: '404'});
 });
+
 
 // listen port => server start
 http.createServer(app).listen(app.get('port'), function(){
