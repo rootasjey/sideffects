@@ -349,7 +349,7 @@ app.get('/', function (req, res) {
 			summary = $(postSummaries[i]).text();
 			link = $(postLinks[i]).attr("href");
 
-			jsonArray.push({"title" : title, "summary" : summary, "link" : link})
+			jsonArray.push({"title" : title, "summary" : summary, "link" : link});
 		}
 
 		res.send(200, jsonArray);
@@ -368,6 +368,10 @@ app.get('/', function (req, res) {
 
 // Save the json array to a local file (data.json)
 .post('/counters/save', function (req, res) {
+	// Allow Cross Domain Policy
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 	// Path to the json file (to save)
 	var file = __dirname + '/public/modules/counters/data.json';
 
@@ -378,7 +382,7 @@ app.get('/', function (req, res) {
 
 	// Open and write in the file
 	jf.writeFile(file, obj, function (err) {
-		if (err == null) {
+		if (err === null) {
 			res.send(201);
 		} else {
 			res.send(409); // if there's an error
@@ -388,6 +392,7 @@ app.get('/', function (req, res) {
 
 // Load the data.json file into the app
 .get('/counters/load', function (req, res) {
+	// Allow Cross Domain Policy
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
@@ -397,13 +402,17 @@ app.get('/', function (req, res) {
 
 	// Open and read the file
 	jf.readFile(file, function (err, obj) {
-		if (err == null) {
+		if (err === null) {
 			res.status(200).json(obj);
 		} else res.send(409); // if there's an error
 	});
 })
 
 .get('/counters/delete', function (req, res) {
+	// Allow Cross Domain Policy
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 	// Path to the json file (to save)
 	var file = __dirname + '/public/modules/counters/data.json';
 
@@ -418,11 +427,15 @@ app.get('/', function (req, res) {
 })
 
 .get('/counters/add', function (req, res) {
+	// Allow Cross Domain Policy
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 	// Path to the json file (to save)
 	var file = __dirname + '/public/modules/counters/data.json';
 
 	var obj = jf.readFileSync(file);
-	obj[req.query.name] = {"fees": 0};
+	obj[req.query.name] = {"total": 0};
 
 
 	// Open and write in the file

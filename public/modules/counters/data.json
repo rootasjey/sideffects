@@ -1,14 +1,20 @@
 {
   "Coffe Script": {
-    "fees": 972
+    "name": "Coffe Script",
+    "points": 0,
+    "taxes": 750,
+    "total": 1780
   },
   "JQuery": {
-    "fees": 1620
+    "name": "JQuery",
+    "points": 0,
+    "taxes": 750,
+    "total": 0
   },
   "Mysqli": {
-    "fees": 0
-  },
-  "Mysqlii": {
-    "fees": 24234
+    "name": "Mysqli",
+    "points": 0,
+    "taxes": 750,
+    "total": 3000
   }
 }
