@@ -3,6 +3,9 @@ sideffects
 A personal website
 lives at [http://www.sideffects.fr](http://www.sideffects.fr)
 
+# blog
+* [JSONP](http://www.wikiwand.com/en/JSONP)
+
 #update
 * switched to [io.js](http://iojs.org)
 
