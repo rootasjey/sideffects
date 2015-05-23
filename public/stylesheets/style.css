@@ -72,9 +72,6 @@ th {
     display: block;
   }
 }
-#blog {
-  background: #000;
-}
 #blog #header {
   height: 500px;
   width: 100%;

@@ -4,26 +4,91 @@ html
     title= 'sideffects // blog'
     meta(charset='utf-8')
     link(rel='stylesheet', href='/css/bootstrap.css')
-    link(rel='stylesheet', href='/css/blog.css')
+    link(rel='stylesheet', href='/modules/blog/stylesheets/blog.css')
+    link(rel='stylesheet', href='/modules/blog/stylesheets/clean-blog.css')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', type='text/css')
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic', type='text/css')
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800', type='text/css')
     
   body#blog
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          a.brand(href='/') sideffects
-    .wrap
-      .container
-        .row
-          .span8
-            block content
-          .span4
-            .well.sidebar-nav
-              ul.nav.nav-list
-                li.nav-header categories
-                - each cat in getCategories()
-                  li
-                    a(href=categoryURL(cat)) #{cat}
-                li.nav-header tags
-                - each tag in getTags()
-                  li
-                    a(href=tagURL(tag)) #{tag}
+    //- <!-- Navigation -->
+    nav(class="navbar navbar-default navbar-custom navbar-fixed-top")
+      div(class="container-fluid")
+        //- <!-- Brand and toggle get grouped for better mobile display -->
+        div(class="navbar-header page-scroll")
+          button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
+            span(class="sr-only">Toggle navigation)
+            span(class="icon-bar")
+            span(class="icon-bar")
+            span(class="icon-bar")
+          a(class="navbar-brand" href="index.html">Start Bootstrap)
+
+        //- <!-- Collect the nav links, forms, and other content for toggling -->
+        div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+          ul(class="nav navbar-nav navbar-right")
+            li
+              a(href="index.html") Home
+            li
+              a(href="about.html") About
+            li
+              a(href="post.html") Sample Post
+            li
+              a(href="contact.html") Contact
+
+    
+    //- <!-- Page Header -->
+    //- <!-- Set your background image for this header on the line below. -->
+    header(class="intro-header" style="background-image: url('/images/bg.jpg')")
+      div(class="container")
+        div(class="row")
+          div(class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1")
+            div(class="site-heading")
+              h1 sideffects
+              hr(class="small")
+              span(class="subheading">A Clean Blog Theme by Start Bootstrap)
+              
+    //- <!-- Main Content -->
+    div(class="container")
+      div(class="row")
+        div(class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1")
+          block content
+          
+          
+          //- <!-- Pager -->
+          ul(class="pager")
+            li(class="next")
+              a(href="#") Older Posts &rarr;
+    
+    hr
+    //- <!-- Footer -->
+    footer
+      div(class="container")
+        div(class="row")
+          div(class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1")
+            ul(class="list-inline text-center")
+              li
+                a(href="#")
+                  span(class="fa-stack fa-lg")
+                    i(class="fa fa-circle fa-stack-2x")
+                    i(class="fa fa-twitter fa-stack-1x fa-inverse")
+              li
+                a(href="#")
+                  span(class="fa-stack fa-lg")
+                    i(class="fa fa-circle fa-stack-2x")
+                    i(class="fa fa-facebook fa-stack-1x fa-inverse")
+              li
+                a(href="#")
+                  span(class="fa-stack fa-lg")
+                    i(class="fa fa-circle fa-stack-2x")
+                    i(class="fa fa-github fa-stack-1x fa-inverse")
+              
+          p(class="copyright text-muted") Copyright &copy; sideffects 2015
+
+    //- <!-- jQuery -->
+    script(src="js/jquery.js")
+
+    //- <!-- Bootstrap Core JavaScript -->
+    script(src="js/bootstrap.min.js")
+
+    //- <!-- Custom Theme JavaScript -->
+    script(src="modules/blog/js/clean-blog.min.js")
