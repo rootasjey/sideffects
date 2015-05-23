@@ -93,6 +93,7 @@ var _user 	= 'dc76e9f0c0006e8f919e0c515c66dbba3982f785';
 var _pass 	= 'a141005e8413ee86855c36cafbb63eae454178b1';
 var _ADMIN 	= 0; // 0 if user, 1 if logged as administrator
 
+var homeURL = null;
 
 // Poet Blog engine configuration
 // ------------------------------
@@ -103,12 +104,13 @@ var poet = Poet(app, {
 });
 
 poet.addRoute('/post/:post', function (req, res, next) {
-  var post = poet.helpers.getPost(req.params.post);
-  if (post) {
-    res.render('blog/post', { post: post });
-  } else {
+	var post = poet.helpers.getPost(req.params.post);
+
+	if (post) {
+	res.render('blog/post', { post: post, homeURL: homeURL });
+	} else {
 	res.render('includes/404', {title: '404'});
-  }
+	}
 })
 .addRoute('/tag/:tag', function (req, res, next) {
   var posts = poet.helpers.postsWithTag(req.params.tag);
@@ -163,11 +165,12 @@ app.get('/', function (req, res) {
 
 .get('/blog', function (req, res) {
 	var posts = poet.helpers.getPosts(0,5);
+	homeURL = req.protocol + '://' + req.get('host') + req.originalUrl;
 
 	if (posts) {
-		res.render('blog/posts', {posts: posts});
+		res.render('blog/posts', { posts: posts, homeURL: homeURL });
 	} else {
-		res.render('includes/404', {title: '404'});
+		res.render('includes/404', { title: '404' });
 	}
 })
 
