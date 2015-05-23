@@ -1,0 +1,10 @@
+## Ignore some files and folders
+
+# Ignore thumbs images
+[Tt]humbs.db
+
+# Ignore log
+*.log
+
+# Ignore node_modules
+node_modules/

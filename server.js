@@ -19,7 +19,8 @@ var express 		= require('express'),	// web dev framework
 	sha1 			= require('js-sha1'),
 	jf				= require('jsonfile'),
 	util			= require('util'),
-	jsdom			= require('jsdom');
+	jsdom			= require('jsdom'),
+	Poet 			= require('poet');
 
 //var port = process.env.port || 8080;
 
@@ -35,7 +36,7 @@ function compile(str, path) {
 	return stylus(str)
 		.set('filename', path)
 		.use(nib());
-};
+}
 
 
 // ---------------------------------------------------
@@ -43,7 +44,7 @@ function compile(str, path) {
 // containing templates
 // and the static folder
 // ---------------------------------------------------
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3003);
 app.set('views', __dirname + '/views');	// folder templates
 app.set('view engine', 'jade');			// template engine
 app.use(morgan('dev'));					// logging output (will log incoming requests to the console)
@@ -52,11 +53,13 @@ app.use(bodyParser.json());				// to suport JSON-encoded bodies
 app.use(bodyParser.urlencoded({			// to suport URL-encoded bodies
 	extended: true
 }));
+
 app.use(methodOverride());
 app.use(stylus.middleware({
 	src: __dirname + '/public',
 	compile: compile
 }));
+
 app.use(express.static(__dirname + '/public'));
 // static folder containing css, img & others contents
 // ---------------------------------------------------
@@ -74,10 +77,10 @@ var uuid  = require('node-uuid');
 // -------------------------------------
 nconf.env()
      .file({ file: './database/config.json'});
-var tableName 		= nconf.get("TABLE_NAME")
-var partitionKey 	= nconf.get("PARTITION_KEY")
-var accountName 	= nconf.get("STORAGE_NAME")
-var accountKey 		= nconf.get("STORAGE_KEY");
+var tableName 		= nconf.get("TABLE_NAME"),
+	partitionKey 	= nconf.get("PARTITION_KEY"),
+	accountName 	= nconf.get("STORAGE_NAME"),
+	accountKey 		= nconf.get("STORAGE_KEY");
 
 // -----------------------------
 // An object (Table) for table access storage
@@ -90,6 +93,31 @@ var _user 	= 'dc76e9f0c0006e8f919e0c515c66dbba3982f785';
 var _pass 	= 'a141005e8413ee86855c36cafbb63eae454178b1';
 var _ADMIN 	= 0; // 0 if user, 1 if logged as administrator
 
+
+// Poet Blog engine configuration
+// ------------------------------
+var poet = Poet(app, {
+  posts: './_posts/',
+  postsPerPage: 5,
+  metaFormat: 'json'
+});
+
+poet.addRoute('/post/:post', function (req, res, next) {
+  var post = poet.helpers.getPost(req.params.post);
+  if (post) {
+    res.render('blog/post', { post: post });
+  } else {
+	res.render('includes/404', {title: '404'});
+  }
+})
+.addRoute('/tag/:tag', function (req, res, next) {
+  var posts = poet.helpers.postsWithTag(req.params.tag);
+  if (posts) {
+    res.render('blog/tag', { posts: posts });
+  } else {
+	res.render('includes/404', {title: '404'});
+  }
+}).init();
 
 
 // -------------------------------
@@ -133,6 +161,31 @@ app.get('/', function (req, res) {
 // 	});
 // })
 
+.get('/blog', function (req, res) {
+	var posts = poet.helpers.getPosts(0,5);
+
+	if (posts) {
+		res.render('blog/posts', {posts: posts});
+	} else {
+		res.render('includes/404', {title: '404'});
+	}
+})
+
+.get('/rss', function (req, res) {
+  // Only get the latest posts
+  var posts = poet.helpers.getPosts(0, 5);
+  res.setHeader('Content-Type', 'application/rss+xml');
+  res.render('blog/rss', { posts: posts });
+})
+
+.get('/sitemap.xml', function (req, res) {
+  // Only get the latest posts
+  var postCount = poet.helpers.getPostCount();
+  var posts = poet.helpers.getPosts(0, postCount);
+  res.setHeader('Content-Type', 'application/xml');
+  res.render('blog/sitemap', { posts: posts });
+})
+
 // Add a new post
 .post('/blog/add_post', function (req, res) {
 	if(_ADMIN) {
@@ -144,13 +197,13 @@ app.get('/', function (req, res) {
 
 		// create a query
 		var task = {
-			PartitionKey : post_table.partitionKey
-			, RowKey : uuid()
-			, Title : req.param('title')
-			, Body  : bodyformated
-			, Created_at : new Date()
-			, Category : 'blogpost'
-			, Tags : req.param('tags')
+			PartitionKey : post_table.partitionKey,
+			RowKey : uuid(),
+			Title : req.param('title'),
+			Body  : bodyformated,
+			Created_at : new Date(),
+			Category : 'blogpost',
+			Tags : req.param('tags')
 		};
 
 		// check if it's an update

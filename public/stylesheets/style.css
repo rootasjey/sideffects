@@ -73,7 +73,12 @@ th {
   }
 }
 #blog {
-  background: #ecf0f1;
+  background: #000;
+}
+#blog #header {
+  height: 500px;
+  width: 100%;
+  background: #00f;
 }
 #blog .blog-post {
   text-align: left;
