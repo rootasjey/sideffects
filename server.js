@@ -2,7 +2,7 @@
 // WWW.SIDEFFECT.FR
 // -----------------------------
 // by Jeremie Corpinot
-// jeremiecorpinot@outlook.com
+// http://github.com/rootasjey
 
 // -----------------------------
 // ----------requires-----------
