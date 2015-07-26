@@ -1,6 +1,11 @@
 //- <!-- Page Header -->
-//- <!-- Set your background image for this header on the line below. -->
-header(class="intro-header" style="background-image: url('/images/bg.png')")
+//- <!-- Set the background if defined in a post or set to the default one -->
+if post && post.background
+  - var background = "background-image: url(" + post.background + ")"
+else
+  - var background = "background-image: url(/images/bg.png)"
+  
+header(class="intro-header" style=background)
   div(class="container")
     div(class="row")
       div(class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1")

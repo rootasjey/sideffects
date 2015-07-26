@@ -2,7 +2,8 @@
     "title"    : "La relation entre RequireJS, AMD et CommonJS",
     "tags"     : [ "dev", "JavaScript", "nodejs", "io.js" ],
     "category" : "dev",
-    "date"     : "05-24-2015"
+    "date"     : "05-24-2015",
+    "background" : "/modules/blog/headers/requirejs.png"
 }}}
 
 En entendant parler de [requireJS](http://requirejs.org) à mon stage

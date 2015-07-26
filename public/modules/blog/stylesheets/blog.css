@@ -7,8 +7,20 @@
     border-color: rgba(18, 17, 17, 0.15) !important;
 }
 
-#top-header {
-  /*height: 700px;
-  width: 100%;
-  background: url("/images/bg.jpg");*/
+.tags {
+    margin: 40px 0 40px 0;
+
 }
+    .tags a {
+        text-decoration: none;
+    }
+
+
+.label-info {
+    margin-right: 10px;
+    transition: .4s;
+}
+    .label-info:hover {
+        background: #e74c3c;
+        transition: .4s;
+    }

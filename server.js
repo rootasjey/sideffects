@@ -68,30 +68,30 @@ app.use(express.static(__dirname + '/public'));
 // ---------------
 // DATABASE: AZURE
 // ---------------
-var azure = require('azure');
-var nconf = require('nconf');
-var uuid  = require('node-uuid');
+// var azure = require('azure');
+// var nconf = require('nconf');
+// var uuid  = require('node-uuid');
 
 // -------------------------------------
 // configuration for local developpement
 // -------------------------------------
-nconf.env()
-     .file({ file: './database/config.json'});
-var tableName 		= nconf.get("TABLE_NAME"),
-	partitionKey 	= nconf.get("PARTITION_KEY"),
-	accountName 	= nconf.get("STORAGE_NAME"),
-	accountKey 		= nconf.get("STORAGE_KEY");
+// nconf.env()
+//      .file({ file: './database/config.json'});
+// var tableName 		= nconf.get("TABLE_NAME"),
+// 	partitionKey 	= nconf.get("PARTITION_KEY"),
+// 	accountName 	= nconf.get("STORAGE_NAME"),
+// 	accountKey 		= nconf.get("STORAGE_KEY");
 
 // -----------------------------
 // An object (Table) for table access storage
 // -----------------------------
-var Table 	= require('./database/table');
+// var Table 	= require('./database/table');
 // var post_table = new Table(azure.createTableService(accountName, accountKey), tableName, partitionKey);
 // -----------------------------
 // intern security
-var _user 	= 'dc76e9f0c0006e8f919e0c515c66dbba3982f785';
-var _pass 	= 'a141005e8413ee86855c36cafbb63eae454178b1';
-var _ADMIN 	= 0; // 0 if user, 1 if logged as administrator
+// var _user 	= 'dc76e9f0c0006e8f919e0c515c66dbba3982f785';
+// var _pass 	= 'a141005e8413ee86855c36cafbb63eae454178b1';
+// var _ADMIN 	= 0; // 0 if user, 1 if logged as administrator
 
 var homeURL = null;
 
@@ -107,9 +107,9 @@ poet.addRoute('/post/:post', function (req, res, next) {
 	var post = poet.helpers.getPost(req.params.post);
 
 	if (post) {
-	res.render('blog/post', { post: post, homeURL: homeURL });
+		res.render('blog/post', { post: post, homeURL: homeURL });
 	} else {
-	res.render('includes/404', {title: '404'});
+		res.render('includes/404', {title: '404'});
 	}
 })
 .addRoute('/tag/:tag', function (req, res, next) {
