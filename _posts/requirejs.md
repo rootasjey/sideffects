@@ -18,11 +18,23 @@ de quelqu'un qui était tout aussi perdu que moi :D
 
 Et en fait, la réponse était sur le site officiel depuis le début dans la [documentation](http://requirejs.org/docs/whyamd.html) ;o
 
-En combinant les différentes réponses, voici ma compréhension du truc:
+En combinant les différentes réponses, voici ma compréhension de l'histoire.
+
+<br><br>
+**SOMMAIRE**
+
+  - [Un peu d'histoire](#un-peu-dhistoire)
+  - [CommonJS](#commonjs)
+  - [AMD](#amd)
+  - [RequireJS](#requirejs)
+      - [Exemple:](#exemple)
+  - [En conclusion](#en-conclusion)
+- [sources](#sources)
+
 
 
 <br><br>
-## Un peu d'histoire
+## Un peu d'histoire <a name="un-peu-dhistoire"></a>
 
 L'idée est partie de [James Burke](https://github.com/jrburke) qui voulait
 utiliser des modules de différentes sources mais ne pouvait pas à cause
@@ -43,7 +55,7 @@ Il fallait un truc asyncrhone. C'est là où RequireJS est née.
 
 
 <br><br>
-## CommonJS
+## CommonJS <a name="commonjs"></a>
 
 CommonJS est un moyen de définir des modules en JavaScript avec l'aide d'**exports**.
 Un exemple de code ressemblerait à cela:
@@ -70,7 +82,7 @@ CommonJS a plusieurs implémentations, notamment celle de [Node.js](http://nodej
 
 
 <br><br>
-## AMD
+## AMD <a name="amd"></a>
 
 La légende dit que du fait que CommonJS n'était pas
 spécifiquement designé pour l'environnement du navigateur,
@@ -80,12 +92,12 @@ avant même que ses dépendances ne soit chargées (magique hein? :D).
 
 
 <br><br>
-## RequireJS
+## RequireJS <a name="requirejs"></a>
 
 RequireJS est une implémentation d'AMD et peut être utilisé pour charger
 des modules de manière asyncrhone.
 
-#### Exemple:
+#### Exemple: <a name="exemple"></a>
 
 Dans un fichier html:
 
@@ -108,7 +120,7 @@ function   ($,        canvas,   sub) {
 ```
 
 <br><br>
-## En conclusion
+## En conclusion <a name="en-conclusion"></a>
 
 Donc CommonJS et AMD sont différentes implémentations de définir des modules JavaScript.
 Ces bibliothèques ont été crées par [James Burke](https://github.com/jrburke)
@@ -121,7 +133,7 @@ des dépendances de modules.
 De plus, **RequireJS** offre un *wrapper* de telle sorte que les modules CommonJS
 peuvent presque être directement importés et utilisés par **RequireJS**.
 
-### sources
+# sources <a name="sources"></a>
 
 * [stackoverflow](http://stackoverflow.com/questions/16521471/relation-between-commonjs-amd-and-requirejs)
 * [requireJS docs](http://requirejs.org/docs/whyamd.html)

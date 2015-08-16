@@ -6,14 +6,21 @@
     "background": "/modules/blog/headers/prismjs.jpg"
 }}}
 
-
-
 Prism est un colorateur syntaxique JavaScript léger, extensible, écrit par [Lea Verou](http://lea.verou.me).
 Il facile d'utilisation et est utile quand on affiche des bout de code sur son site ou blog, un peu comme ici :D. Donc non, Prism n'a rien à voir avec le programme de renseignement de la NSA.
 
-<br>
-<br>
-# PRESENTATION
+
+<br><br>
+**SOMMAIRE**
+
+- [PRESENTATION](#presentation)
+- [UTILISATION](#utilisation)
+- [DEFINIR DE NOUVEAUX LANGAGES](#definir-de-nouveaux-langages)
+- [UPDATE](#update)
+
+
+<br><br>
+# PRESENTATION <a name="presentation"></a>
 
 Plutôt bien conçu, ce petit framework est utilisé par:
 * [Mozilla Developer Network](https://developer.mozilla.org/fr/)
@@ -39,7 +46,7 @@ Il possède quelques limitations, mais très spécifiques donc pas très génant
 
 <br>
 <br>
-# UTILISATION
+# UTILISATION <a name="utilisation"></a>
 
 Passons à la partie intéressante qui est l'utilisation de ce petit framework.
 
@@ -88,7 +95,7 @@ Voici les plus intéressant:
 
 <br>
 <br>
-# DEFINIR DE NOUVEAUX LANGAGES
+# DEFINIR DE NOUVEAUX LANGAGES <a name="definir-de-nouveaux-langages"></a>
 
 Développant actuellement un [client _GitHub_ sous Windows Phone 8.1](https://github.com/rootasjey/octopull), j'ai dû intégrer cette bibliothèque qui n'a pas été de tout repos.
 
@@ -195,3 +202,16 @@ if (Prism.languages.markup) {
 ```
 
 Après quelques tests, cela marche bien, mais cela fait de la dupliquation de code. Cependant, je n'ai pas encore trouvé de moyen plus rapide d'ajouter des extentions à un langage.
+
+# UPDATE <a name="update"></a>
+
+Finalement, il y a bien un moyen plus simple de définir de nouveaux langages à partir de langages existant.
+
+Voici un exemple avec le langage JavaScript (extension .js) et Markdown (extension .md) :
+
+```javascript
+Prism.languages.js = Prism.util.clone(Prism.languages.javascript);
+;
+Prism.languages.md = Prism.util.clone(Prism.languages.markdown);
+;
+```

@@ -119,6 +119,9 @@ poet.addRoute('/post/:post', function (req, res, next) {
   } else {
 	res.render('includes/404', {title: '404'});
   }
+})
+.watch(function () {
+	// watcher reloaded
 }).init();
 
 

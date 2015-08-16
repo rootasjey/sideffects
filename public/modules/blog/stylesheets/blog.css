@@ -24,3 +24,43 @@
         background: #e74c3c;
         transition: .4s;
     }
+
+img[type='screenshot'] {
+    height: 100%;
+    width: 100%;
+
+    border: 10px solid #eee;
+    border-radius: 10px;
+
+    left: 0;
+    cursor: pointer;
+    position: relative;
+
+    transition: .4s;
+}
+
+    img[type='screenshot']:hover {
+        border: 14px solid #eee;
+        transition: .4s;
+    }
+
+q {
+    display: block;
+    padding: 10px;
+    background: #eee;
+    font-style: italic;
+}
+
+.backtotop {
+    height  : 30px;
+    width   : 30px;
+    background: #eee;
+
+    right   : 40px;
+    bottom  : 40px;
+    position: absolute;
+}
+    .backtotop img {
+        height: 30px;
+        width: 30px;
+    }
