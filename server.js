@@ -64,30 +64,6 @@ app.use(express.static(__dirname + '/public'));
 // static folder containing css, img & others contents
 // ---------------------------------------------------
 
-
-// ---------------
-// DATABASE: AZURE
-// ---------------
-// var azure = require('azure');
-// var nconf = require('nconf');
-// var uuid  = require('node-uuid');
-
-// -------------------------------------
-// configuration for local developpement
-// -------------------------------------
-// nconf.env()
-//      .file({ file: './database/config.json'});
-// var tableName 		= nconf.get("TABLE_NAME"),
-// 	partitionKey 	= nconf.get("PARTITION_KEY"),
-// 	accountName 	= nconf.get("STORAGE_NAME"),
-// 	accountKey 		= nconf.get("STORAGE_KEY");
-
-// -----------------------------
-// An object (Table) for table access storage
-// -----------------------------
-// var Table 	= require('./database/table');
-// var post_table = new Table(azure.createTableService(accountName, accountKey), tableName, partitionKey);
-// -----------------------------
 // intern security
 // var _user 	= 'dc76e9f0c0006e8f919e0c515c66dbba3982f785';
 // var _pass 	= 'a141005e8413ee86855c36cafbb63eae454178b1';

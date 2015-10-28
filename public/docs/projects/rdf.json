@@ -2,12 +2,14 @@
   "title": "RDF",
   "description": "Ce projet réalisé en Java est une application capable de faire de la recherche sémantique.",
   "platform": "Java, Apache, RDF",
+  "langcolor": "#CA6924",
   "authors": "Jérémie Corpinot, Somia Katir, Souleyman Belem, Youness Chafia, Mohammed Hameg, Ange-Marie N'Dri, Sokhna",
   "contributors": "Stephane Lopez",
   "year": "2014",
+  "icon": "icons/database.png",
   "preview" : "docs/projects/screenshots/rdf_preview.jpg",
   "miniature" : "docs/projects/screenshots/rdf_img.png",
   "link": "https://github.com/rootasjey/RDF",
-  "progress": "30%"
+  "progress": "100%"
 
 }

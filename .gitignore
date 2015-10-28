@@ -9,6 +9,3 @@
 
 # Ignore node_modules
 node_modules/browser-sync
-node_modules/gulp
-node_modules/gulp-nodemon
-node_modules/livereload
