@@ -1,4 +1,4 @@
-{{{ "title" : "WinJS: Tips 1", "tags" : [ "dev", "JavaScript", "winjs", "code", "html", "css" ], "category" : "dev", "date" : "11-29-2015", "background": "/modules/blog/headers/winjs_d.png" }}}
+{{{ "title" : "WinJS: Tips 1", "tags" : [ "dev", "JavaScript", "winjs", "back" ], "category" : "dev", "date" : "11-29-2015", "background": "/modules/blog/headers/winjs_d.png" }}}
 
 Hello!
 
@@ -22,19 +22,23 @@ Chaque poste présentera quelques astuces que j'ai découvert au cours de la sem
 
 ##SOMMAIRE
 
-* Override Back Button
+* [Override Back Button](#override-back-button)
 
-Override Back Button
+#Override Back Button<a name="override-back-button"></a>
 
 Par défaut, le boutton retour (sur les mobiles ou le bouton virtuel sous Windows 10 Desktop) navigue vers la page précédente, mais il peut arriver qu'on veut modifier ce comportement. Voici un exemple de cas:
 
 On a une page avec une liste d'éléments. En cliquant sur un élément on a une vue détaillée de celui-ci.
+Un utilisateur appuyant sur le bouton retour s'attendrait à fermer la vue détaillée pour retourner sur la liste d'éléments.
 
-Un utilisateur appuyant sur le bouton retour s'attendrait sûrement à fermer la vue détaillée pour retourner sur la liste d'éléments.
+Pour permettre ce comportement, il faut surcharger la méthode de retour de navigation.
+On attache dabord l'évènement à WinJS.
 
 ```JavaScript
 WinJS.Navigation.addEventListener("beforenavigate", this.beforenavigate);
 ```
+
+Puis on définit l'écouteur en annulant la navigation avec la fonction ```event.preventDefault();```
 
 ```JavaScript
 // Execute additional code before navigation
@@ -48,5 +52,8 @@ beforenavigate: WinJS.Class.define(function (eventObject) {
 
 >_[docs sur les events de navigation](https://msdn.microsoft.com/en-us/library/windows/apps/br229838.aspx)_
 
+> [Gist exemple complet](https://gist.github.com/rootasjey/87e6cca1c0e37e1eb868)
 
 Alors oui, on pourrait créer une autre page pour la vue détaillée, mais paradoxalement, cela pourrait être plus long à coder et ajouterait des fichiers supplémentaires (html, css, js).
+
+
