@@ -23,6 +23,30 @@ Chaque poste présentera quelques astuces que j'ai découvert au cours de la sem
 ##SOMMAIRE
 
 * Override Back Button
-*
 
 Override Back Button
+
+Par défaut, le boutton retour (sur les mobiles ou le bouton virtuel sous Windows 10 Desktop) navigue vers la page précédente, mais il peut arriver qu'on veut modifier ce comportement. Voici un exemple de cas:
+
+On a une page avec une liste d'éléments. En cliquant sur un élément on a une vue détaillée de celui-ci.
+
+Un utilisateur appuyant sur le bouton retour s'attendrait sûrement à fermer la vue détaillée pour retourner sur la liste d'éléments.
+
+```JavaScript
+WinJS.Navigation.addEventListener("beforenavigate", this.beforenavigate);
+```
+
+```JavaScript
+// Execute additional code before navigation
+beforenavigate: WinJS.Class.define(function (eventObject) {
+  // This function gives you a chance to veto navigation. This demonstrates that capability
+  if (true /* should cancel navigation */) {
+    event.preventDefault();
+  }
+}),
+```
+
+>_[docs sur les events de navigation](https://msdn.microsoft.com/en-us/library/windows/apps/br229838.aspx)_
+
+
+Alors oui, on pourrait créer une autre page pour la vue détaillée, mais paradoxalement, cela pourrait être plus long à coder et ajouterait des fichiers supplémentaires (html, css, js).
