@@ -23,6 +23,7 @@ Chaque poste présentera quelques astuces que j'ai découvert au cours de la sem
 ##SOMMAIRE
 
 * [Override Back Button](#override-back-button)
+* [App Title Back Button](#app-title-back-button)
 
 #Override Back Button<a name="override-back-button"></a>
 
@@ -57,3 +58,21 @@ beforenavigate: WinJS.Class.define(function (eventObject) {
 Alors oui, on pourrait créer une autre page pour la vue détaillée, mais paradoxalement, cela pourrait être plus long à coder et ajouterait des fichiers supplémentaires (html, css, js).
 
 
+#App Title Back Button <a name="app-title-back-button"></a>
+
+Ici, on souhaite afficher le bouton de retour dans la barre de titre de l'application 
+et j'ai donc trouver ce bout de code après quelques recherche.
+
+![Back Button](http://i.stack.imgur.com/UKScx.png "Back Button")
+
+```JavaScript
+var value = Windows.UI.Core.AppViewBackButtonVisibility.visible;
+Windows.UI.Core.SystemNavigationManager.appViewBackButtonVisibility = value;
+```
+
+Malheureusement, rien ne s'affiche avec les lignes précédentes. Si vous avez une idée, je suis preneur :)
+
+Je me suis aidée de ces liens pour les tests:
+
+* http://stackoverflow.com/questions/31700491/displaying-a-backbutton-on-app-title-bar-in-unviersal-windows-10-app-js
+* https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.core.systemnavigationmanager.aspx
