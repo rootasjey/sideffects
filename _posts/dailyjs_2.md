@@ -5,3 +5,9 @@ Hello les gens!
 SOMMAIRE
 
 * classList
+* forEach & array-like object
+* 
+
+#Array-like object
+
+[StackOverflow](http://stackoverflow.com/questions/9329446/for-each-over-an-array-in-javascript)
