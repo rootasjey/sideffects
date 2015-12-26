@@ -24,6 +24,7 @@ Chaque poste présentera quelques astuces que j'ai découvert au cours de la sem
 
 * [Override Back Button](#override-back-button)
 * [App Title Back Button](#app-title-back-button)
+* [Définir un attribut custom sur un élément HTML](#attribute)
 
 #Override Back Button<a name="override-back-button"></a>
 
@@ -76,3 +77,16 @@ Je me suis aidée de ces liens pour les tests:
 
 * http://stackoverflow.com/questions/31700491/displaying-a-backbutton-on-app-title-bar-in-unviersal-windows-10-app-js
 * https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.core.systemnavigationmanager.aspx
+
+# DEFINIR UN ATTRIBUT CUSTOM SUR LES ELEMENTS HTML
+
+WinJS permet de définir un attribut personnalisé grâce à la méthode **WinJS.Binding.setAttribute** :
+
+```html
+<!-- Template pour une ListView ou un Repeater -->
+<div class="listLayoutTopHeaderTemplate" data-win-control="WinJS.Binding.Template">
+    <div class="listLayoutTopHeaderTemplateRoot">
+        <div data-win-bind="innerHTML: name; this['data-name']: name WinJS.Binding.setAttribute"></div>
+    </div>
+</div>
+```
