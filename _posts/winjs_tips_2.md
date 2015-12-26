@@ -10,7 +10,6 @@ Au cours de mes derniers développement, je me suis familiarisé avec le control
 * [ListView versus Repeater](#listVSRep)
 * [Utiliser la ListView](#listview)
 * [Gérer les évènements à l'intérieur de la ListView](#events)
-* data-win-bind="this['data-link']: url WinJS.Binding.setAttribute
 
 
 >Cette article suppose que vous possédez déjà un projet d'app Windows 10 en JavaScript avec la bibliothèque WinJS
@@ -79,7 +78,7 @@ La virtualisation est une technique qui permet de faire le rendu que d'une parti
 * [Exemple d'utilisation du Repeater](http://winjs.azurewebsites.net/#repeater)
 * [Exmeple d'utilisation de la ListView](http://winjs.azurewebsites.net/#listviewinteractions)
 
-# <a name="listview"></a> UTILISER LA LISTVIEW
+# <a name="listview"></a>UTILISER LA LISTVIEW
 
 Pour utiliser la ListView, on commence par déclarer le contrôle dans le HTML:
 
@@ -92,7 +91,6 @@ Pour utiliser la ListView, on commence par déclarer le contrôle dans le HTML:
         <div class="author-name" data-win-bind="textContent: name"></div>
     </div>
 </div>
-    
 <!-- Déclaration du contrôle dans le HTML -->
 <!-- data-win-control: nom du contrôle utilisé -->
 <!-- data-win-option: paramètres du contrôle -->
@@ -114,7 +112,7 @@ Pour utiliser la ListView, on commence par déclarer le contrôle dans le HTML:
         selectionMode: 'single',
         tapBehavior: 'directSelect',
         layout: { type: WinJS.UI.GridLayout }
-}">
+    }">
 </div>
 ```
 
@@ -202,9 +200,14 @@ function authorsTemplate(itemPromise) {
         square.appendChild(img);
         square.appendChild(name);
 
-        // On peut définir des évènements sur le template des items
+        // On définit un évènement de click sur l'image du template
         img.addEventListener("click", function (event) {
-            console.log("IMGG");
+            console.log("IMG");
+        });
+        
+        // On définit un évènement de click sur le texte du template
+        name.addEventListener("click", function (event) {
+            console.log("TXT");
         });
 
         return square;
@@ -213,4 +216,45 @@ function authorsTemplate(itemPromise) {
 // Cette fonction de WinJS permet de spécifier que la fonction 'authorsTemplate' 
 // est compatible avec le traitement déclaratif, car cette fonction sera utilisée comme paramètre pour la ListView.
 WinJS.Utilities.markSupportedForProcessing(authorsTemplate);
+```
+
+Enfin, il suffit de renseigner le template dans la ListView (le changement est au niveau de l'attribut itemTemplate):
+
+```html
+<div class="listView win-selectionstylefilled"
+     id="listauthors"
+     data-win-control="WinJS.UI.ListView"
+     data-win-options="{
+        itemDataSource: Authors.ListView.data.dataSource,
+        itemTemplate: authorsTemplate,
+        groupDataSource: Authors.ListView.data.groups.dataSource,
+        groupHeaderTemplate: select('.listLayoutTopHeaderTemplate'),
+        selectionMode: 'single',
+        tapBehavior: 'directSelect',
+        layout: { type: WinJS.UI.GridLayout }
+}">
+</div>
+```
+
+Maintenant cliquer sur l'image ou le nom d'un auteur lancera deux fonctions différentes.
+Ce scénario est surtout nécessaire quand on possède des templates complexes, sinon utiliser la fonction 'selectionChanged' sera largement suffisant.
+
+Scénario avec l'event _selectionChanged_ de la ListView: 
+
+>authors.js
+```JavaScript
+var list = document.querySelector("#listauthors");
+list.addEventListener("selectionchanged", clickAuthor);
+// Click event (on author item)
+function clickAuthor (event) {
+    var author = null; // sera remplie avec les infos de l'auteur
+    // Obtient la sélection de la listview
+    var selected =
+        authors.elements.listViewAuthors.selection.getItems().done(
+        function (results) {
+            author = results[0].data; // récupère le premier élément sélectionné
+    });
+    // Traitement
+    // [...]
+}
 ```
