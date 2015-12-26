@@ -85,6 +85,14 @@ Pour utiliser la ListView, on commence par déclarer le contrôle dans le HTML:
 
 >authors.html
 ```html
+<!-- Template des éléments de la ListView -->
+<div class="author-template" data-win-control="WinJS.Binding.Template" style="display: none">
+    <div class="author-square">
+        <img class="author-img"/>
+        <div class="author-name" data-win-bind="textContent: name"></div>
+    </div>
+</div>
+    
 <!-- Déclaration du contrôle dans le HTML -->
 <!-- data-win-control: nom du contrôle utilisé -->
 <!-- data-win-option: paramètres du contrôle -->
@@ -100,7 +108,7 @@ Pour utiliser la ListView, on commence par déclarer le contrôle dans le HTML:
      data-win-control="WinJS.UI.ListView"
      data-win-options="{
         itemDataSource: Authors.ListView.data.dataSource,
-        itemTemplate: myfunction,
+        itemTemplate: select('.author-template'),
         groupDataSource: Authors.ListView.data.groups.dataSource,
         groupHeaderTemplate: select('.listLayoutTopHeaderTemplate'),
         selectionMode: 'single',
@@ -141,4 +149,68 @@ Et on a une belle liste d'élément rangés par ordre alphabétique :)
 
 # <a name="events"></a> GERER LES EVENEMTNS À L'INTERIEUR DE LA LISTVIEW
 
-Un dernier point qui me chagrinait par rapport à la ListView était la difficulté 
+Un dernier point qui me chagrinait par rapport à la ListView était la difficulté de lier des évènements sur les éléments d'un template (modèle), car la liaison ne marche pas en l'ajoutant directement dans le HTML:
+
+>authors.html
+```html
+<div class="author-template" data-win-control="WinJS.Binding.Template" style="display: none">
+    <div class="author-square">
+        <img class="author-img" data-win-bind="onclick: clickImg"/>
+        <div class="author-name" data-win-bind="textContent: name"></div>
+    </div>
+</div>
+```
+
+>authors.js
+```JavaScript
+function clickImg(event) {
+    console.log("image clicked!");
+}
+```
+
+Pour lier un évènement sur un élément d'un template, on doit redéfinir le template:
+
+```JavaScript
+/*
+ * Génère un template pour les éléments de la ListView des auteurs
+ * @param {object} Item promise provenant de la ListView, il est passé automatiquement
+ * @return {HTMLElement}
+ */
+function authorsTemplate(itemPromise) {
+    // Le paramètre itemPromise est passé automatiquement par la ListView grâce au binding
+    return itemPromise.then(function (currentItem) {
+        // L'objet currentItem est le modèle de données courant
+        // et ainsi pour chaque auteur, cette fonction sera appelée
+        // --------------------------------------------------------
+        // C'est ici qu'on va construire notre HTML
+        // pour le template des éléments de la ListView
+        var square, img, name;
+        
+        // On crée des éléments en leur ajoutant des classes
+        square = document.createElement("div");
+        square.classList.add("author-square");
+
+        img = document.createElement("img");
+        img.classList.add("author-img");
+
+        name = document.createElement("div");
+        name.classList.add("author-name");
+        
+        // On accède aux attributs du modèle de données grâce à l'attribut 'data'
+        name.textContent = currentItem.data.name;
+
+        square.appendChild(img);
+        square.appendChild(name);
+
+        // On peut définir des évènements sur le template des items
+        img.addEventListener("click", function (event) {
+            console.log("IMGG");
+        });
+
+        return square;
+    });
+}
+// Cette fonction de WinJS permet de spécifier que la fonction 'authorsTemplate' 
+// est compatible avec le traitement déclaratif, car cette fonction sera utilisée comme paramètre pour la ListView.
+WinJS.Utilities.markSupportedForProcessing(authorsTemplate);
+```
