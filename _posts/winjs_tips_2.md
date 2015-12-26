@@ -7,17 +7,17 @@ Au cours de mes derniers développement, je me suis familiarisé avec le control
 
 ###SOMMAIRE
 
-* [ListView](https://msdn.microsoft.com/en-us/library/windows/apps/br211837.aspx) versus [Repeater] (https://msdn.microsoft.com/en-us/library/windows/apps/dn301916.aspx)
-* Utiliser la ListView
-* Personnaliser la ListView
+* [ListView versus Repeater](#listVSRep)
+* [Utiliser la ListView](#listview)
+* [Gérer les évènements à l'intérieur de la ListView](#events)
 * data-win-bind="this['data-link']: url WinJS.Binding.setAttribute
 
 
 >Cette article suppose que vous possédez déjà un projet d'app Windows 10 en JavaScript avec la bibliothèque WinJS
 
-#LISTVIEW VERSUS REPEATER
+# <a name="listVSRep"></a>LISTVIEW VERSUS REPEATER
 
-Lors du développement de mes applications Windows 10, j'avais tendance à choisir le contrôle du Repeater plutôt que la ListView car aux premiers abords mettre en pratique le Repeater est plus simple:
+Lors du développement de mes applications Windows 10, j'avais tendance à choisir le contrôle du Repeater plutôt que la ListView car aux premiers abords mettre en pratique le [Repeater] (https://msdn.microsoft.com/en-us/library/windows/apps/dn301916.aspx) est plus simple:
 
 >home.html
 ```html
@@ -78,3 +78,34 @@ La virtualisation est une technique qui permet de faire le rendu que d'une parti
 
 * [Exemple d'utilisation du Repeater](http://winjs.azurewebsites.net/#repeater)
 * [Exmeple d'utilisation de la ListView](http://winjs.azurewebsites.net/#listviewinteractions)
+
+# <a name="listview"></a> UTILISER LA LISTVIEW
+
+Pour utiliser la ListView, on commence par déclarer le contrôle dans le HTML:
+
+>page.html
+```html
+<!-- Déclaration du contrôle dans le HTML -->
+<div class="listView win-selectionstylefilled"
+     id="listauthors"
+     data-win-control="WinJS.UI.ListView"
+     data-win-options="{
+        itemDataSource: Authors.ListView.data.dataSource,
+        itemTemplate: myfunction,
+        groupDataSource: Authors.ListView.data.groups.dataSource,
+        groupHeaderTemplate: select('.listLayoutTopHeaderTemplate'),
+        selectionMode: 'single',
+        tapBehavior: 'directSelect',
+        layout: { type: WinJS.UI.GridLayout }
+}">
+</div>
+
+<!-- data-win-control: nom du contrôle utilisé -->
+<!-- -->
+<!-- -->
+<!-- itemTemplate: modèle de chaque élément de la ListView -->
+<!-- -->
+<!-- -->
+```
+
+# <a name="events"></a> GERER LES EVENEMTNS À L'INTERIEUR DE LA LISTVIEW
