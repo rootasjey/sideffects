@@ -83,9 +83,18 @@ La virtualisation est une technique qui permet de faire le rendu que d'une parti
 
 Pour utiliser la ListView, on commence par déclarer le contrôle dans le HTML:
 
->page.html
+>authors.html
 ```html
 <!-- Déclaration du contrôle dans le HTML -->
+<!-- data-win-control: nom du contrôle utilisé -->
+<!-- data-win-option: paramètres du contrôle -->
+<!-- itemDataSource: source de données -->
+<!-- itemTemplate: modèle de chaque élément de la ListView -->
+<!-- groupDataSource: à indiquer si les données sont groupées par paquet -->
+<!-- groupHeaderTemplate: modèle des headers des groupes de données -->
+<!-- selectionMode: si les éléments sont sélectionnable de manière individuelle ou multiple -->
+<!-- tapBehavior: réaction quand un item est cliqué -->
+<!-- layout: disposition du rendu des éléments -->
 <div class="listView win-selectionstylefilled"
      id="listauthors"
      data-win-control="WinJS.UI.ListView"
@@ -99,13 +108,37 @@ Pour utiliser la ListView, on commence par déclarer le contrôle dans le HTML:
         layout: { type: WinJS.UI.GridLayout }
 }">
 </div>
-
-<!-- data-win-control: nom du contrôle utilisé -->
-<!-- -->
-<!-- -->
-<!-- itemTemplate: modèle de chaque élément de la ListView -->
-<!-- -->
-<!-- -->
 ```
 
+>data.js
+```JavaScript
+WinJS.Namespace.define("data", {
+    // Déclaration de la liste et de ses données
+    authors: new WinJS.Binding.List([
+      {id: "1", name: "Balzac", url: "url 1"},
+      {id: "2", name: "Appolinaire", url: "url 2"},
+      {id: "3", name: "Stendhal", url: "url 3"},
+      {id: "4", name: "Flaubert", url: "url 4"},
+    ]),
+});
+// Création des groupes de données en se basant sur les noms des auteurs
+var grouped = data.authors.createGrouped(function (item) {
+    return item.name.toUpperCase().charAt(0);
+}, function (item) {
+    return {
+        name: item.name.toUpperCase().charAt(0)
+    };
+}, function (left, right) { // fonction de rangement par ordre croissant A-Z
+    return left.charCodeAt(0) - right.charCodeAt(0);
+});
+// Déclaration de la ListView groupée
+WinJS.Namespace.define("Authors.ListView", {
+    data: grouped,
+});
+```
+
+Et on a une belle liste d'élément rangés par ordre alphabétique :)
+
 # <a name="events"></a> GERER LES EVENEMTNS À L'INTERIEUR DE LA LISTVIEW
+
+Un dernier point qui me chagrinait par rapport à la ListView était la difficulté 
