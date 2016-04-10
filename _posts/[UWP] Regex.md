@@ -106,7 +106,7 @@ Okay, now we've seen the whole method I'll give some explanations :)
 _I assume you know how to send HTTP requests with an HTTPClient and how to basically use HtmlAgilityPack.
 If not, you can [read this other post I wrote about HTTP requests](www.sideffects.fr/blog/)_
 
-### REGEX DEFINITIONS <a name="def"></a>
+### REGEX DEFINITIONS
 We begin with regex definitions:
 
 ```c#
@@ -142,7 +142,7 @@ The regex look for a link ending with `.php`
 
 ```c#
 Regex span_regex = new Regex("<span class=\"title\">" + "((.|\n)*?)");
-``
+```
 This on look for a node starting as a `span` having the class `title` and can ends by anything.
     
 
