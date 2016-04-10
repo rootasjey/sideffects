@@ -11,8 +11,8 @@
 <br>
 TABLE OF CONTENT
 
-* [INTRODUCTION](#introduction-)
-* [REQUIREMENTS](#requirements-)
+* [INTRODUCTION](#introduction)
+* [REQUIREMENTS](#requirements)
 * [CODING](#coding)
 * [DISSECTION](#diss)
 * [REGEX DEFINITIONS](#def)
