@@ -1,27 +1,49 @@
-{{{ "title" : "[UWP] Using RegularExpressions", "tags" : [ "dev", "C#", "regex", "expressions", "reguliere", "regular"], 
-"category" : "dev", "date" : "09-04-2016", "background": "/modules/blog/headers/prismjs.jpg" }}}
+{{{ 
+    "title"     : "[UWP] Using RegularExpressions", 
+    "tags"      : [ "dev", "C#", "regex", "expressions", "reguliere", "regular"], 
+    "category"  : "dev", 
+    "date"      : "09-04-2016", 
+    "background": "/modules/blog/headers/prismjs.jpg" 
+}}}
 
 > Dev Level: middle
 
-#INTRODUCTION
+<br>
+TABLE OF CONTENT
+
+* [INTRODUCTION](#intro)
+* [REQUIREMENTS](#req)
+* [CODING](#coding)
+* [DISSECTION](#diss)
+* [REGEX DEFINITIONS](#def)
+* [REGEX MATCHES](#matches)
+* [END](#end)
+* [REFERENCE](#ref)
+
+#INTRODUCTION <a name="intro"></a>
 
 Hello,
 
 I recently needed to use regular expression to parse a web page in my UWP (Universal Windows Platform) app,
-(this happens when the service I want to use doesn't have APIs) and as the code can be tricky or difficult to understand, 
-I decided to write about it for briefly explain how this works and as a memo for me :)
+(this happens when the service I want to use doesn't have any APIs) and as the code can be tricky or difficult to understand, 
+I decided to write about it to briefly explain how this works and as a memo for me :)
 
 
-What is parsing?
+>**What is parsing?** <br>
+>Parsing is the process of analysing a string of symbols and extract parts of it.<br>
+>See the [wiki page for more information](http://www.wikiwand.com/en/Parsing)
 
-What is regular expression (regex)?
 
-#REQUIREMENTS
+>**What is regular expression (regex)?**<br>
+>A regular expression is a sequence of characters that defines a search pattern.<br>
+>See the [wiki page for more information](http://www.wikiwand.com/en/Regular_expression)
+
+# REQUIREMENTS <a name="req"></a>
 * An UWP Project
 * An URL to parse
 * Visual Studio 2015 (any version)
 
-# CODING
+# CODING <a name="coding"></a>
 
 The following namespaces are requiered but Visual Studio (VS) should import them automatically
 ```c#
@@ -60,10 +82,10 @@ public async Task<int> Fetch(string url) {
     // Loop
     string[] quotesArray = doc.DocumentNode.Descendants("article").Select(y => y.InnerHtml).ToArray();
     foreach (string element in quotes) {
-      MatchCollection sample_match  = content_regex.Matches(element);
-      MatchCollection quantum_match = author_regex.Matches(element);
-      MatchCollection php_match     = authorLink_regex.Matches(element);
-      MatchCollection span_match    = quoteLink_regex.Matches(element);
+      MatchCollection sample_match  = sample_regex.Matches(element);
+      MatchCollection quantum_match = quantum_regex.Matches(element);
+      MatchCollection php_match     = php_regex.Matches(element);
+      MatchCollection span_match    = span_regex.Matches(element);
       
       var sample  = content_match.Count > 0 ? content_match[0].ToString() : null;
       var quantum = quantum_match.Count > 0 ? quantum_match[0].ToString() : null;
@@ -77,14 +99,14 @@ public async Task<int> Fetch(string url) {
 }
 ```
 
-# DISSECTION
+## DISSECTION <a name="diss"></a>
 
 Okay, now we've seen the whole method I'll give some explanations :)
 
 _I assume you know how to send HTTP requests with an HTTPClient and how to basically use HtmlAgilityPack.
 If not, you can [read this other post I wrote about HTTP requests](www.sideffects.fr/blog/)_
 
-## REGEX DEFINITIONS
+### REGEX DEFINITIONS <a name="def"></a>
 We begin with regex definitions:
 
 ```c#
@@ -101,9 +123,30 @@ It is a sub-pattern telling the regex that anything can be found between the wor
 Thus, if the regex encounter the following phrase:
 
 >'Beggining is a little bit like ending'
+
 It will match it and save it as a result.
 
-## REGEX MATCHES
+
+These others examples are similar and if you've understand the principles you can skip this part.
+
+```c#
+Regex quantum_regex = new Regex("<div class=\"quantum-break-is-out\">" + "((.|\n)*?)" + "</div>");
+```
+This regex look for a HTML node `div` who has the class `quantum-break-is-out`.
+
+```c#
+Regex php_regex     = new Regex("((.|\n)*?)" + ".php");
+```
+
+The regex look for a link ending with `.php`
+
+```c#
+Regex span_regex    = new Regex("<span class=\"title\">" + "((.|\n)*?)");
+``
+This on look for a node starting as a `span` having the class `title` and can ends by anything.
+    
+
+### REGEX MATCHES <a name="matches"></a>
 
 ```c#
 string[] quotesArray = doc.DocumentNode.Descendants("article").Select(y => y.InnerHtml).ToArray();
@@ -111,5 +154,29 @@ string[] quotesArray = doc.DocumentNode.Descendants("article").Select(y => y.Inn
 I won't explain this line as this is not the subject and we dealt with it in the [HTTP requests post](www.sideffects.fr/blog/).
 
 ```c#
-
+MatchCollection sample_match  = sample_regex.Matches(element);
 ```
+For each element in the array we apply the `Match()` method to find result. This result is saved in a `MatchCollection` sample_match.
+
+```c#
+var sample  = content_match.Count > 0 ? content_match[0].ToString() : null;
+```
+We check is the results array contains at least one element by checking the `Count` attribute.
+If it does, we convert the value to string with the `ToString()` method, if not we set the `null` value to the `sample`variable.
+
+# END <a name="end"></a>
+
+I basically showed you how to build and use regex, now you can try on your own 
+or look for more information in the following links in the reference section.
+
+# REFERENCES <a name="ref"></a>
+
+Here are a bunch of useful links you want to know further that we learned in this article
+
+* [.NET Framework Regular Expressions](https://msdn.microsoft.com/en-us/library/hs600312(v=vs.110).aspx)
+* [Regex, classe](https://msdn.microsoft.com/fr-fr/library/system.text.regularexpressions.regex(v=vs.110).aspx)
+* [Regular Expression Language - Quick Reference](https://msdn.microsoft.com/en-us/library/az24scfc(v=vs.110).aspx)
+
+If you want to quickly test your regex online
+* http://www.regexr.com/
+* https://regex101.com/#pcre
