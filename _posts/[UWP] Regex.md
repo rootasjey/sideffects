@@ -14,13 +14,13 @@ TABLE OF CONTENT
 * [INTRODUCTION](#introduction)
 * [REQUIREMENTS](#requirements)
 * [CODING](#coding)
-* [DISSECTION](#diss)
-* [REGEX DEFINITIONS](#def)
-* [REGEX MATCHES](#matches)
+* [DISSECTION](#dissection)
+* [REGEX DEFINITIONS](#regex-definitions)
+* [REGEX MATCHES](#regex-matches)
 * [END](#end)
-* [REFERENCE](#ref)
+* [REFERENCES](#references)
 
-#INTRODUCTION
+# INTRODUCTION
 
 Hello,
 
@@ -43,7 +43,7 @@ I decided to write about it to briefly explain how this works and as a memo for 
 * An URL to parse
 * Visual Studio 2015 (any version)
 
-# CODING <a name="coding"></a>
+# CODING
 
 The following namespaces are requiered but Visual Studio (VS) should import them automatically
 ```c#
@@ -99,7 +99,7 @@ public async Task<int> Fetch(string url) {
 }
 ```
 
-## DISSECTION <a name="diss"></a>
+## DISSECTION
 
 Okay, now we've seen the whole method I'll give some explanations :)
 
@@ -110,7 +110,7 @@ If not, you can [read this other post I wrote about HTTP requests](www.sideffect
 We begin with regex definitions:
 
 ```c#
-Regex sample_regex  = new Regex("beggining" + "((.|\n)*?)" + "ending");
+Regex sample_regex = new Regex("beggining" + "((.|\n)*?)" + "ending");
 ```
 This line creates a new Regex object, and we have to initalize it with a pattern.
 This pattern is a string which will be used to look up for pieces of text corresponding to this string.
@@ -135,18 +135,18 @@ Regex quantum_regex = new Regex("<div class=\"quantum-break-is-out\">" + "((.|\n
 This regex look for a HTML node `div` who has the class `quantum-break-is-out`.
 
 ```c#
-Regex php_regex     = new Regex("((.|\n)*?)" + ".php");
+Regex php_regex = new Regex("((.|\n)*?)" + ".php");
 ```
 
 The regex look for a link ending with `.php`
 
 ```c#
-Regex span_regex    = new Regex("<span class=\"title\">" + "((.|\n)*?)");
+Regex span_regex = new Regex("<span class=\"title\">" + "((.|\n)*?)");
 ``
 This on look for a node starting as a `span` having the class `title` and can ends by anything.
     
 
-### REGEX MATCHES <a name="matches"></a>
+### REGEX MATCHES
 
 ```c#
 string[] quotesArray = doc.DocumentNode.Descendants("article").Select(y => y.InnerHtml).ToArray();
@@ -164,12 +164,12 @@ var sample  = content_match.Count > 0 ? content_match[0].ToString() : null;
 We check is the results array contains at least one element by checking the `Count` attribute.
 If it does, we convert the value to string with the `ToString()` method, if not we set the `null` value to the `sample`variable.
 
-# END <a name="end"></a>
+# END
 
 I basically showed you how to build and use regex, now you can try on your own 
 or look for more information in the following links in the reference section.
 
-# REFERENCES <a name="ref"></a>
+# REFERENCES
 
 Here are a bunch of useful links you want to know further that we learned in this article
 
