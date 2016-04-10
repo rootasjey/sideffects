@@ -11,8 +11,8 @@
 <br>
 TABLE OF CONTENT
 
-* [INTRODUCTION](#intro)
-* [REQUIREMENTS](#req)
+* [INTRODUCTION](#introduction-)
+* [REQUIREMENTS](#requirements-)
 * [CODING](#coding)
 * [DISSECTION](#diss)
 * [REGEX DEFINITIONS](#def)
@@ -20,7 +20,7 @@ TABLE OF CONTENT
 * [END](#end)
 * [REFERENCE](#ref)
 
-#INTRODUCTION <a name="intro"></a>
+#INTRODUCTION
 
 Hello,
 
@@ -38,7 +38,7 @@ I decided to write about it to briefly explain how this works and as a memo for 
 >A regular expression is a sequence of characters that defines a search pattern.<br>
 >See the [wiki page for more information](http://www.wikiwand.com/en/Regular_expression)
 
-# REQUIREMENTS <a name="req"></a>
+# REQUIREMENTS
 * An UWP Project
 * An URL to parse
 * Visual Studio 2015 (any version)
