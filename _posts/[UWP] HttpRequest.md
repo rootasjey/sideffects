@@ -48,12 +48,20 @@ var responseBodyAsText = await message.Content.ReadAsStringAsync(); // get the c
 
 > [MSDN page about the HttpClient class](https://msdn.microsoft.com/en-us/library/system.net.http.httpclient(v=vs.118).aspx)
 
+> You need these following using to use the code above, but Visual Studio should recommand to import them automatically
+```c#
+using System.Net.Http;
+using System.Net.NetworkInformation;
+```
+
 In theses first lines of code, we did these steps:
-* create an [HttpClient](https://msdn.microsoft.com/en-us/library/system.net.http.httpclient(v=vs.118).aspx) instance
-* send an HTTP GET request to the url (http://bisouslescopains.tumblr.com/)
-* get the data result from the server (asynchronously)
-* get the redirected url
-* read the content's response
+* __create an [HttpClient](https://msdn.microsoft.com/en-us/library/system.net.http.httpclient(v=vs.118).aspx) instance__
+* __send an HTTP GET request to the url (http://bisouslescopains.tumblr.com/) and get the data result from the server (asynchronously)<br/>__
+This request is executed _asynchronously_ but we wait for its result with the _await_ keyword.
+* __get the redirected url__<br/>
+Useful if the server re-write the url request
+* __read the content's response__<br/>
+The _ReadAsStringAsync()_ method can run asynchronously but is awaited before the next line of code.
 
 A faster way if you don't need others server informations (as _redirected url_, _server status code_, _headers_) is :
 ```c#
@@ -87,6 +95,55 @@ if (!NetworkInterface.GetIsNetworkAvailable()) {
 ```
 
 ## PARSE THE RESULT
+
+Here is the fun part :D
+
+### INSTALL HTMLAGILITYPACK PACKAGE
+
+First we need to install the [HtmlAgilityPack package](https://htmlagilitypack.codeplex.com/).
+Follow these step from Visual Studio (VS):
+
+[1st image]
+In Visual Studio (VS), 
+
+* click on the 'Tools' menu 
+* then go to 'NuGet packages manager'
+* click on 'Manage NuGet packages for the solution'
+
+[2nd image]
+VS will open a new tab with all available packages online and installed in your solution.
+Now we have to:
+
+1. search for 'HtmlAgilityPack' in the 'Browse' tab (see 1)
+2. select the right 'HtmlAgilityPack' package
+3. select in which project you want to install it (select the project you want to parse HTML requests)
+4. click on 'Install'
+
+Now you should see 'HtmlAgilityPack' in your _References_ and be able to add the following using statement:
+
+```c#
+using HtmlAgilityPack;
+using System.Linq;
+```
+
+> The _System.Linq_ using extends HtmlAgilityPack available methods
+
+
+### USE HTMLAGILITYPACK
+
+Now the setup is done, we can begin to load the HTML result and parse the data.
+
+```c#
+// HTML Document building
+HtmlDocument doc = new HtmlDocument();
+doc.LoadHtml(responseBodyAsText);
+
+var quotes = doc.DocumentNode.Descendants("article");
+foreach (HtmlNode q in quotes) {
+var content = q.Descendants("div").Where(x => x.GetAttributeValue("class", "") == "batman").FirstOrDefault();
+var authorAndReference = q.Descendants("div").Where(x => x.GetAttributeValue("class", "") == "robin").FirstOrDefault();
+}
+```
 
 # END
 
