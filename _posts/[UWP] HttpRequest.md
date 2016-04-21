@@ -59,11 +59,11 @@ using System.Net.NetworkInformation;
 
 In theses first lines of code, we did these steps:
 * __create an [HttpClient](https://msdn.microsoft.com/en-us/library/system.net.http.httpclient(v=vs.118).aspx) instance__
-* __send an HTTP GET request to the url (http://bisouslescopains.tumblr.com/) and get the data result from the server (asynchronously)<br/>__
+* __send an HTTP GET request to the url (http://bisouslescopains.tumblr.com/) and get the data result from the server (asynchronously)__    
 This request is executed _asynchronously_ but we wait for its result with the _await_ keyword.
-* __get the redirected url__<br/>
+* __get the redirected url__    
 Useful if the server re-write the url request
-* __read the content's response__<br/>
+* __read the content's response__    
 The _ReadAsStringAsync()_ method can run asynchronously but is awaited before the next line of code.
 
 A faster way if you don't need others server informations (as _redirected url_, _server status code_, _headers_) is :
@@ -187,7 +187,8 @@ Now that you got the content, you can make further process.
 So we've seen how to send HTTP requests to a server and parse the data response.
 In the next article, we'll see how to parse content using [regular expressions](http://www.wikiwand.com/en/Regular_expression).
 
-Thank you for the reading, don't hesitate to share if you learn something in this article :)
+Thank you for the reading, don't hesitate to tell me if you have a better solution or remarks in the comments.   
+You can also share this article if you learned something or if it could help someone :)
 
 > See the short memo on HtmlAgilityPack samples
 
