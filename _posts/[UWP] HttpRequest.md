@@ -1,3 +1,6 @@
+---
+published: false
+---
 {{{ 
     "title"     : "[UWP] HttpRequest", 
     "tags"      : [ "dev", "C#", "http", "request", "htmlAgilityPack", "parse", "parsing"], 
@@ -8,7 +11,6 @@
 
 > Dev Level: begginer
 
-<br>
 TABLE OF CONTENT
 
 * [INTRODUCTION](#introduction)
@@ -16,6 +18,7 @@ TABLE OF CONTENT
 * [CODING](#coding)
 * [END](#end)
 * [REFERENCES](#references)
+
 
 # INTRODUCTION
 
@@ -136,14 +139,48 @@ Now the setup is done, we can begin to load the HTML result and parse the data.
 ```c#
 // HTML Document building
 HtmlDocument doc = new HtmlDocument();
-doc.LoadHtml(responseBodyAsText);
+doc.LoadHtml(responseBodyAsText); // the responseBodyAsText variable was created before when sending the http request
+```
 
+To start, we
+* Create an HTML document to simulate a web page
+* Load the HTML content from our previous response from the request
+
+Then we get a nodes array
+```c#
 var quotes = doc.DocumentNode.Descendants("article");
+```
+The _'Descendants'_ method gets all 'article' nodes in the document
+
+If you would want all span of the HTML document, you woul write
+```c#
+var quotes = doc.DocumentNode.Descendants("span");
+```
+
+
+Now we loop into each article node
+
+```c#
 foreach (HtmlNode q in quotes) {
 var content = q.Descendants("div").Where(x => x.GetAttributeValue("class", "") == "batman").FirstOrDefault();
 var authorAndReference = q.Descendants("div").Where(x => x.GetAttributeValue("class", "") == "robin").FirstOrDefault();
+
+// Do other stuff with the content
 }
 ```
+For each node:
+* Get the div node which has the _'batman'_ class
+* Get the div node which has the _'robin'_ class
+
+In case these div nodes are not found, it will return null.
+
+If you want to get multiple nodes, you can write
+
+```c#
+var content = q.Descendants("div").Where(x => x.GetAttributeValue("class", "") == "batman").ToArray();
+```
+
+Now that you got the content, you can make further process.
 
 # END
 
@@ -151,6 +188,8 @@ So we've seen how to send HTTP requests to a server and parse the data response.
 In the next article, we'll see how to parse content using [regular expressions](http://www.wikiwand.com/en/Regular_expression).
 
 Thank you for the reading, don't hesitate to share if you learn something in this article :)
+
+> See the short memo on HtmlAgilityPack samples
 
 # REFERENCES
 * [HttpClient Class](https://msdn.microsoft.com/en-us/library/system.net.http.httpclient(v=vs.118).aspx)
