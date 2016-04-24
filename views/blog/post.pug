@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div.post
+    div.post.content
+      != post.content
+    div.tags
+      each tag in post.tags
+        a.tag(href=tagUrl(tag))
+          span.label.label-info #{tag}
+  div.comments
+    include includes/disqus.pug
+
+  div#top-btn(onclick="ScrollTop()")
+    span.glyphicon.glyphicon-chevron-up

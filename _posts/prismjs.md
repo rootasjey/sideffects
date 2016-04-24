@@ -1,51 +1,57 @@
 {{{
-    "title"     : "Prismjs: un colorateur syntaxique moderne",
+    "title"     : "PRISMJS: UN COLORATEUR SYNTAXIQUE MODERNE",
     "tags"      : [ "dev", "JavaScript", "Syntax highlighter", "code", "pre", "prism", "highlightjs" ],
     "category"  : "dev",
     "date"      : "07-26-2015",
     "background": "/modules/blog/headers/prismjs.jpg"
 }}}
 
-Prism est un colorateur syntaxique JavaScript léger, extensible, écrit par [Lea Verou](http://lea.verou.me).
-Il facile d'utilisation et est utile quand on affiche des bout de code sur son site ou blog, un peu comme ici :D. Donc non, Prism n'a rien à voir avec le programme de renseignement de la NSA.
+Prism est un colorateur syntaxique JavaScript léger, extensible,
+écrit par [Lea Verou](http://lea.verou.me).
+Il facile d'utilisation et est utile quand on affiche des bout de code
+sur son site ou blog, un peu comme ici :D.
+Donc non, Prism n'a rien à voir avec le programme de renseignement de la NSA.   
 
-
-<br><br>
 **SOMMAIRE**
 
 - [PRESENTATION](#presentation)
 - [UTILISATION](#utilisation)
 - [DEFINIR DE NOUVEAUX LANGAGES](#definir-de-nouveaux-langages)
-- [UPDATE](#update)
+- [UPDATE](#update)   
 
-
-<br><br>
 # PRESENTATION <a name="presentation"></a>
 
 Plutôt bien conçu, ce petit framework est utilisé par:
-* [Mozilla Developer Network](https://developer.mozilla.org/fr/)
-* [WebPlatform.org](https://www.webplatform.org)
-* [CSS Tricks](https://css-tricks.com)
-* et d'autes (rien que ça!)
+- [Mozilla Developer Network](https://developer.mozilla.org/fr/)
+- [WebPlatform.org](https://www.webplatform.org)
+- [CSS Tricks](https://css-tricks.com)
+- et d'autes (rien que ça!)
 
 Ses avantages comparés à une autre bibliothèque comme [Highlightjs](https://highlightjs.org)
 sont:
 
-* Sa légèreté (quelques dizaines, voir centaines de Kilo-octects avec tous les plugins).
-* Il est facilement extensible avec des [regex](https://regex101.com) ou des plugins.
-* Il respect [les standards du W3C](http://www.w3.org/TR/html5/text-level-semantics.html#the-code-element) sur la déclaration de bloques de code
-* L'héritage de définition des langages. Par exemple, pour définir du _CoffeScript_, il suffit d'hériter du _JavaScript_ et de changer quelques règles de syntaxes. Ce qui accélère l'ajout de nouveaux langages.
-* L'highlight asyncrhone avec des Web Workers pour des gros bloques de code.
-* L'highlight de langages intégré dans d'autres, par ex. du _CSS_ dans du _HTML_.
-* L'affichage de caractères invisibles grâce un plugin.
-* Le support de plusieurs navigateurs et le tralala.
+- Sa légèreté (quelques dizaines, voir centaines de Kilo-octects
+avec tous les plugins).
+- Il est facilement extensible avec des [regex](https://regex101.com) ou des plugins.
+- Il respect
+[les standards du W3C](http://www.w3.org/TR/html5/text-level-semantics.html#the-code-element)
+sur la déclaration de bloques de code
+- L'héritage de définition des langages. Par exemple,
+pour définir du _CoffeScript_, il suffit d'hériter du _JavaScript_
+et de changer quelques règles de syntaxes. Ce qui accélère l'ajout de nouveaux langages.
+- L'highlight asyncrhone avec des Web Workers pour des gros bloques de code.
+- L'highlight de langages intégré dans d'autres, par ex. du _CSS_ dans du _HTML_.
+- L'affichage de caractères invisibles grâce un plugin.
+- Le support de plusieurs navigateurs et le tralala.
 
 
-Il possède quelques limitations, mais très spécifiques donc pas très génantes, comme l'absence de support pour IE 6-8, quelques problèmes d'highlight sur [des exemples particuliers](http://prismjs.com/examples.html#failures), et l'écrasement de markup _HTML_ dans le code s'il y en avait.
+Il possède quelques limitations, mais très spécifiques donc pas très génantes,
+comme l'absence de support pour IE 6-8,
+quelques problèmes d'highlight sur
+[des exemples particuliers](http://prismjs.com/examples.html#failures),
+et l'écrasement de markup _HTML_ dans le code s'il y en avait.    
 
 
-<br>
-<br>
 # UTILISATION <a name="utilisation"></a>
 
 Passons à la partie intéressante qui est l'utilisation de ce petit framework.
@@ -60,14 +66,14 @@ Afin de l'intégrer à un projet en cours, les étapes à suivre sont:
 <!DOCTYPE html>
 <html>
 <head>
-	...
+...
 
 
 <link href="themes/prism.css" rel="stylesheet" />
 
 </head>
 <body>
-	...
+...
 
 
 <script src="prism.js"></script>

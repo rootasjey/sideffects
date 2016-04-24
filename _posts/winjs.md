@@ -1,9 +1,9 @@
 {{{
-    "title"     : "WinJS: Basics 1",
+    "title"     : "WINJS: BASICS 1",
     "tags"      : [ "dev", "JavaScript", "winjs", "code", "html", "css" ],
     "category"  : "dev",
     "date"      : "08-16-2015",
-    "background": "/modules/blog/headers/winjs_d.png"
+    "background": "/blog/headers/winjs_d.png"
 }}}
 
 
@@ -102,12 +102,12 @@ Pour utiliser _less_, procédons comme ceci :
 
 2. Aller dans les _outils_ > _Gestionnaire de package NuGets_ >
 _Gérer les packages NuGet pour la solution..._
-<img type='screenshot' alt='MetroLess 1' src='/modules/blog/attachements/winjs_basics1/winjs_basics1_1.png' />
+<img type='screenshot' alt='MetroLess 1' src='/blog/attachements/winjs_basics1/winjs_basics1_1.png' />
 <br><br>
 
 3. Sur la nouvelle fenêtre, cliquer sur _En ligne_ dans le panel de gauche
 4. Dans le champ de recherche en haut à droite, tapez _"metroless"_
-<img type='screenshot' alt='MetroLess 2' src='/modules/blog/attachements/winjs_basics1/winjs_basics1_2.png'>
+<img type='screenshot' alt='MetroLess 2' src='/blog/attachements/winjs_basics1/winjs_basics1_2.png'>
 <br>
 <br>
 <br>

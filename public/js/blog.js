@@ -2,43 +2,31 @@
 // BLOG.JS (SIDEFFECTS)
 // --------------------
 
-// Fire functions automatically
-function autoloadBlod() {
-    getRecentBlogPosts();
-}
-
 // Get the last post from the blog which is on a different domain server
-function getRecentBlogPosts() {
-    $.get("/getblog/", function (data) {
-        showPosts(data);
+function getBlogPosts() {
+
+    $.get("/posts", function (data) {
+        getRecentBlogPostsResponse(data);
     });
 }
 
-// Create blog posts elements on the home page from a array of data
-function showPosts(data) {
-    for (var i = 0; i < data.length; i++) {
-        var title = $("<h1>", {
-            class: "post-title",
-        });
+function getRecentBlogPostsResponse(data) {
+    // console.log(data);
+    // add posts to the page
+    for (var i = 0; i < 1; i++) {
+        console.log(data[i]);
+        _app.posts.push(data[i]);
 
-        var link = $("<a>", {
-            class: "post-link",
-            html: data[i].title,
-            href: data[i].link
-        });
+        var item = _app.buildPostItem(data[i], i);
 
-        var summary = $("<div>", {
-            class: "post-summary",
-            html: data[i].summary
-        });
+        // _app.$grid.append(item).masonry('appended', item);
+        var grid = document.getElementById('main-grid');
+        grid.appendChild(item);
+        item.addEventListener('click', clickPostItem);
 
-        title.append(link);
-
-        var post = $("<div>", {
-            class: "blog-post col-lg-6",
-        }).append(title).append(summary);
-
-        post.appendTo("#blog .blog-content");
+        if (_app.$grid === null) {
+            _app.initGrid();
+        }
     }
 }
 
@@ -52,4 +40,29 @@ function parseRSS(url, callback) {
       callback(data.responseData.feed);
     }
   });
+}
+
+function clickPostItem(event) {
+    var parent = event.target;
+
+    while (parent.className.indexOf("grid-item ") === -1) {
+        parent = parent.parentNode;
+    }
+
+    console.log(parent);
+    // var projectIndex = parent.getAttribute("data-id");
+    //
+    // var project = _app.projects[projectIndex];
+    //
+    // var data = {
+    //     title: project.title,
+    //     textContent: project.description,
+    //     link: project.link,
+    //     miniature : project.miniature,
+    //     infos: project.infos
+    // };
+    //
+    // _app.hideGrid();
+    // _app.modal.show(data);
+
 }

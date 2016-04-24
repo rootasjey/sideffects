@@ -1,9 +1,9 @@
 {{{
-    "title"    : "La relation entre RequireJS, AMD et CommonJS",
+    "title"    : "LA RELATION ENTRE REQUIREJS, AMD ET COMMONJS",
     "tags"     : [ "dev", "JavaScript", "nodejs", "io.js" ],
     "category" : "dev",
     "date"     : "05-24-2015",
-    "background" : "/modules/blog/headers/requirejs.png"
+    "background" : "/blog/headers/requirejs.png"
 }}}
 
 En entendant parler de [requireJS](http://requirejs.org) à mon stage
@@ -34,6 +34,7 @@ En combinant les différentes réponses, voici ma compréhension de l'histoire.
 
 
 <br><br>
+
 ## Un peu d'histoire <a name="un-peu-dhistoire"></a>
 
 L'idée est partie de [James Burke](https://github.com/jrburke) qui voulait

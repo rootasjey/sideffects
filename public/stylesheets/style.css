@@ -257,6 +257,7 @@ body {
   margin: 10px 0;
   cursor: pointer;
   overflow: hidden;
+  background: transparent;
 }
 #main-grid .grid-item.bubble:hover .grid-item-bg {
   transform: scale(1.1);
@@ -359,6 +360,14 @@ body {
   transform: scale(1);
   transition: 0.4s;
 }
+#main-grid .grid-item .grid-item-txt .grid-item-title {
+  font-size: 3em;
+  font-weight: 900;
+}
+#main-grid .grid-item .grid-item-txt .grid-item-desc {
+  font-size: 1em;
+  font-weight: 100;
+}
 #main-grid .grid-item .grid-item-icon {
   width: 40%;
   height: 40%;
@@ -383,6 +392,7 @@ body {
   position: absolute;
   padding: 100px 100px;
   z-index: 3;
+  transition: 0.4s;
 }
 #modal.visible {
   display: block;
@@ -413,6 +423,7 @@ body {
 #modal .content .textContent {
   width: 60%;
   font-size: 1.5em;
+  margin-bottom: 20px;
 }
 #modal .content .infos {
   top: 150px;
@@ -423,6 +434,10 @@ body {
 #modal .link {
 float
   display: block;
+  transition: 0.4s;
+}
+#modal .link:hover {
+  transform: scale(0.9);
 }
 #modal .picture {
   max-height: 90%;

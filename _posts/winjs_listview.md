@@ -1,4 +1,10 @@
-{{{ "title" : "WinJS: ListView et Repeater", "tags" : [ "dev", "JavaScript", "winjs", "listview", "virtualizartion", "Repeater" ], "category" : "dev", "date" : "11-29-2015", "background": "/modules/blog/headers/winjs_d.png" }}}
+{{{
+    "title" : "WinJS: ListView et Repeater",
+    "tags" : [ "dev", "JavaScript", "winjs", "listview", "virtualizartion", "Repeater" ],
+    "category" : "dev",
+    "date" : "11-29-2015",
+    "background": "/blog/headers/winjs_d.png" 
+}}}
 
 Bonjour à tous!
 
@@ -183,7 +189,7 @@ function authorsTemplate(itemPromise) {
         // C'est ici qu'on va construire notre HTML
         // pour le template des éléments de la ListView
         var square, img, name;
-        
+
         // On crée des éléments en leur ajoutant des classes
         square = document.createElement("div");
         square.classList.add("author-square");
@@ -193,7 +199,7 @@ function authorsTemplate(itemPromise) {
 
         name = document.createElement("div");
         name.classList.add("author-name");
-        
+
         // On accède aux attributs du modèle de données grâce à l'attribut 'data'
         name.textContent = currentItem.data.name;
 
@@ -204,7 +210,7 @@ function authorsTemplate(itemPromise) {
         img.addEventListener("click", function (event) {
             console.log("IMG");
         });
-        
+
         // On définit un évènement de click sur le texte du template
         name.addEventListener("click", function (event) {
             console.log("TXT");
@@ -213,7 +219,7 @@ function authorsTemplate(itemPromise) {
         return square;
     });
 }
-// Cette fonction de WinJS permet de spécifier que la fonction 'authorsTemplate' 
+// Cette fonction de WinJS permet de spécifier que la fonction 'authorsTemplate'
 // est compatible avec le traitement déclaratif, car cette fonction sera utilisée comme paramètre pour la ListView.
 WinJS.Utilities.markSupportedForProcessing(authorsTemplate);
 ```
@@ -239,7 +245,7 @@ Enfin, il suffit de renseigner le template dans la ListView (le changement est a
 Maintenant cliquer sur l'image ou le nom d'un auteur lancera deux fonctions différentes.
 Ce scénario est surtout nécessaire quand on possède des templates complexes, sinon utiliser la fonction 'selectionChanged' sera largement suffisant.
 
-Scénario avec l'event _selectionChanged_ de la ListView: 
+Scénario avec l'event _selectionChanged_ de la ListView:
 
 >authors.js
 ```JavaScript

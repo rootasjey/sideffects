@@ -28,6 +28,7 @@ html, body {
         margin 10px 0
         cursor pointer
         overflow hidden
+        background transparent
 
         // When the item is a bubble
         // scale its background on hover
@@ -160,6 +161,16 @@ html, body {
 
                 }
             }
+
+            .grid-item-title {
+                font-size 3em
+                font-weight 900
+            }
+
+            .grid-item-desc {
+                font-size 1em
+                font-weight 100
+            }
         }
 
         .grid-item-icon {
@@ -191,9 +202,10 @@ html, body {
     top 0
     left 0
     position absolute
-
     padding 100px 100px
+
     z-index 3
+    transition .4s
 
     &.visible {
         display block
@@ -232,6 +244,7 @@ html, body {
         .textContent{
             width 60%
             font-size 1.5em
+            margin-bottom 20px
         }
 
         .infos {
@@ -245,6 +258,11 @@ html, body {
     .link {
         float
         display block
+        transition .4s
+
+        &:hover {
+            transform scale(0.9)
+        }
     }
 
     .picture {

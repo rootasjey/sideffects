@@ -1,21 +1,27 @@
-{{{ "title" : "WinJS: Tips 1", "tags" : [ "dev", "JavaScript", "winjs", "back" ], "category" : "dev", "date" : "11-29-2015", "background": "/modules/blog/headers/winjs_d.png" }}}
+{{{
+    "title" : "WinJS: Tips 1",
+    "tags" : [ "dev", "JavaScript", "winjs", "back" ],
+    "category" : "dev",
+    "date" : "11-29-2015",
+    "background": "/blog/headers/winjs_d.png"
+}}}
 
 Hello!
 
-Je me suis mis au développement d'applications en JavaScript sous Windows 10 (Desktop & Mobile), 
+Je me suis mis au développement d'applications en JavaScript sous Windows 10 (Desktop & Mobile),
 et j'utilise [WinJS](https://github.com/winjs/winjs) comme bibliothèque principale.
-WinJS est une bibliothèque JavaScript créée par Microsoft pour faciliter la création d'apps en offrant 
-des fonctions utilitaires telles que la création simplifiée 
+WinJS est une bibliothèque JavaScript créée par Microsoft pour faciliter la création d'apps en offrant
+des fonctions utilitaires telles que la création simplifiée
 d'un objet [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest):
 
 ```JavaScript
 WinJS.xhr(options).done( /* Your success and error handlers */ );
 ```
 
-Bien que le développement d'application JavaScript sous Windows 10 
-est très similaire à ce qu'on peut retrouver sur la toile, 
+Bien que le développement d'application JavaScript sous Windows 10
+est très similaire à ce qu'on peut retrouver sur la toile,
 il existe des particularités qui peuvent ralentir le développement.
-C'est pour cette raison que je souhaite regrouper les différentes choses à savoir dans une série 
+C'est pour cette raison que je souhaite regrouper les différentes choses à savoir dans une série
 de posts qui permettra d'accélérer la mise en production de nos applications.
 
 Chaque poste présentera quelques astuces que j'ai découvert au cours de la semaine.
@@ -61,7 +67,7 @@ Alors oui, on pourrait créer une autre page pour la vue détaillée, mais parad
 
 #App Title Back Button <a name="app-title-back-button"></a>
 
-Ici, on souhaite afficher le bouton de retour dans la barre de titre de l'application 
+Ici, on souhaite afficher le bouton de retour dans la barre de titre de l'application
 et j'ai donc trouver ce bout de code après quelques recherche.
 
 ![Back Button](http://i.stack.imgur.com/UKScx.png "Back Button")
