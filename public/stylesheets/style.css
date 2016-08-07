@@ -73,9 +73,9 @@ th {
   }
 }
 #blog #header {
+  background: #00f;
   height: 500px;
   width: 100%;
-  background: #00f;
 }
 #blog .blog-post {
   text-align: left;
@@ -377,7 +377,7 @@ body {
   position: absolute;
 }
 #main-grid .grid-item.large {
-  height: 400px;
+  height: 600px;
   width: 70%;
 }
 #main-grid .grid-item.long {

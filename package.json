@@ -17,21 +17,21 @@
   ],
   "dependencies": {
     "async": "^0.9.0",
-    "azure": "^0.9.7",
     "body-parser": "~1.2",
-    "express": "~4.2",
-    "jade": "~1.3",
+    "express": "~4",
     "js-sha1": "~0.1",
     "jsdom": "~4.0",
     "jsonfile": "^2.0.0",
+    "later": "^1.2.0",
     "marked": "^0.3.2",
     "method-override": "^1.0.2",
     "morgan": "^1.5.3",
     "nconf": "^0.6.9",
     "nib": "~1.0",
-    "node-uuid": "^1.4.1",
+    "phantom": "^2.1.14",
     "poet": "^2.0.0",
     "pug": "^2.0.0-alpha6",
+    "request": "^2.74",
     "stylus": "~0.45"
   },
   "noAnalyze": true,
@@ -40,8 +40,6 @@
     "node": ">=0.6.14"
   },
   "devDependencies": {
-    "browser-sync": "^2.7.3",
-    "gulp": "^3.8.11",
-    "gulp-nodemon": "^2.0.3"
+    "browser-sync": "^2.7.3"
   }
 }

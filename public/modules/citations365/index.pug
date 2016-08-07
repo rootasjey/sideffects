@@ -1,0 +1,37 @@
+doctype html
+
+html(lang='fr')
+  head
+    <meta charset="utf-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A personal website">
+    <meta name="author" content="Jeremie Corpinot">
+    //- link(type="image/png", rel="icon", href="favicon.png" )
+    link(type='text/css', rel='stylesheet', href='/modules/citations365/styles.css')
+
+    title citations365 lockscreen
+
+
+    //- <!-- Custom Fonts -->
+    //- link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', type='text/css')
+    link(type='text/css', rel='stylesheet', href='http://fonts.googleapis.com/css?family=Montserrat:400,700')
+    //- link(type='text/css', rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic')
+
+  body
+    - var height = 1280
+    - var width = 768
+    case device
+      when 'pc'
+        - var height = 1400
+        - var width = 1400
+    - var link = "https://unsplash.it/" + width + "/" + height + "?random"
+
+    div#container
+      div.quote
+        span.content
+        span.author
+        span.ref
+      img.bg(src=link)
+
+  script(src='/modules/citations365/scripts.js')

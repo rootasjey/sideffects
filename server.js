@@ -1,51 +1,37 @@
-//WWW.SIDEFFECT.FR
-//--------------------
-//by Jeremie Corpinot
-//http://github.com/rootasjey
+"use strict";
 
-//-----------------------------
-//----------requires-----------
-//-----------------------------
-var express			= require('express'), // web dev framework
-	stylus			= require('stylus'), // css pre-compiler
-	morgan			= require('morgan'),		// loggin middleware
-	nib				= require('nib'),           // Stylus utilities
-    http			= require('http'),
-    path			= require('path'),
-	fs				= require('fs'),				// file stream
-	bodyParser		= require('body-parser'),
+// www.sideffects.fr
+// http://github.com/rootasjey
+
+var express				= require('express'),
+	stylus					= require('stylus'),
+	morgan					= require('morgan'),		// loggin middleware
+	nib							= require('nib'),       // Stylus utilities
+  http						= require('http'),
+  path						= require('path'),
+	fs							= require('fs'),				// file stream
+	bodyParser			= require('body-parser'),
 	methodOverride	= require('method-override'),
-	jf				= require('jsonfile'),
-	// jsdom			= require('jsdom'),
-	Poet			= require('poet'),
-	marked 			= require('marked'),
-	pug				= require('pug');
+	jf							= require('jsonfile'),
+	Poet						= require('poet'),
+	marked 					= require('marked'),
+	pug							= require('pug'),
+	url 						= require('url');
 
-//var port = process.env.port || 8080;
-
-// ---------------
-// ----- APP -----
-// ---------------
 var app = express();
-// ----------------
 function compile(str, path) {
 	return stylus(str)
 		.set('filename', path)
 		.use(nib());
 }
 
-// ---------------------------------------
-// Set the default views folder
-// containing templates
-// and the static folder
-// ---------------------------------------
 app.set('port', process.env.PORT || 3003);
-app.set('views', getDirname() + '/views');	// folder templates
-app.set('view engine', 'pug');			// template engine
-app.use(morgan('dev'));					// logging output (will log incoming requests to the console)
+app.set('views', getDirname() + '/views');	// templates folder
+app.set('view engine', 'pug');							// template engine
+app.use(morgan('dev'));											// logging output (will log incoming requests to the console)
 app.use(bodyParser());
-app.use(bodyParser.json());				// to suport JSON-encoded bodies
-app.use(bodyParser.urlencoded({			// to suport URL-encoded bodies
+app.use(bodyParser.json());									// suport JSON-encoded bodies
+app.use(bodyParser.urlencoded({							// suport URL-encoded bodies
 	extended: true
 }));
 
@@ -90,10 +76,13 @@ poet.addRoute('/post/:post', function (req, res) {
 	// watcher reloaded
 }).init();
 
+// /////////////////////
+// :::::: ROUTING ::::::
+// /////////////////////
+var countersRoutes = require('./routes/counters');
+var dataminingRoutes = require('./routes/datamaning');
+var citations365Routes = require('./routes/citations365');
 
-// -------------------------------
-// -----------ROUTING ------------
-// -------------------------------
 // Home
 app.get('/', function (req, res) {
 	res.render('index');
@@ -133,11 +122,11 @@ app.get('/', function (req, res) {
 	// open the projects directory
 	fs.readdir(path, function (err, files) {
 		if(err) { // if the directory is not found
-			res.send(404);
+			res.status(404).end();
 		}
 
 		for (var i = 0; i < files.length; i++) {
-			if(files[i].endsWith(".json")){
+			if(files[i].endsWith('.json')){
 				// build the file path
 				var pathFile = path + '/' + files[i];
 				var fileContent = jf.readFileSync(pathFile);
@@ -146,7 +135,7 @@ app.get('/', function (req, res) {
 			else continue;
 		}
 
-		res.send(200, jsonArray);
+		res.status(200).send(jsonArray);
 	});
 })
 
@@ -157,14 +146,12 @@ app.get('/', function (req, res) {
 
 	// open the projects directory
 	fs.readdir(path, function (err, files) {
-		if(err) {
-			// if the directory is not found
-			res.send(404);
+		if(err) { // if the directory is not found
+			res.stats(404).end();
 		}
 
 		for (var i = 0; i < files.length; i++) {
-
-			if(files[i].endsWith(".md")){
+			if(files[i].endsWith(".md")) {
 				// build the file path
 				var file = files[i].replace(".md", "");
 				var path_file = path + '/' + files[i];
@@ -177,7 +164,7 @@ app.get('/', function (req, res) {
 			}
 		}
 
-		res.send(200, jsonArray);
+		res.status(200).send(jsonArray);
 	});
 })
 
@@ -190,141 +177,31 @@ app.get('/', function (req, res) {
 
 	// open the file
 	fs.readFile(p, 'utf-8', function (err2, data) {
-		if (err2) res.send(404);
-
-		// parse the data as markdown
-		var content = marked(data);
+		if (err2) res.status(404).end();
+		var content = marked(data); // parse the data as markdown
 		// console.log(marked('I am using __markdown__.'));
 		jsonArray.push({'title' : t, 'content' : content});
-
-		res.send(200, jsonArray);
+		res.status(200).send(jsonArray);
 	});
 })
 
 .get('/posts', function (req, res) {
-	 var posts = poet.helpers.getPosts(0, 2);
-
-	 res.send(200, posts);
+	var posts = poet.helpers.getPosts(0, 2);
+	res.status(200).send(posts);
 })
 
-// ----------------
-// COUNTERS MODULE
-// ----------------
-.get('/counters', function (req, res)  {
-	res.render('../public/modules/counters/counters');
-})
-// Save the json array to a local file (data.json)
-.post('/counters/save', function (req, res) {
-	// Allow Cross Domain Policy
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	// Path to the json file (to save)
-	var file = getDirname() + '/public/modules/counters/data.json';
-
-	// Get the object from the queryString
-	// and normalize it to a json object
-	var obj = req.query.json;
-	obj = JSON.parse(obj);
-
-	// Open and write in the file
-	jf.writeFile(file, obj, function (err) {
-		if (err === null) {
-			res.send(201);
-		} else {
-			res.send(409); // if there's an error
-		}
-	});
-})
-
-// Load the data.json file into the app
-.get('/counters/load', function (req, res) {
-	// Allow Cross Domain Policy
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-
-	// Path to the json file (to read)
-	var file = getDirname() + '/public/modules/counters/data.json';
-
-	// Open and read the file
-	jf.readFile(file, function (err, obj) {
-		if (err === null) {
-			res.status(200).json(obj);
-		} else res.send(409); // if there's an error
-	});
-})
-
-.get('/counters/delete', function (req, res) {
-	// Allow Cross Domain Policy
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-	// Path to the json file (to save)
-	var file = getDirname() + '/public/modules/counters/data.json';
-
-	var obj = jf.readFileSync(file);
-	obj[req.query.name] = null;
-	delete obj[req.query.name];
-
-	// Open and write in the file
-	jf.writeFileSync(file, obj);
-
-	res.send(200);
-})
-
-.get('/counters/add', function (req, res) {
-	// Allow Cross Domain Policy
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-	// Path to the json file (to save)
-	var file = getDirname() + '/public/modules/counters/data.json';
-
-	var obj = jf.readFileSync(file);
-	obj[req.query.name] = {"total": 0};
-
-
-	// Open and write in the file
-	jf.writeFileSync(file, obj);
-
-	res.send(200);
-})
-
-// END COUNTERS MODULE
-// -------------------
-
-// -----------------
-// DATAMINING MODULE
-// -----------------
-.get('/datamining', function (req, res) {
-	res.render('../public/modules/datamining/index');
-})
-
-.get('/datamining/rapport', function (req, res) {
-	var path = getDirname() + '/public/modules/datamining/rapport.md';
-	var jsonArray = [];
-
-	// open the file
-	fs.readFile(path, 'utf-8', function (err2, data) {
-		if (err2) res.send(404);
-
-		// parse the data as markdown
-		var content = marked(data);
-		jsonArray.push({'content' : content});
-
-		res.send(200, jsonArray);
-	});
-})
-
+.use('/counters', countersRoutes)
+.use('/datamining', dataminingRoutes)
+.use('/api/365', citations365Routes);
 // Handle inexistant routes
-.use(function (req, res) {
-	// res.header("Access-Control-Allow-Origin", "*");
-	// res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	// next(); // func param
-
-    res.render('includes/404', {title: '404'});
-});
+// .use(function (req, res) {
+// 	// res.header("Access-Control-Allow-Origin", "*");
+// 	// res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// 	// next(); // func param
+//
+//     res.render('includes/404', {title: '404'});
+// });
 
 
 // listen port => server start
