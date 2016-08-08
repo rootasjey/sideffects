@@ -14,7 +14,7 @@ const BG_PC_NAME = 'pc.png';
 const BG_PC_PATH = getRoot() + '\\public\\modules\\citations365\\walls\\pc.png';
 
 // Schedule
-const wallpaperSched = later.parse.recur().every(1).minute();
+const wallpaperSched = later.parse.recur().every(1).hour();
 const wallTimer = later.setInterval(generateWallpapers, wallpaperSched);
 
 function generateWallpapers() {
