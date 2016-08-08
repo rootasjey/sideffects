@@ -14,16 +14,18 @@ const BG_PC_NAME = 'pc.png';
 const BG_PC_PATH = getRoot() + '\\public\\modules\\citations365\\walls\\pc.png';
 
 // Schedule
-const wallpaperSched = later.parse.recur().every(1).hour();
+const wallpaperSched = later.parse.recur().every(1).minute();
 const wallTimer = later.setInterval(generateWallpapers, wallpaperSched);
 
 function generateWallpapers() {
+  console.log('screen!');
   screenshot('phone');
   screenshot('pc');
 }
 
 function screenshot(device) {
-  var url = 'http://www.sideffects.fr/api/365/screenshot?device=' + device;
+  // var url = 'http://www.sideffects.fr/api/365/screenshot?device=' + device;
+  var url = 'http://localhost:3003/api/365/screenshot?device=' + device;
   request(url);
 }
 
@@ -71,13 +73,13 @@ router.get('/screenshot', function (req, res) {
       // console.log(content);
       sitepage.close();
       phInstance.exit();
+      res.status(200).send('done');
     })
     .catch(error => {
       console.log(error);
       phInstance.exit();
+      res.status(500).send(error);
     });
-
-	res.status(200).send('done');
 })
 
 .get('/preview', function (req, res) {
@@ -121,8 +123,8 @@ router.get('/screenshot', function (req, res) {
         }
 
         quote = quote;
-        author = author.replace(/\s{2}/g, '').substr(4);
-        ref = ref.replace(/\s{2}/g, '');
+        author = author.replace(/\s{2}/g, '').replace(/Vos avis(.)*:/g, '').substr(4);
+        ref = ref ? ref.replace(/\s{2}/g, '') : '';
 
         break;
       }

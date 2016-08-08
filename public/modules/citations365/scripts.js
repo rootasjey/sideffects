@@ -22,6 +22,6 @@ function populateBackground(quote) {
     var ref = document.querySelector('.quote .ref');
 
     content.textContent = quote.content;
-    author.textContent = quote.author;
-    ref.textContent = quote.ref;
+    author.textContent = quote.author.toUpperCase();
+    ref.textContent = quote.ref.toUpperCase();
 }

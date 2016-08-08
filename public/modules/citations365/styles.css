@@ -9,10 +9,10 @@ body {
 }
 .quote {
   position: absolute;
-  font-size: 3.5em;
+  font-size: 3em;
   color: #fff;
   width: 728px;
-  padding: 60px;
+  padding: 90px;
   z-index: 2;
 }
 .quote .content {
