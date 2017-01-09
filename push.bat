@@ -1,5 +1,5 @@
 REM This bat-file add files, create a commit and push it to github
-REM sideffects - 2015
+REM Rockfall - 2015
 
 echo Adding files to commit
 git add --all
