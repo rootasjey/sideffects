@@ -1,10 +1,10 @@
-# rockfall
-A Connect Four game built with JavaScript
+# sideffects
+My personal website
+
+[sideffects.fr](http://wwww.sideffects.fr)
 
 ## version
-0.1.0
-
-![Rockfall](rockfall.png "Rockfall")
+2.0.0
 
 ## push code to the repo with one command
 
