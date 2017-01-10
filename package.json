@@ -13,6 +13,10 @@
     "dev": "nodemon --watch server.js server.js",
     "build": "webpack"
   },
+  "engines": {
+    "node": ">=7.1.0",
+    "npm": ">=3.10.9"
+  },
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
