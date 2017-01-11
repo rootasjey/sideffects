@@ -8,7 +8,7 @@ const app         = express();
 
 app.use(require('morgan')('short'));
 app.use(bodyParser.json());
-app.use(express.static('dist')); // un-comment for production
+app.use(express.static('public')); // un-comment for production
 
 // require('./routes/hmr')(app); // HMR module - comment for production
 require('./routes/deamons')({fetch:fetch, jsonfile:jsonfile, jsdom:jsdom});
