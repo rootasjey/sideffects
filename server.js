@@ -24,7 +24,6 @@ app
 var server = http.createServer(app);
 server.listen(process.env.PORT || 3000, function() {
   console.log('Listening on %j', server.address());
-  console.log('PORT:' + process.env.PORT);
 });
 // if (require.main === module) {
 //   var server = http.createServer(app);
@@ -33,6 +32,3 @@ server.listen(process.env.PORT || 3000, function() {
 //     console.log('PORT:' + process.env.PORT);
 //   });
 // }
-// http.createServer(app).listen(app.get('port') || 3000, function(){
-//   console.log("Express server listening on port: " + app.get('port'));
-// });
