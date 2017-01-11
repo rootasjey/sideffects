@@ -15,7 +15,8 @@ require('./routes/deamons')({fetch:fetch, jsonfile:jsonfile, jsdom:jsdom});
 
 app
 .get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  let directory = __dirname || '';
+  res.sendFile(directory + '/index.html');
 })
 .use('/quotes', require('./routes/quotes'))
 .use('/unsplash', require('./routes/unsplash'));

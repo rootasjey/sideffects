@@ -27,9 +27,7 @@
     "morgan": "^1.7.0",
     "node-fetch": "^1.6.3",
     "preact": "^7.1.0",
-    "preact-compat": "^3.9.4"
-  },
-  "devDependencies": {
+    "preact-compat": "^3.9.4",
     "babel": "^6.5.2",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
@@ -40,7 +38,9 @@
     "preact-router": "^2.3.2",
     "raw-loader": "^0.5.1",
     "webpack": "^1.14.0",
-    "webpack-core": "^0.6.9",
+    "webpack-core": "^0.6.9"
+  },
+  "devDependencies": {
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.14.0"
   }
