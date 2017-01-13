@@ -9,8 +9,7 @@ export default class Home extends Component {
     imgUrl: '',
     quoteContent: '',
     quoteAuthor: '',
-    quoteRef: '',
-    tweetLink: ''
+    quoteRef: ''
   }
 
   getHeroStyle() {
@@ -60,10 +59,7 @@ export default class Home extends Component {
         this.setState({
           quoteContent: quote.content, 
           quoteAuthor: quote.author, 
-          quoteRef: quote.ref,
-          tweetLink: 'https://twitter.com/intent/tweet?text=' + 
-                      quote.content + ' - de ' + quote.author + ' - ' + quote.ref + 
-                      '&hashtags=citation,quote'
+          quoteRef: quote.ref
         });
       }
     });
@@ -97,7 +93,6 @@ export default class Home extends Component {
                 <div {...quoteIconStyle} >
                   <span {...css(twitterIcon, iconStyle)}
                     onClick={() => this.shareTweet()} >
-                    
                   </span>
                 </div>                
             </div>
