@@ -1,7 +1,7 @@
 # sideffects
 My personal website
 
-[sideffects.fr](http://wwww.sideffects.fr)
+[sideffects.fr](http://www.sideffects.fr)
 
 ## version
 2.0.0
