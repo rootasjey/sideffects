@@ -10,8 +10,8 @@ app.use(require('morgan')('short'));
 app.use(bodyParser.json());
 app.use(express.static('public')); // un-comment for production
 
-// require('./routes/hmr')(app); // HMR module - comment for production
-require('./routes/deamons')({fetch:fetch, jsonfile:jsonfile, jsdom:jsdom});
+// require('./routes/hmr')(app); // HMR module - un-comment for dev
+require('./routes/deamons')({ fetch: fetch, jsonfile: jsonfile, jsdom: jsdom });
 
 app
 .get('/', function(req, res) {
@@ -19,7 +19,11 @@ app
   res.sendFile(directory + '/index.html');
 })
 .use('/quotes', require('./routes/quotes'))
-.use('/unsplash', require('./routes/unsplash'));
+.use('/unsplash', require('./routes/unsplash'))
+.get('*', (req, res) => {
+  let directory = __dirname || '';
+  res.sendFile(directory + '/index.html');
+})
 
 var server = http.createServer(app);
 server.listen(process.env.PORT || 3000, function() {

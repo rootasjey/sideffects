@@ -16,7 +16,7 @@ export default class Home extends Component {
     return css({
       width: '100%',
       position: 'relative',
-      background: 
+      background:
         'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + this.state.imgUrl + ')',
       backgroundSize: 'cover',
       height: '100vh'
@@ -43,33 +43,50 @@ export default class Home extends Component {
 
   componentWillMount() {
     this.request({
-      method: 'GET', 
+      method: 'GET',
       url: '/unsplash/random',
       success: (response) => {
         let picture = JSON.parse(response);
-        this.setState({imgUrl: picture.urls.regular});
+        this.setState({ imgUrl: picture.urls.regular });
       }
     });
 
     this.request({
-      method: 'GET', 
+      method: 'GET',
       url: '/quotes/random',
       success: (response) => {
         let quote = JSON.parse(response);
         this.setState({
-          quoteContent: quote.content, 
-          quoteAuthor: quote.author, 
+          quoteContent: quote.content,
+          quoteAuthor: quote.author,
           quoteRef: quote.ref
         });
       }
     });
+
+    // this.addParallax()
+  }
+
+  addParallax() {
+    window.addEventListener('scroll', (e) => {
+      let topDistance = this.title.getBoundingClientRect().top
+      let depth = 0.20
+      let movement = (topDistance * depth)
+      let movement2 = topDistance * 0.20
+
+      let translate3d = 'translate3d(0, ' + movement + 'px, 0)'
+      let trans3d = 'translate3d(0, ' + movement2 + 'px, 0)'
+
+      this.title.style.transform = translate3d
+      this.iconTwitter.style.transform = translate3d
+    })
   }
 
   shareTweet() {
-    let url = 'https://twitter.com/intent/tweet?text=' + 
-                      this.state.quoteContent + ' - de ' + 
-                      this.state.quoteAuthor + ' - ' + 
-                      this.state.quoteRef + 
+    let url = 'https://twitter.com/intent/tweet?text=' +
+                      this.state.quoteContent + ' - de ' +
+                      this.state.quoteAuthor + ' - ' +
+                      this.state.quoteRef +
                       '&hashtags=citation,quote';
     window.open(url)
   }
@@ -80,7 +97,9 @@ export default class Home extends Component {
         {/*Hero Section*/}
         <div {...this.getHeroStyle()} >
           <div {...textBlockStyle} >
-            <div {...heroTitleStyle}> <h1>s/deffects</h1> </div>
+            <div {...heroTitleStyle} ref={(title) => {this.title = title}} >
+              <h1>s/deffects</h1>
+            </div>
 
             <div {...quoteStyle} >
                 <p> {this.state.quoteContent} </p>
@@ -94,7 +113,7 @@ export default class Home extends Component {
                   <span {...css(twitterIcon, iconStyle)}
                     onClick={() => this.shareTweet()} >
                   </span>
-                </div>                
+                </div>
             </div>
           </div>
         </div>
@@ -105,6 +124,14 @@ export default class Home extends Component {
     )
   }
 };
+
+const letterStyle = css({
+  height: 80,
+  width: 60,
+  viewBox: '0 0 14 114',
+
+  display: 'inline-block'
+})
 
 const textBlockStyle = css({
   top: '50%',
@@ -135,7 +162,7 @@ const quoteStyle = css({
 const quoteRef = css({
   fontSize: '0.8em',
   textAlign: 'right',
-  
+
   ' p': {
     margin: '0'
   }

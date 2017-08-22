@@ -3,6 +3,7 @@ import { Router } from 'preact-router';
 import { css } from 'glamor';
 
 import Home from './home';
+import Onetime from './onetime';
 
 export default class App extends Component {
   handleRoute = e => {
@@ -13,7 +14,8 @@ export default class App extends Component {
     return (
       <div class='app' style={style}>
           <Router onChange={this.handleRoute}>
-            <Home path='/'/>
+            <Home path='/' />
+            <Onetime path='/onetime' />
           </Router>
       </div>
     )
